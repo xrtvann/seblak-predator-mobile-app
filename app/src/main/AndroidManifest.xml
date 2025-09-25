@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeblakPredator">
         <activity
+            android:name=".ui.theme.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
