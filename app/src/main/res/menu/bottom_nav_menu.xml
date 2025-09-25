@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_dashboard"
-        android:title="Dashboard"
-        android:icon="@android:drawable/ic_menu_view"
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
         />
     <item
         android:id="@+id/nav_transaction"
         android:title="Transaksi"
-        android:icon="@android:drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_receipt"
         />
+
+    <item
+        android:id="@+id/nav_fab"
+        android:title=""
+        android:enabled="false"/>
+
+
+    <item
+        android:id="@+id/nav_history"
+        android:title="Riwayat"
+        android:icon="@android:drawable/ic_menu_recent_history"/>
+
     <item
         android:id="@+id/nav_setting"
         android:title="Pengaturan"
-        android:icon="@android:drawable/ic_menu_manage"
+        android:icon="@drawable/ic_settings"
         />
 </menu>

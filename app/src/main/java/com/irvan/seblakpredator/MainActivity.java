@@ -17,7 +17,6 @@ import com.irvan.seblakpredator.fragment.PengaturanFragment;
 import com.irvan.seblakpredator.fragment.TransaksiFragment;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
@@ -37,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, new DashboardFragment())
-                                .commit();
+                .replace(R.id.frame_container, new DashboardFragment())
+                .commit();
 
 
         bottomNavigation.setOnItemSelectedListener(menuItem -> {
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             int id = menuItem.getItemId();
 
 
-            if (id == R.id.nav_dashboard){
+            if (id == R.id.nav_home) {
                 selectedFragment = new DashboardFragment();
             } else if (id == R.id.nav_transaction) {
                 selectedFragment = new TransaksiFragment();
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }
