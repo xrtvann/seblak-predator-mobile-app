@@ -1,9 +1,12 @@
 package com.irvan.seblakpredator.ui.theme;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.irvan.seblakpredator.R;
 
 public class LoginActivity extends AppCompatActivity {
-
+    Button login, forgetPassword, register;
+    EditText passwordText, usernameText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,12 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        EditText passwordText = findViewById(R.id.passwordColumn);
+        usernameText = findViewById(R.id.usernameColumn);
+        passwordText = findViewById(R.id.passwordColumn);
+        login = findViewById(R.id.loginbutton);
+        forgetPassword = findViewById(R.id.forgetbutton);
+        register = findViewById(R.id.registerbutton);
+
         final boolean[] isPasswordVisible = {false};
         Typeface typeface = ResourcesCompat.getFont(this, R.font.arial);
         passwordText.setTypeface(typeface);
@@ -59,5 +68,12 @@ public class LoginActivity extends AppCompatActivity {
             }
             return false;
         } );
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

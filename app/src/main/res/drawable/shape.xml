@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <!-- Warna background -->
-    <solid android:color="#4CAF50"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- Saat EditText fokus -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/> <!-- Background tetap putih -->
+            <stroke
+                android:width="2dp"
+                android:color="#E98568"/> <!-- Border fokus -->
+            <corners android:radius="20dp"/>
+            <padding
+                android:left="16dp"
+                android:top="10dp"
+                android:right="16dp"
+                android:bottom="10dp"/>
+        </shape>
+    </item>
 
-    <!-- Sudut membulat -->
-    <corners android:radius="20dp"/>
-
-    <!-- Padding dalam -->
-    <padding
-        android:left="16dp"
-        android:top="10dp"
-        android:right="16dp"
-        android:bottom="10dp"/>
-</shape>
+    <!-- Default / tidak fokus -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/> <!-- Background tetap putih -->
+            <stroke
+                android:width="2dp"
+                android:color="#CCCCCC"/> <!-- Border default -->
+            <corners android:radius="20dp"/>
+            <padding
+                android:left="16dp"
+                android:top="10dp"
+                android:right="16dp"
+                android:bottom="10dp"/>
+        </shape>
+    </item>
+</selector>

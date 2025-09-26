@@ -9,17 +9,121 @@
     android:background="@drawable/gradient_background">
 
     <FrameLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="324dp"
-            android:layout_height="434dp"
+            android:layout_width="343dp"
+            android:layout_height="438dp"
             android:layout_gravity="center"
-            android:background="@drawable/rounded">
+            android:background="@drawable/rounded"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/arialbd"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/nameColumn"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="Nama"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:ignore="TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/emailColumn"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="email@example.com"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameColumn"
+                tools:ignore="TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/teleponColumn"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="Nomor Telepon"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailColumn"
+                tools:ignore="TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/usernameColumn"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/teleponColumn"
+                tools:ignore="TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/passwordColumn"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameColumn"
+                tools:ignore="TextSizeCheck" />
+
+            <Button
+                android:id="@+id/registerbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Daftar"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordColumn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
