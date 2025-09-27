@@ -2,29 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
-        android:icon="@drawable/ic_home"
-        />
+        android:title="@string/nav_home"
+        android:icon="@drawable/ic_home" />
     <item
         android:id="@+id/nav_transaction"
-        android:title="Transaksi"
-        android:icon="@drawable/ic_receipt"
-        />
-
-    <item
-        android:id="@+id/nav_fab"
-        android:title=""
-        android:enabled="false"/>
-
+        android:title="@string/nav_transaksi"
+        android:icon="@drawable/ic_receipt" />
 
     <item
         android:id="@+id/nav_history"
-        android:title="Riwayat"
-        android:icon="@android:drawable/ic_menu_recent_history"/>
+        android:title="@string/nav_riwayat"
+        android:icon="@drawable/ic_history" />
 
     <item
         android:id="@+id/nav_setting"
-        android:title="Pengaturan"
-        android:icon="@drawable/ic_settings"
-        />
+        android:title="@string/nav_pengaturan"
+        android:icon="@drawable/ic_settings" />
 </menu>
