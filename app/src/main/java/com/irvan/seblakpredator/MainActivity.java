@@ -1,17 +1,11 @@
 package com.irvan.seblakpredator;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.irvan.seblakpredator.fragment.DashboardFragment;
 import com.irvan.seblakpredator.fragment.PengaturanFragment;
 import com.irvan.seblakpredator.fragment.RiwayatFragment;
