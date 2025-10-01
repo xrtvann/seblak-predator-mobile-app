@@ -1,4 +1,4 @@
-package com.irvan.seblakpredator.ui.theme;
+package com.irvan.seblakpredator;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -15,8 +15,6 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.irvan.seblakpredator.R;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, forgetPassword, register;

@@ -10,9 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.R;
-import com.irvan.seblakpredator.ui.theme.LoginActivity;
+import com.irvan.seblakpredator.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
