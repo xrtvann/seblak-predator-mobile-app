@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- Saat EditText fokus -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/> <!-- Background tetap putih -->
+            <stroke
+                android:width="2dp"
+                android:color="#E98568"/> <!-- Border fokus -->
+            <corners android:radius="20dp"/>
+            <padding
+                android:left="16dp"
+                android:top="10dp"
+                android:right="16dp"
+                android:bottom="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Default / tidak fokus -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/> <!-- Background tetap putih -->
+            <stroke
+                android:width="2dp"
+                android:color="#CCCCCC"/> <!-- Border default -->
+            <corners android:radius="20dp"/>
+            <padding
+                android:left="16dp"
+                android:top="10dp"
+                android:right="16dp"
+                android:bottom="10dp"/>
+        </shape>
+    </item>
+</selector>
