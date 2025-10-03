@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.SeblakPredator" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.SeblakPredator" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="materialButtonStyle">@style/Widget.SeblakPredator.Button</item>
     </style>
-    <!-- Custom Button -->
-    <style name="Widget.SeblakPredator.Button" parent="Widget.MaterialComponents.Button">
+      
+       <style name="Widget.SeblakPredator.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">#4CAF50</item> <!-- Warna hijau -->
         <item name="android:textColor">@android:color/white</item>
         <item name="shapeAppearanceOverlay">@style/RoundedButtonShape</item>
     </style>
-    <!-- Rounded Shape -->
-    <style name="RoundedButtonShape">
+      
+         <style name="RoundedButtonShape">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
-    </style>
+      </style>
 
 </resources>
 
