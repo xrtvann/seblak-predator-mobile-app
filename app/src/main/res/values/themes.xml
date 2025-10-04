@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SeblakPredator" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+    <style name="Theme.SeblakPredator" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="materialButtonStyle">@style/Widget.SeblakPredator.Button</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.SeblakPredator.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Removed windowFullscreen to allow content to draw behind system bars -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Widget.SeblakPredator.Button" parent="Widget.MaterialComponents.Button">
@@ -18,5 +30,7 @@
         <item name="cornerSize">20dp</item>
     </style>
 
+    <style name="customEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
-

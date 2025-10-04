@@ -1,144 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    tools:context=".LoginActivity">
+    android:padding="10dp"
+    tools:context=".auth.LoginActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/formContainer"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="141dp"
+                android:layout_height="141dp"
+                android:src="@drawable/ic_splash"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="Login"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginTop="32dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/material_dynamic_neutral20"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:text="Silahkan login untuk melanjutkan"
+                android:textAlignment="center"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameColumn"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:layout_marginTop="32dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameInput"
+                style="@style/customEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordColumn"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/black"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
+                style="@style/customEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="344dp"
-            android:layout_height="438dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rounded"
-            tools:ignore="MissingConstraints">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/arialbd"
-                android:text="Selamat Datang"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/arial"
-                android:text="Silahkan login terlebih dahulu"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-            <EditText
-                android:id="@+id/usernameColumn"
-                android:layout_width="250dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/shape"
-
-                android:ems="10"
-                android:fontFamily="@font/arial"
-                android:hint="Username"
-                android:inputType="text"
-                android:text=""
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.505"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
-                tools:ignore="TextSizeCheck" />
-
-            <EditText
-                android:id="@+id/passwordColumn"
-                android:layout_width="250dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape"
-                android:drawableEnd="@drawable/ic_eyehide"
-                android:ems="10"
-                android:fontFamily="@font/arial"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text=""
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.505"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameColumn"
-                tools:ignore="TextSizeCheck" />
-
-            <Button
-                android:id="@+id/loginbutton"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/secondary"
-                android:fontFamily="@font/arialbd"
-                android:text="Login"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.174"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordColumn" />
-
-            <Button
-                android:id="@+id/forgetbutton"
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="@color/secondary"
-                android:fontFamily="@font/arial"
-                android:text="Lupa Password?"
-                android:textAllCaps="false"
-                android:textSize="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.834"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordColumn" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/arial"
-                android:text="Belum Memiliki Akun?"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginbutton" />
-
-            <Button
-                android:id="@+id/registerbutton"
-                android:layout_width="84dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/arialbd"
-                android:text="Daftar"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
+                android:id="@+id/linkResetPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/TextAppearance.Material3.BodyMedium"
+                android:gravity="end"
+                android:textStyle="normal"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:text="Lupa Password ?" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:padding="16dp"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_marginTop="24dp" />
 
+        <TextView
+            android:id="@+id/linkRegister"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="Belum punya akun ? Silahkan daftar"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textStyle="normal"
+            android:clickable="true"
+            android:textColor="@color/material_dynamic_neutral30" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
