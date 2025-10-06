@@ -80,7 +80,6 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/arialbd"
                             android:text="Halo, "
-                            android:drawableStart=""
                             android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
