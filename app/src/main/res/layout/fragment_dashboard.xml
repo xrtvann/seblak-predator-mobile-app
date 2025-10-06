@@ -11,8 +11,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck"
         tools:visibility="visible">
 
@@ -35,8 +37,8 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="419dp"
-                        android:layout_height="356dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="330dp"
                         android:background="@drawable/rounded_banner_button"
                         android:clipToOutline="true"
                         android:scaleType="centerCrop"
@@ -52,9 +54,10 @@
                     android:layout_width="318dp"
                     android:layout_height="89dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="320dp"
+                    android:layout_marginTop="292dp"
                     android:background="@drawable/gradient_background_rounded"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints">
@@ -71,7 +74,7 @@
                         app:layout_constraintHorizontal_bias="0.20"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="MissingConstraints" >
+                        tools:ignore="MissingConstraints">
 
                         <TextView
                             android:id="@+id/personGreeting"
@@ -82,9 +85,9 @@
                             android:text="Halo, "
                             android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.20"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintHorizontal_bias="0.20" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -100,7 +103,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arialbd"
                     android:text="Pesan Sekarang"
                     app:layout_constraintBottom_toBottomOf="parent"
