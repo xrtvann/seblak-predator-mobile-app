@@ -41,6 +41,7 @@
                         android:layout_height="330dp"
                         android:background="@drawable/rounded_banner_button"
                         android:clipToOutline="true"
+                        android:contentDescription="TODO"
                         android:scaleType="centerCrop"
                         android:src="@drawable/bannerdiscount"
                         android:visibility="visible"
