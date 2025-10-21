@@ -284,7 +284,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/noteOrderMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="37dp">
 
                     <TextView
                         android:id="@+id/labelMostOrder"
@@ -305,20 +305,32 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/listMenuRecent"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="200dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/detailProduct"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/detailMenu"
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
 
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:layout_editor_absoluteX="25dp"
-                            tools:srcCompat="@tools:sample/avatars" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="120dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:srcCompat="@drawable/seblak_suki" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
