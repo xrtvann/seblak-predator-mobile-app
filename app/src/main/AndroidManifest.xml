@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeblakPredator">
         <activity
+            android:name=".KeranjangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KeranjangActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.ResetPasswordActivity"
             android:exported="false" />
         <activity
@@ -24,8 +30,8 @@
             android:exported="false" />
         <activity
             android:name=".splash.SplashActivity"
-            android:theme="@style/Theme.SeblakPredator.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SeblakPredator.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
