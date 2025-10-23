@@ -16,7 +16,7 @@ import java.util.List;
 public class KeranjangActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private CartAdapter adapter;
+//    private CartAdapter adapter;
     private CheckBox checkAll;
     private TextView btnDelete;
     private Button btnCheckout;
@@ -38,22 +38,22 @@ public class KeranjangActivity extends AppCompatActivity {
         itemList.add(new CartItem("Fitrah", "Rp 18.000", "Seblak seafood level 3", false));
         itemList.add(new CartItem("Radit", "Rp 20.000", "Seblak komplit level 4", false));
 
-        adapter = new CartAdapter(itemList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+//        adapter = new CartAdapter(itemList);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(adapter);
 
         // ✅ Pilih semua item
-        checkAll.setOnCheckedChangeListener((buttonView, isChecked) -> adapter.selectAll(isChecked));
+//        checkAll.setOnCheckedChangeListener((buttonView, isChecked) -> adapter.selectAll(isChecked));
 
         // ✅ Hapus item terpilih dengan konfirmasi
-        btnDelete.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Konfirmasi Hapus")
-                    .setMessage("Apakah kamu yakin ingin menghapus item yang dipilih?")
-                    .setPositiveButton("Ya", (dialog, which) -> adapter.removeSelected())
-                    .setNegativeButton("Batal", null)
-                    .show();
-        });
+//        btnDelete.setOnClickListener(v -> {
+//            new AlertDialog.Builder(this)
+//                    .setTitle("Konfirmasi Hapus")
+//                    .setMessage("Apakah kamu yakin ingin menghapus item yang dipilih?")
+//                    .setPositiveButton("Ya", (dialog, which) -> adapter.removeSelected())
+//                    .setNegativeButton("Batal", null)
+//                    .show();
+//        });
 
         // ✅ Tombol Checkout (belum aktif)
         btnCheckout.setOnClickListener(v -> {
