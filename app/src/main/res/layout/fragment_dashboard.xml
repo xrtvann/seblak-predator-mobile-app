@@ -305,7 +305,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/listMenuRecent"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -361,9 +361,10 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <LinearLayout
+                                android:id="@+id/linearLayout2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="10dp"
                                 android:gravity="center"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -376,8 +377,33 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Deskripsi Product"
-                                    android:textColor="@color/black"/>
+                                    android:textColor="@color/black" />
+
                             </LinearLayout>
+
+                            <Button
+                                android:id="@+id/orderButton"
+                                style="@style/TextAppearance.Material3.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:backgroundTint="@color/primary"
+                                android:text="Beli lagi"
+                                android:textColor="@color/white"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                            <TextView
+                                android:id="@+id/price_product"
+                                style="@style/TextAppearance.Material3.SearchView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Harga"
+                                android:textColor="@color/black"
+                                app:layout_constraintBottom_toTopOf="@+id/orderButton"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                                tools:layout_editor_absoluteX="102dp" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
