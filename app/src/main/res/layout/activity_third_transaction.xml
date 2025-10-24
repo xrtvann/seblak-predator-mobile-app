@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="#E64A19"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="34dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_cart"
+            app:tint="#FFFFFF" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_person"
+            app:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- SCROLL UTAMA -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- KATEGORI -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:paddingVertical="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:text="Semua"
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#E64A19"
+                        android:textColor="#FFFFFF"/>
+
+                    <Button
+                        android:text="Minuman"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="#FFFFFF"/>
+
+                    <Button
+                        android:text="Snacks"
+                        android:layout_width="110dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="#FFFFFF"/>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- GARIS PEMBATAS -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDD"
+                android:layout_marginVertical="4dp"/>
+
+            <!-- DAFTAR ITEM MENU -->
+            <LinearLayout
+                android:id="@+id/containerMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- ====== MINUMAN ====== -->
+                <!-- 1. Cheers -->
+                <LinearLayout
+                    android:id="@+id/item_cheers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_cheers"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_cheers"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_cheers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cheers"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_cheers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 3.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_cheers"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 2. Nutrisari -->
+                <LinearLayout
+                    android:id="@+id/item_nutrisari"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_nutrisari"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_nutrisari"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_nutrisari"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nutrisari"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_nutrisari"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 3.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_nutrisari"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 3. Pop Ice -->
+                <LinearLayout
+                    android:id="@+id/item_popice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_popice"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_popice"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_popice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pop Ice"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_popice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 5.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_popice"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+                <!-- 4. Teh (Hangat/Es) -->
+                <LinearLayout
+                    android:id="@+id/item_teh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_teh"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_teh"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_teh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Teh (Hangat/Es)"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_teh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 3.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_teh"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 5. Jeruk (Hangat/Es) -->
+                <LinearLayout
+                    android:id="@+id/item_jeruk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_jeruk"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_jeruk"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_jeruk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jeruk (Hangat/Es)"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_jeruk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 4.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_jeruk"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 6. Milo -->
+                <LinearLayout
+                    android:id="@+id/item_milo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_milo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_milo"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_milo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Milo"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_milo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 5.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_milo"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 7. Hilo -->
+                <LinearLayout
+                    android:id="@+id/item_hilo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_hilo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_hilo"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_hilo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hilo"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_hilo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 5.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_hilo"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 8. Chocolatos -->
+                <LinearLayout
+                    android:id="@+id/item_chocolatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_chocolatos"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_chocolatos"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_chocolatos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chocolatos"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_chocolatos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 5.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_chocolatos"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- 9. Kopi -->
+                <LinearLayout
+                    android:id="@+id/item_kopi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_kopi"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_kopi"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_kopi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kopi"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_kopi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 3.500"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_kopi"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- ====== SNACKS ====== -->
+                <!-- 10. Molreng -->
+                <LinearLayout
+                    android:id="@+id/item_molreng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_molreng"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_molreng"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_molreng"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Molreng"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaProduk_molreng"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 2.500"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_molreng"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <!-- ITEM 11 -->
+                <LinearLayout
+                    android:id="@+id/item_twistko"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_twistko"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_twistko"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_twistko"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Twistko"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/tvHargaProduk_twistko"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 1.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_twistko"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+                <!-- ITEM 12 -->
+                <LinearLayout
+                    android:id="@+id/item_kerupukikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_kerupukikan"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_kerupukikan"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_kerupukikan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kerupuk Ikan"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/tvHargaProduk_kerupukikan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 2.500"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_kerupukikan"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+                <!-- ITEM 13 -->
+                <LinearLayout
+                    android:id="@+id/item_suki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_item_card"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/img_suki"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/img_suki"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_image_round" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNamaProduk_suki"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Suki"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/tvHargaProduk_suki"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 1.000"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnTambah_suki"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- TOMBOL LANJUT -->
+    <LinearLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnLanjut"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Masukkan ke Keranjang"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            android:backgroundTint="@color/primary"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.irvan.seblakpredator;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
@@ -9,9 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.irvan.seblakpredator.fragment.DashboardFragment;
 import com.irvan.seblakpredator.fragment.PengaturanFragment;
-import com.irvan.seblakpredator.fragment.RiwayatFragment;
 import com.irvan.seblakpredator.fragment.TransaksiFragment;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,12 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_container, new DashboardFragment())
+                .replace(R.id.frame_container, new RiwayatPesananFragment())
                 .commit();
 
 
@@ -40,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_transaction) {
                 selectedFragment = new TransaksiFragment();
             } else if (id == R.id.nav_history) {
-                selectedFragment = new RiwayatFragment();
+                // Saat klik Riwayat, langsung tampilkan fragment RiwayatFragment (list utama)
+                selectedFragment = new RiwayatPesananFragment();
             } else if (id == R.id.nav_setting) {
                 selectedFragment = new PengaturanFragment();
             }
@@ -50,11 +47,17 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame_container, selectedFragment)
                         .commit();
             }
+
             return true;
         });
-
-
     }
 
-
+    // ✅ Tambahan: method untuk membuka halaman detail RiwayatPesananFragment
+    public void bukaRiwayatPesanan() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_container, new RiwayatPesananFragment())
+                .addToBackStack(null) // supaya bisa tombol back
+                .commit();
+    }
 }
