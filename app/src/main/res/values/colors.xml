@@ -13,4 +13,5 @@
     <color name="colorAccent">#FA5A18</color>
     <color name="primary">#e34122</color>
     <color name="secondary">#ff9f17</color>
+    <color name="red">#FF0000</color>
 </resources>

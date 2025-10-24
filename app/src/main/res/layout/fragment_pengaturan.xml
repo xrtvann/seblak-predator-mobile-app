@@ -1,12 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
+    android:fitsSystemWindows="false"
     android:orientation="vertical">
 
-    <TextView
-        android:text="Pengaturan"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="8dp"
+        >
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_exit"
+            android:drawableTint="@color/red"
+            android:drawablePadding="1sp"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:text="Log Out" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

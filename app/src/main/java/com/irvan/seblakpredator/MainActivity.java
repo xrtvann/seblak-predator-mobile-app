@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.irvan.seblakpredator.fragment.DashboardFragment;
 import com.irvan.seblakpredator.fragment.PengaturanFragment;
+import com.irvan.seblakpredator.fragment.RiwayatFragment;
 import com.irvan.seblakpredator.fragment.TransaksiFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_container, new RiwayatPesananFragment())
+                .replace(R.id.frame_container, new DashboardFragment())
                 .commit();
 
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new TransaksiFragment();
             } else if (id == R.id.nav_history) {
                 // Saat klik Riwayat, langsung tampilkan fragment RiwayatFragment (list utama)
-                selectedFragment = new RiwayatPesananFragment();
+                selectedFragment = new RiwayatFragment();
             } else if (id == R.id.nav_setting) {
                 selectedFragment = new PengaturanFragment();
             }
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void bukaRiwayatPesanan() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frame_container, new RiwayatPesananFragment())
+                .replace(R.id.frame_container, new RiwayatFragment())
                 .addToBackStack(null) // supaya bisa tombol back
                 .commit();
     }

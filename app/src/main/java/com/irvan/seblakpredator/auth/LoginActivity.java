@@ -3,6 +3,7 @@ package com.irvan.seblakpredator.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -60,7 +62,28 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
         });
-    }
 
+        loginButton.setOnClickListener(v -> {
+            String username = usernameInput.getText().toString().trim();
+            String password = passwordInput.getText().toString().trim();
+
+            if (username.isEmpty() || password.isEmpty()){
+                usernameColumn.setError("Username tidak boleh kosong");
+                passwordColumn.setError("Password tidak boleh kosong");
+                return;
+            }
+
+            if (username.equals("admin") && password.equals("12345")) {
+                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+
+                // Pindah ke halaman dashboard (contoh)
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Username atau password salah!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
