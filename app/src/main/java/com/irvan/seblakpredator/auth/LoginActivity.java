@@ -68,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordInput.getText().toString().trim();
 
             if (username.isEmpty() || password.isEmpty()){
-                usernameColumn.setError("Username tidak boleh kosong");
-                passwordColumn.setError("Password tidak boleh kosong");
+                usernameColumn.setError("Username harus di isi");
+                passwordColumn.setError("Password harus di isi");
                 return;
             }
 
-            if (username.equals("admin") && password.equals("12345")) {
+            if (username.equals("irvan") && password.equals("irvan123")) {
                 Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
 
                 // Pindah ke halaman dashboard (contoh)
