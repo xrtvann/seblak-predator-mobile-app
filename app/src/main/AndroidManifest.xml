@@ -12,7 +12,7 @@
         android:theme="@style/Theme.SeblakPredator">
 
         <activity
-            android:name=".KeranjangActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".KeranjangActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

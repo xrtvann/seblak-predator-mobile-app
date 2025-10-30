@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.irvan.seblakpredator.R;
 
@@ -61,7 +64,40 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        // 🔹 Ambil container dari XML
+        LinearLayout productContainer = view.findViewById(R.id.productContainer);
+
+        // 🔹 Data Dummy
+        String[] namaProduk = {"Seblak Original", "Seblak Ceker", "Seblak Seafood"};
+        String[] deskripsiProduk = {"Seblak pedas khas Bandung", "Seblak ceker empuk", "Seblak udang & cumi"};
+        String[] hargaProduk = {"Rp10.000", "Rp12.000", "Rp15.000"};
+        int[] gambarProduk = {R.drawable.seblak_suki, R.drawable.seblak_suki, R.drawable.seblak_suki};
+
+        // 🔹 Bersihkan dulu (jaga-jaga kalau fragmen direload)
+        productContainer.removeAllViews();
+
+        // 🔹 Loop data dummy
+        for (int i = 0; i < namaProduk.length; i++) {
+            // Inflate item_product.xml
+            View itemView = inflater.inflate(R.layout.item_product, productContainer, false);
+
+            // Isi datanya
+            ImageView img = itemView.findViewById(R.id.imageProduct);
+            TextView nama = itemView.findViewById(R.id.nameProduct);
+            TextView desc = itemView.findViewById(R.id.descriptionProduct);
+            TextView harga = itemView.findViewById(R.id.price_product);
+
+            img.setImageResource(gambarProduk[i]);
+            nama.setText(namaProduk[i]);
+            desc.setText(deskripsiProduk[i]);
+            harga.setText(hargaProduk[i]);
+
+            // Tambahkan ke container
+            productContainer.addView(itemView);
+        }
+
+        return view;
     }
 }
