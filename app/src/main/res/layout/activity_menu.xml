@@ -47,7 +47,7 @@
 
     <!-- Tombol Tambah -->
     <ImageView
-        android:id="@+id/btnTambah2"
+        android:id="@+id/imgTambah2"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:src="@drawable/ic_add_circle"

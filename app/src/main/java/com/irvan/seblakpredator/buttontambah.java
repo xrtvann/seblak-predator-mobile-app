@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Buttontambah extends AppCompatActivity {
+public class buttontambah extends AppCompatActivity {
 
     private TextView btnMinus, btnPlus, txtJumlah;
     private int jumlah = 0;
@@ -14,7 +14,7 @@ public class Buttontambah extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buttontambah); // ganti sesuai nama layout kamu
+        setContentView(R.layout.activity_buttontambah); // pastikan sesuai nama layout kamu
 
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
