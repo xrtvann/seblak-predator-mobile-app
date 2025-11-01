@@ -818,15 +818,29 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnLanjut"
-            android:layout_width="match_parent"
+            android:id="@+id/btnTambahPesanan"
+            android:layout_width="160dp"
             android:layout_height="48dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            android:backgroundTint="@color/primary"
+            android:text="Tambah Pesanan"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnMasukKeranjang"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:textSize="11sp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="4dp"
             android:backgroundTint="@color/primary"
             android:text="Masukkan ke Keranjang"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

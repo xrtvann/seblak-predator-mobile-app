@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/KotakMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_item_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Gambar Produk -->
+    <ImageView
+        android:id="@+id/imgProduk2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_image_round"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" />
+
+    <!-- Detail Produk -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNamaProduk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rafael hitam"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHargaProduk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Rp 1.500"
+            android:textColor="#000"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Tombol Tambah -->
+    <ImageView
+        android:id="@+id/btnTambah2"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_add_circle"
+        app:tint="#3CB371" />
+
+</LinearLayout>
