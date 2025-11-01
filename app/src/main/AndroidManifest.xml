@@ -14,7 +14,7 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".ThirdTransaction"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +31,8 @@
         <activity
             android:name=".KeranjangActivity"
             android:exported="false" />
+        <activity android:name=".FirstTransaction"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
