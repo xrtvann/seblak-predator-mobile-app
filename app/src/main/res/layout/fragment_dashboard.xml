@@ -87,7 +87,9 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gradient_background_rounded"
                         android:backgroundTint="@color/peach"
-
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.20"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +179,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Pesan Sekarang"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.18"
@@ -195,12 +199,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/optionsOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp">
+                    android:layout_height="120dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/deliveryOption"
                         android:layout_width="145dp"
                         android:layout_height="100dp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/shape"
                         android:backgroundTint="@color/primary"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -244,6 +249,7 @@
                         android:id="@+id/dineinOptionButton"
                         android:layout_width="145dp"
                         android:layout_height="100dp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/shape"
                         android:backgroundTint="@color/secondary"
                         android:padding="0dp"
@@ -308,6 +314,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Menu yang sering dipesan"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.18"

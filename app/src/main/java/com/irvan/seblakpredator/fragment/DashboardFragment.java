@@ -1,7 +1,9 @@
 package com.irvan.seblakpredator.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 
 /**
@@ -66,8 +69,19 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+
         // 🔹 Ambil container dari XML
         LinearLayout productContainer = view.findViewById(R.id.productContainer);
+        ConstraintLayout profilePage = view.findViewById(R.id.information);
+
+        profilePage.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
+
+        TextView person = view.findViewById(R.id.personGreeting);
+        String name = "fitrah";
+        person.setText("Halo "+name);
 
         // 🔹 Data Dummy
         String[] namaProduk = {"Seblak Original", "Seblak Ceker", "Seblak Seafood"};
