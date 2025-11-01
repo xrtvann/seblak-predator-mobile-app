@@ -33,14 +33,9 @@ public class SecondTransaction extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
 
         // 🔹 Data produk utama
-        String[] namaProduk = {
-                "Rafael Putih", "Krupuk Tangga", "Krupuk Warna", "Krupuk oren",
-                "Rafael Warna","Macaroni Spiral","Cuanki Lidah","Pilus Cikur"
-        };
-        String[] hargaProduk = {
-                "Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000",
-                "Rp 1.000","Rp 1.000","Rp 1.500","Rp 1.000"
-        };
+        String[] namaProduk = {"Rafael Putih", "Krupuk Tangga", "Krupuk Warna", "Krupuk oren","Rafael Warna","Macaroni Spiral","cuanki lidah","pilus cikur","siomay kering","mie kecil","mie pipih","bihun","sosis kecil","kornet","sosis merah sapi","scallop","fish roll","duo twister","odeng ori spicy","tahu bakso seafood","bakso ikan","kembang cumi","siomay ayam","siomay udang","kue ikan bulat","pentol keju","otak-otak singapure","crapstick","pentol jamur","beef burger","ekor udang chedea","ekor udan sunfish","pakcoy","sawi","jeruk limau","enoki","sosis oren ayam","enoki jumbo","bola salmon","dumpling ayam","dumpling keju","dumpling spicy","cikua","cikua long","udang guling","tahu bakso","makaroni","otak-otak ikan","sosis salju","kue ikan goreng","tempura","pentol jumbo","money bag","telor","sayap","tulangan","ceker","kuetiau","tahu geprek","jemur kuping","cirawang ori","cirawang pedas","gyoza ikan","jamur salju","cedea karakter","pentol udang","cireng" };
+
+        String[] hargaProduk = {"Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.500","Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 2.000","Rp 2.000","Rp 3.000","Rp 2.000","Rp 3.000","Rp 3.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 3.000","Rp 5.000","Rp 3.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 1.000","Rp 1.000","Rp 1.000","Rp 2.000","Rp 3.000","Rp 7.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 4.000","Rp 3.000","Rp 2.000","Rp 1.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 2.000","Rp 5.000","Rp 2.000","Rp 3.000","Rp 5.000","Rp 1.000","Rp 2.000","Rp 1.000","Rp 1.500","Rp 1.000","Rp 1.000","Rp 1.000","Rp 2.000","Rp 1.000","Rp 2.000","Rp 2.000","Rp 2.000",};
         int[] gambarProduk = {
                 R.drawable.ic_launcher_background,
                 R.drawable.ic_launcher_background,
