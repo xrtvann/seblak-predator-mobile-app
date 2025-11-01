@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutJumlah"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@android:color/transparent"
+    android:paddingHorizontal="8dp"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/btnMinus"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="-"
+        android:textSize="24sp"
+        android:textColor="@color/primary"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+    <TextView
+        android:id="@+id/txtJumlah"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="0"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#212121" />
+
+    <TextView
+        android:id="@+id/btnPlus"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="24sp"
+        android:textColor="@color/primary"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+</LinearLayout>

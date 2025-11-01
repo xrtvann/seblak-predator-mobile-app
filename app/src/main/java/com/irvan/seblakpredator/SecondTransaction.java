@@ -16,6 +16,7 @@ public class SecondTransaction extends AppCompatActivity {
     LinearLayout KotakMenu;
     Button btnsemua, btnkerupuk, btnsayuran, btnolahandaging, btnmie;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
