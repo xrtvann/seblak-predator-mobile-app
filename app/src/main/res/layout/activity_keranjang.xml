@@ -29,7 +29,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_arrow_back"
-            android:tint="@android:color/white" />
+            app:tint="@android:color/white" />
 
         <!-- Judul -->
         <TextView
@@ -49,36 +49,22 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_person"
-            android:tint="@android:color/white" />
+            app:tint="@android:color/white" />
     </LinearLayout>
 
-    <!-- ScrollView untuk konten -->
-    <ScrollView
-        android:id="@+id/scrollContainer"
+    <!-- RecyclerView (bisa discroll) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerKeranjang"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <!-- RecyclerView isi keranjang -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerKeranjang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                tools:listitem="@layout/item_keranjang" />
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clipToPadding="false"
+        android:padding="12dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_keranjang" />
 
     <!-- Bottom Bar -->
     <LinearLayout
