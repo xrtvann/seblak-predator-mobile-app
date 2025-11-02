@@ -118,12 +118,12 @@ public class SecondTransaction extends AppCompatActivity {
         };
 
         String[] hargaTopping = {"Rp 2.000", "Rp 3.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 5.000",
+                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 1.000", "Rp 5.000",
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
                 "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000",
                 "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 3.000",
-                "Rp 3.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
+                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
                 "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000"
         };
         int[] gambarTopping = {
