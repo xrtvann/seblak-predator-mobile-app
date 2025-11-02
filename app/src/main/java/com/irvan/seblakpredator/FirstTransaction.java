@@ -1,5 +1,23 @@
 package com.irvan.seblakpredator;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,7 +51,7 @@ public class FirstTransaction extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_first_transaction);
 
-        // FIX fitur EdgeToEdge (tidak error)
+        // Setup EdgeToEdge (hindari error padding layar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -54,21 +72,31 @@ public class FirstTransaction extends AppCompatActivity {
         spinnerKencur.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dataKencur));
         spinnerRasa.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dataRasa));
 
-        // ================== BUTTON KLIK ==================
+        // ================== BUTTON LANJUT ==================
         btnLanjut.setOnClickListener(v -> {
+
+            // Ambil semua data input
             String nama = edtNama.getText().toString();
             String level = spinnerLevel.getSelectedItem().toString();
             String kencur = spinnerKencur.getSelectedItem().toString();
             String rasa = spinnerRasa.getSelectedItem().toString();
 
             int idKuah = rgKuah.getCheckedRadioButtonId();
-            RadioButton pilihKuah = findViewById(idKuah);
-            String kuah = pilihKuah.getText().toString();
-
             int idTelur = rgTelur.getCheckedRadioButtonId();
+
+            // Validasi biar user isi semua
+            if (idKuah == -1 || idTelur == -1 || nama.isEmpty()) {
+                Toast.makeText(this, "Harap lengkapi semua data terlebih dahulu!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            RadioButton pilihKuah = findViewById(idKuah);
             RadioButton pilihTelur = findViewById(idTelur);
+
+            String kuah = pilihKuah.getText().toString();
             String telur = pilihTelur.getText().toString();
 
+            // Tampilkan data (opsional)
             Toast.makeText(this,
                     "Nama : " + nama +
                             "\nLevel : " + level +
@@ -77,6 +105,19 @@ public class FirstTransaction extends AppCompatActivity {
                             "\nKencur : " + kencur +
                             "\nRasa : " + rasa,
                     Toast.LENGTH_LONG).show();
+
+            // ================== PINDAH HALAMAN ==================
+            Intent intent = new Intent(FirstTransaction.this, SecondTransaction.class);
+
+            // (Opsional) Kirim data ke halaman kedua
+            intent.putExtra("nama", nama);
+            intent.putExtra("level", level);
+            intent.putExtra("kuah", kuah);
+            intent.putExtra("telur", telur);
+            intent.putExtra("kencur", kencur);
+            intent.putExtra("rasa", rasa);
+
+            startActivity(intent);
         });
     }
 }

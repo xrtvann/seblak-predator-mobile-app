@@ -10,20 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_seblak_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SeblakPredator">
+
         <activity
-            android:name=".TransaksiActivity"
+            android:name=".KeranjangActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".KeranjangActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".KeranjangActivity" -->
-        <!-- android:exported="false" /> -->
+
         <activity
             android:name=".auth.ResetPasswordActivity"
             android:exported="false" />
@@ -38,14 +34,9 @@
             android:exported="false" />
         <activity
             android:name=".splash.SplashActivity"
-            android:exported="true"
-            android:theme="@style/Theme.SeblakPredator.Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"
+            android:theme="@style/Theme.SeblakPredator.Splash" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

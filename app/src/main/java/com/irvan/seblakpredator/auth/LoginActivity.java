@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             String username = usernameInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
+            String usernameHint = "irvan";
+            String passwordHint = "irvan123";
 
             if (username.isEmpty() || password.isEmpty()){
                 usernameColumn.setError("Username harus di isi");
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            if (username.equals("irvan") && password.equals("irvan123")) {
+            if (username.equals(usernameHint) && password.equals(passwordHint)) {
                 Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
 
                 // Pindah ke halaman dashboard (contoh)

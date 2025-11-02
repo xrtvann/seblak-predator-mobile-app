@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.ThirdTransaction;
 import com.irvan.seblakpredator.auth.LoginActivity;
 
 @SuppressLint("CustomSplashScreen")

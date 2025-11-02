@@ -75,6 +75,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btnsemua"
                         android:layout_width="90dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
@@ -83,6 +84,7 @@
                         android:textColor="#FFFFFF" />
 
                     <Button
+                        android:id="@+id/btnkerupuk"
                         android:layout_width="110dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
@@ -91,6 +93,7 @@
                         android:textColor="#FFFFFF" />
 
                     <Button
+                        android:id="@+id/btnsayuran"
                         android:layout_width="108dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
@@ -99,19 +102,30 @@
                         android:textColor="#FFFFFF" />
 
                     <Button
+                        android:id="@+id/btntopping"
                         android:layout_width="158dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
-                        android:text="Olahan Daging"
+                        android:text="Topping"
                         android:textColor="#FFFFFF" />
 
                     <Button
+                        android:id="@+id/btnmie"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Mie"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/btnayam"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Ayam"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -126,113 +140,12 @@
 
             <!-- DAFTAR ITEM MENU -->
             <LinearLayout
-                android:id="@+id/containerMenu"
+                android:id="@+id/KotakMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- ITEM 1 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
 
-                    <ImageView
-                        android:id="@+id/imgProduk1"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/bg_image_round"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_background" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvNamaProduk1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dirty Matchapresso"
-                            android:textColor="#000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvHargaProduk1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Rp 31.000"
-                            android:textColor="#000"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/btnTambah2"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_add_circle"
-                        android:backgroundTint="#3CB371" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/imgProduk2"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/bg_image_round"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_background" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvNamaProduk2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dirty Matchapresso"
-                            android:textColor="#000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvHargaProduk2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Rp 31.000"
-                            android:textColor="#000"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/btnTambah1"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_add_circle"
-                        android:backgroundTint="#3CB371" />
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
