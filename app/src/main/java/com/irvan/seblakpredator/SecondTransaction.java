@@ -1,6 +1,7 @@
 package com.irvan.seblakpredator;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,19 @@ public class SecondTransaction extends AppCompatActivity {
         btnAyam = findViewById(R.id.btnayam);
 
         LayoutInflater inflater = getLayoutInflater();
+        Button lanjut = findViewById(R.id.btnLanjut);
+
+        lanjut.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondTransaction.this, ThirdTransaction.class);
+            startActivity(intent);
+        });
+
+        ImageView kembali = findViewById(R.id.btnBack);
+
+        kembali.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondTransaction.this, FirstTransaction.class);
+            startActivity(intent);
+        });
 
         // 🔹 Semua produk
         String[] namaProduk = {
