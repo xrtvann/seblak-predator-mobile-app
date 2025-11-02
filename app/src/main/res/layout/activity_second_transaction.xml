@@ -102,12 +102,12 @@
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:id="@+id/btnolahandaging"
+                        android:id="@+id/btntopping"
                         android:layout_width="158dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
-                        android:text="Olahan Daging"
+                        android:text="Topping"
                         android:textColor="#FFFFFF" />
 
                     <Button
@@ -117,6 +117,15 @@
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Mie"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/btnayam"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Ayam"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>

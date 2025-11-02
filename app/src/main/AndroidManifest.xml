@@ -14,7 +14,7 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ThirdTransaction"
+            android:name=".SecondTransaction"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
