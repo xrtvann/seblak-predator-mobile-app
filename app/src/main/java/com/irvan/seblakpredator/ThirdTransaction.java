@@ -101,6 +101,9 @@ public class ThirdTransaction extends AppCompatActivity {
                 tvNamaProduk.setText(namaProduk[i]);
                 tvHargaProduk.setText(hargaProduk[i]);
 
+                setupQtyLogic(itemView);
+
+
                 // Tambahkan view ke container utama
                 KotakMenu2.addView(itemView);
             }
@@ -120,6 +123,9 @@ public class ThirdTransaction extends AppCompatActivity {
                     imgProduk.setImageResource(gambarProduk[i]);
                     tvNamaProduk.setText(namaProduk[i]);
                     tvHargaProduk.setText(hargaProduk[i]);
+
+                    setupQtyLogic(itemView);
+
 
                     // Tambahkan view ke container utama
                     KotakMenu2.addView(itemView);
@@ -142,6 +148,9 @@ public class ThirdTransaction extends AppCompatActivity {
                     tvNamaProduk.setText(namaSnack[i]);
                     tvHargaProduk.setText(hargaSnack[i]);
 
+                    setupQtyLogic(itemView);
+
+
                     // Tambahkan view ke container utama
                     KotakMenu2.addView(itemView);
                 }
@@ -163,11 +172,45 @@ public class ThirdTransaction extends AppCompatActivity {
                     tvNamaProduk.setText(namaMinuman[i]);
                     tvHargaProduk.setText(hargaMinuman[i]);
 
+                    setupQtyLogic(itemView);
+
+
                     // Tambahkan view ke container utama
                     KotakMenu2.addView(itemView);
                 }
             });
         }
+    private void setupQtyLogic(View itemView) {
+        ImageView btnTambahAwal = itemView.findViewById(R.id.btnTambah2);
+        LinearLayout layoutQty = itemView.findViewById(R.id.layoutQty);
+        ImageView btnTambah = itemView.findViewById(R.id.btnTambah);
+        ImageView btnKurang = itemView.findViewById(R.id.btnKurang);
+        TextView txtQty = itemView.findViewById(R.id.txtQty);
+
+        btnTambahAwal.setOnClickListener(v -> {
+            btnTambahAwal.setVisibility(View.GONE);
+            layoutQty.setVisibility(View.VISIBLE);
+            txtQty.setText("1");
+        });
+
+        btnTambah.setOnClickListener(v -> {
+            int jumlah = Integer.parseInt(txtQty.getText().toString());
+            jumlah++;
+            txtQty.setText(String.valueOf(jumlah));
+        });
+
+        btnKurang.setOnClickListener(v -> {
+            int jumlah = Integer.parseInt(txtQty.getText().toString());
+            if (jumlah > 1) {
+                jumlah--;
+                txtQty.setText(String.valueOf(jumlah));
+            } else {
+                layoutQty.setVisibility(View.GONE);
+                btnTambahAwal.setVisibility(View.VISIBLE);
+            }
+        });
     }
+
+}
 
 
