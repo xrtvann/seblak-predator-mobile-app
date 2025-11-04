@@ -26,6 +26,7 @@ public class TransaksiFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     public TransaksiFragment() {
         // Required empty public constructor
     }
