@@ -12,7 +12,10 @@
         android:theme="@style/Theme.SeblakPredator">
 
         <activity
-            android:name=".KeranjangActivity"
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondTransaction"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
