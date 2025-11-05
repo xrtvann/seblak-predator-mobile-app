@@ -30,7 +30,7 @@
             android:name=".auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".SecondTransaction"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
