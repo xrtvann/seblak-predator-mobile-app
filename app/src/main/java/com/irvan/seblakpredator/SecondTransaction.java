@@ -96,8 +96,8 @@ public class SecondTransaction extends AppCompatActivity {
 
 
         // 🔸 Kategori Kerupuk
-        String[] namaKerupuk = {"Rafael Putih", "Rafael Oren", "Kerupuk Tangga", "Kerupuk Bulat Warna", "Kerupuk Bulat Putih", "Kerupuk Bulat Oren", "Rafael Warna Kecil", "Rafael Warna Besar"};
-        String[] hargaKerupuk = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000"};
+        String[] namaKerupuk = {"Rafael Putih", "Rafael Oren", "Kerupuk Tangga", "Kerupuk Bulat Warna", "Kerupuk Bulat Putih", "Kerupuk Bulat Oren", "Rafael Warna Kecil", "Rafael Warna Besar", "Siomay Kering", "Cuanky Lidah", "Tahu Geprek", "Cikur"};
+        String[] hargaKerupuk = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.500", "Rp 1.500", "Rp 1.000"};
         int[] gambarKerupuk = {R.drawable.img_rafael_putih, R.drawable.img_rafael_oren, R.drawable.img_kerupuk_tangga, R.drawable.img_kerupuk_bulat_warna, R.drawable.img_kerupuk_bulat_putih, R.drawable.img_kerupuk_bulat_oren, R.drawable.img_rafael_warna, R.drawable.img_rafael_warna};
 
         // 🔸 Kategori Sayuran
@@ -118,12 +118,12 @@ public class SecondTransaction extends AppCompatActivity {
         };
 
         String[] hargaTopping = {"Rp 2.000", "Rp 3.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 5.000",
+                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 1.500", "Rp 5.000",
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
                 "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000",
                 "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 3.000",
-                "Rp 3.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
+                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
                 "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000"
         };
         int[] gambarTopping = {
@@ -137,13 +137,13 @@ public class SecondTransaction extends AppCompatActivity {
                 R.drawable.img_cikuwa_long, R.drawable.img_dumpling_ayam, R.drawable.img_dumpling_keju, R.drawable.img_dumpling_spicy
         };
         // 🔸 Kategori Mie
-        String[] namaMie = {"Mie Kecil", "Mie Pipih", "Bihun", "Kuetiau"};
-        String[] hargaMie = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000"};
+        String[] namaMie = {"Mie Kecil", "Mie Pipih", "Bihun", "Kuetiau", "Intermie"};
+        String[] hargaMie = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 4.000"};
         int[] gambarMie = {R.drawable.img_mie_kecil, R.drawable.img_mie_pipih, R.drawable.img_bihun, R.drawable.img_kwetiau};
 
         // 🔸 Kategori Ayam
-        String[] namaAyam = {"Tulangan", "Ceker", "Sayap"};
-        String[] hargaAyam = {"Rp 1.000", "Rp 2.000", "Rp 5.000"};
+        String[] namaAyam = {"Tulangan", "Ceker", "Sayap", "Telur"};
+        String[] hargaAyam = {"Rp 1.000", "Rp 2.000", "Rp 5.000", "Rp 3.000"};
         int[] gambarAyam = {R.drawable.img_tulangan, R.drawable.img_ceker, R.drawable.img_sayap};
 
 
