@@ -14,7 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="#E74A2E"
         android:gravity="center_vertical"
@@ -56,7 +56,7 @@
             android:id="@+id/imageView3"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="108dp"
+            android:layout_marginStart="90dp"
             android:src="@drawable/ic_person"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -67,6 +67,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -118,7 +119,7 @@
                     android:text="Ganti"
                     android:textColor="#ffff
 "
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -231,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingVertical="4dp"/>
+                android:paddingVertical="4dp" />
 
             <!-- RINGKASAN PEMBAYARAN -->
             <TextView
@@ -343,19 +344,28 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_checkout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/checkoutlayout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primary"
-        android:text="Checkout"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="100dp"
+        android:layout_marginTop="500dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/primary"
+            android:text="Checkout"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
