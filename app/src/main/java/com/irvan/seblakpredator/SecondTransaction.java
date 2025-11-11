@@ -107,14 +107,14 @@ public class SecondTransaction extends AppCompatActivity {
 
         // 🔸 Kategori Topping
         String[] namaTopping = {
-                "Sosis Kecil", "Sosis Merah Sapi", "Sosis Oren Ayam", "Beef Burger", "Fish Cake",
+                "Sosis Kecil", "Sosis Merah Sapi", "Sosis Oren Ayam", "Beef Burger", "Kue Ikan Bulat",
                 "Pentol Daging", "Tempura", "Tahu Bakso", "Cocktail", "Pentol Jumbo",
                 "Cireng", "Kornet", "Ekor Udang Sunfish", "Gyoza Ikan", "Money Bag Ikan",
                 "Siomay Ayam", "Siomay Udang", "Udang Gulung", "Odeng Ori", "Odeng Spicy",
                 "Pentol Ikan", "Otak-otak Ikan", "Bola Salmon", "Kue Ikan", "Fish Roll",
                 "Character Ikan", "Tahu Bakso Seafood", "Otak-otak Singapore", "Ekor Udang Cedea", "Duo Twister",
                 "Flower Twister", "Crabstick", "Scallop", "Kembang Cumi", "Cikua Mini",
-                "Cikua Long", "Dumpling Ayam", "Dumpling Keju", "Dumpling Spicy"
+                "Cikua Long", "Dumpling Ayam", "Dumpling Keju", "Dumpling Spicy", "Pentol Jamur", "Kue Ikan Pedas"
         };
 
         String[] hargaTopping = {"Rp 2.000", "Rp 3.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
@@ -124,7 +124,7 @@ public class SecondTransaction extends AppCompatActivity {
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000",
                 "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 3.000",
                 "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000"
+                "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.500"
         };
         int[] gambarTopping = {
                 R.drawable.img_sosis_kecil, R.drawable.img_sosis_merah_sapi, R.drawable.img_sosis_oren_ayam, R.drawable.img_beef_burger, R.drawable.img_fish_cake,
