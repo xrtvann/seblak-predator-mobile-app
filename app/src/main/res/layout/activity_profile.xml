@@ -58,9 +58,12 @@
                     app:tint="@color/black" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="400dp"
+                    android:layout_height="350dp"
                     android:layout_marginTop="10dp"
+                    android:background="@color/primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -71,10 +74,10 @@
                         android:layout_marginTop="20dp"
                         android:hint="Nama"
                         app:boxBackgroundMode="outline"
-                        app:boxStrokeColor="@color/orange"
+                        app:boxStrokeColor="@color/white"
                         app:boxStrokeWidth="2dp"
-                        app:colorControlActivated="@color/orange"
-                        app:hintTextColor="@color/orange"
+                        app:colorControlActivated="@color/white"
+                        app:hintTextColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -151,7 +154,7 @@
                             android:id="@+id/phoneInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"/>
+                            android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 

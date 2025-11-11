@@ -1,14 +1,20 @@
 package com.irvan.seblakpredator.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.auth.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +67,42 @@ public class PengaturanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pengaturan, container, false);
+        View view = inflater.inflate(R.layout.fragment_pengaturan, container, false);
+        View logout = view.findViewById(R.id.logoutButton);
+        logout.setOnClickListener(v ->
+            showLogoutDialog());
+        return view;
     }
+    private void showLogoutDialog() {
+        // Inflate custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_logoutconfirm, null);
+
+        // Buat dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        Animation anim = AnimationUtils.loadAnimation(requireContext(), R.anim.dialog_enter);
+        view.startAnimation(anim);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Tombol OK
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> {dialog.dismiss();
+        requireContext().getSharedPreferences("user_prefs", 0)
+                .edit()
+                .clear()
+                .apply();
+
+        // Pindah ke halaman login
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);});
+        // Tombol Batal
+        Button btnBatal = view.findViewById(R.id.batalbutton);
+        btnBatal.setOnClickListener(v -> dialog.dismiss());
+    }
+
 }

@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            if (username.equals(usernameHint) || password.equals(passwordHint)) {
+            if (username.equals(usernameHint) && password.equals(passwordHint)) {
                 Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
 
                 // Pindah ke halaman dashboard (contoh)
