@@ -30,6 +30,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/saveButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:text="Simpan"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -50,7 +65,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,15 +73,16 @@
                     app:tint="@color/black" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="400dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="473dp"
                     android:layout_marginTop="36dp"
-                    android:background="@color/primary"
+                    android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.454"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
+                    <!-- NAME -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -75,21 +91,23 @@
                         android:layout_marginTop="20dp"
                         android:hint="Nama"
                         app:boxBackgroundMode="outline"
-                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeColor="@color/primary"
                         app:boxStrokeWidth="2dp"
-                        app:colorControlActivated="@color/white"
-                        app:hintTextColor="@color/white"
+                        app:hintTextColor="@color/primary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@+id/textView11">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/nameInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName" />
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- USERNAME -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/username"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -98,10 +116,9 @@
                         android:layout_marginTop="15dp"
                         android:hint="Username"
                         app:boxBackgroundMode="outline"
-                        app:boxStrokeColor="@color/orange"
+                        app:boxStrokeColor="@color/primary"
                         app:boxStrokeWidth="2dp"
-                        app:colorControlActivated="@color/orange"
-                        app:hintTextColor="@color/orange"
+                        app:hintTextColor="@color/primary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/name">
@@ -110,9 +127,12 @@
                             android:id="@+id/usernameInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName" />
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- EMAIL -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/email"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -121,10 +141,9 @@
                         android:layout_marginTop="15dp"
                         android:hint="Email"
                         app:boxBackgroundMode="outline"
-                        app:boxStrokeColor="@color/orange"
+                        app:boxStrokeColor="@color/primary"
                         app:boxStrokeWidth="2dp"
-                        app:colorControlActivated="@color/orange"
-                        app:hintTextColor="@color/orange"
+                        app:hintTextColor="@color/primary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/username">
@@ -133,20 +152,23 @@
                             android:id="@+id/emailInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress" />
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- PHONE -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/phone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:hint="Telepon"
                         app:boxBackgroundMode="outline"
-                        app:boxStrokeColor="@color/orange"
+                        app:boxStrokeColor="@color/primary"
                         app:boxStrokeWidth="2dp"
-                        app:colorControlActivated="@color/orange"
-                        app:hintTextColor="@color/orange"
+                        app:hintTextColor="@color/primary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/email">
@@ -155,9 +177,22 @@
                             android:id="@+id/phoneInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number" />
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <TextView
+                        android:id="@+id/textView11"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Informasi Pribadi"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
