@@ -15,7 +15,7 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".SecondTransaction"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondTransaction"
+            android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".splash.SplashActivity"
