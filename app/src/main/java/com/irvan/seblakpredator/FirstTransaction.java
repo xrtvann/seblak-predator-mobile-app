@@ -59,6 +59,7 @@ public class FirstTransaction extends AppCompatActivity {
         });
 
         // ================== INISIALISASI VIEW ==================
+
         edtNama = findViewById(R.id.edtNama);
         spinnerLevel = findViewById(R.id.spinnerLevel);
         spinnerKencur = findViewById(R.id.spinnerKencur);

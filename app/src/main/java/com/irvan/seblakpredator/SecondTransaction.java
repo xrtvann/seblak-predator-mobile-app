@@ -35,6 +35,7 @@ public class SecondTransaction extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         Button lanjut = findViewById(R.id.btnLanjut);
 
+
         lanjut.setOnClickListener(v -> {
             Intent intent = new Intent(SecondTransaction.this, ThirdTransaction.class);
             startActivity(intent);
