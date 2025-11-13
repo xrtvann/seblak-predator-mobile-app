@@ -69,4 +69,5 @@ dependencies {
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.5.0-alpha04")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("io.github.chaosleung:pinview:1.4.4")
 }
