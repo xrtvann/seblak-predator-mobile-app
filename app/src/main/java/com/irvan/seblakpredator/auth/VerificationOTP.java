@@ -55,7 +55,7 @@ public class VerificationOTP extends AppCompatActivity {
     // Timer hitung mundur 30 detik
     private void startTimer() {
         btnResendOTP.setEnabled(false); // disable tombol saat timer berjalan
-        btnResendOTP.setTextColor(getResources().getColor(R.color.grey));
+        btnResendOTP.setVisibility(TextView.GONE);
 
         new CountDownTimer(30000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -64,9 +64,9 @@ public class VerificationOTP extends AppCompatActivity {
             }
 
             public void onFinish() {
-                timerText.setText("Kamu bisa kirim ulang kode sekarang");
+                timerText.setText("Belum menerima kode?");
                 btnResendOTP.setEnabled(true);
-                btnResendOTP.setTextColor(getResources().getColor(R.color.orange));// aktifkan kembali
+                btnResendOTP.setVisibility(TextView.VISIBLE);// aktifkan kembali
             }
         }.start();
     }
