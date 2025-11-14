@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeblakPredator">
         <activity
+            android:name=".DisconnectNotification"
+            android:exported="false" />
+        <activity
             android:name=".auth.CreatePasswordActivity"
             android:exported="false" />
         <activity
