@@ -10,12 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_seblak_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SeblakPredator">
-
+        <activity
+            android:name=".auth.CreatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.ChangePasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.VerificationOTP"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +41,7 @@
             android:name=".SecondTransaction"
             android:exported="false" />
         <activity
-            android:name=".auth.VerificationOTP"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".splash.SplashActivity"

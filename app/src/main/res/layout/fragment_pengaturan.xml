@@ -12,7 +12,7 @@
         android:layout_height="76dp">
 
         <Button
-            android:id="@+id/backButton2"
+            android:id="@+id/backButton"
             style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
