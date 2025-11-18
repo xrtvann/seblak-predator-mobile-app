@@ -23,6 +23,16 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.R;
 
+import com.irvan.seblakpredator.apiclient.ApiClient;
+import com.irvan.seblakpredator.apiclient.ApiService;
+import com.irvan.seblakpredator.apiclient.LoginRequest;
+import com.irvan.seblakpredator.apiclient.TokenManager;
+import com.irvan.seblakpredator.model.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout usernameColumn, passwordColumn;
@@ -97,37 +107,65 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             String username = usernameInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
-            String usernameHint = "irvan";
-            String passwordHint = "irvan123";
 
             if (username.isEmpty()) {
                 usernameColumn.setError("Username harus di isi");
-            } else {
-                usernameColumn.setError(null);
+                return;
             }
 
             if (password.isEmpty()) {
                 passwordColumn.setError("Password harus di isi");
-            } else {
-                passwordColumn.setError(null);
-            }
-
-            if (username.isEmpty() || password.isEmpty()) {
                 return;
             }
 
+            // MULAI REQUEST API
+            ApiService api = ApiClient.getClient().create(ApiService.class);
+            LoginRequest request = new LoginRequest(username, password);
 
-            if (username.equals(usernameHint) && password.equals(passwordHint)) {
-                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+            api.login(request).enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
 
-                // Pindah ke halaman dashboard (contoh)
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                showErrorIncorrect();
-            }
+                        LoginResponse res = response.body();
+
+                        if (res.isSuccess()) {
+
+                            TokenManager.saveToken(LoginActivity.this, res.getAccessToken());
+
+                            Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
+                        } else {
+                            showErrorIncorrect();
+                        }
+
+                    } else {
+                        // Debug tambahan
+                        try {
+                            String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
+                            Toast.makeText(LoginActivity.this,
+                                    "Login gagal (Response Error)\nHTTP Code: " + response.code() + "\nBody: " + errorBody,
+                                    Toast.LENGTH_LONG).show();
+                            String message = "Login gagal!\nHTTP Code: " + response.code() + "\n" + errorBody;
+                            showErrorDialog(message);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+
+                    Toast.makeText(LoginActivity.this, "Error : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
         });
+
     }
     private void showErrorIncorrect() {
         // Inflate custom layout
@@ -148,5 +186,29 @@ public class LoginActivity extends AppCompatActivity {
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> dialog.dismiss());
     }
+    private void showErrorDialog(String message) {
+        // Inflate custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_errorsystem, null);
+
+        // Set message di TextView (pastikan layout punya TextView dengan id misal errorMessage)
+        TextView errorText = view.findViewById(R.id.errornote);
+        errorText.setText(message);
+
+        // Buat dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.dialog_enter);
+        view.startAnimation(anim);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Tombol OK
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> dialog.dismiss());
+    }
+
 
 }

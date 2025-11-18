@@ -1,13 +1,18 @@
 package com.irvan.seblakpredator.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
+import com.irvan.seblakpredator.ChangeAddressActivity;
 import com.irvan.seblakpredator.R;
 
 /**
@@ -25,6 +30,7 @@ public class TransaksiFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button addressChangeButton, checkOutButton, orderTypeButton, addProductButton, methodTypeButton;
 
 
     public TransaksiFragment() {
@@ -62,6 +68,12 @@ public class TransaksiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaksi, container, false);
+        View view = inflater.inflate(R.layout.fragment_transaksi, container, false);
+        addressChangeButton = view.findViewById(R.id.btn_ganti_alamat);
+        addressChangeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChangeAddressActivity.class);
+            startActivity(intent);
+        });
+        return view;
     }
 }

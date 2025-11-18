@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,8 +27,9 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.VerificationOTP"
-            android:exported="true">
+            android:name=".splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SeblakPredator.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,12 +49,17 @@
             android:name=".SecondTransaction"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.VerificationOTP"
             android:exported="false" />
         <activity
-            android:name=".splash.SplashActivity"
-            android:exported="false"
-            android:theme="@style/Theme.SeblakPredator.Splash" />
+            android:name=".ChangeAddressActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
