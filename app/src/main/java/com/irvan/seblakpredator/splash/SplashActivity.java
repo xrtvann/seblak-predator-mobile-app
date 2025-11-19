@@ -57,6 +57,7 @@ public class SplashActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         Button retry = dialog.findViewById(R.id.reconnectbutton);
+        Button cancel = dialog.findViewById(R.id.batalbutton);
         retry.setOnClickListener(v -> {
             dialog.dismiss();
 
@@ -66,7 +67,10 @@ public class SplashActivity extends AppCompatActivity {
                 showNoConnectionPopup(); // muncul lagi kalau masih offline
             }
         });
-
+        cancel.setOnClickListener(v -> {
+            dialog.dismiss();
+            finishAffinity();
+        });
         dialog.show();
     }
 
