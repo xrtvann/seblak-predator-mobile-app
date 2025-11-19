@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://192.168.1.41/seblak-predator-web-app/api/"; // url
+    private static final String BASE_URL = "http://10.10.4.93/seblak-predator-web-app/api/"; // url
     private static Retrofit retrofit;
 
     public static Retrofit getClient() {
