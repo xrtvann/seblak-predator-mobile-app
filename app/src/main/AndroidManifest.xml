@@ -18,12 +18,6 @@
             android:name=".DisconnectNotification"
             android:exported="false" />
         <activity
-            android:name=".auth.CreatePasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.ChangePasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
@@ -60,6 +54,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+        <activity
+            android:name=".auth.CreatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.ChangePasswordActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

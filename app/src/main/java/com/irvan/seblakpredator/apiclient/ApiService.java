@@ -1,4 +1,5 @@
 package com.irvan.seblakpredator.apiclient;
+import com.irvan.seblakpredator.model.ForgetPassResponse;
 import com.irvan.seblakpredator.model.LoginResponse;
 import com.irvan.seblakpredator.model.RegisterResponse;
 
@@ -16,4 +17,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("auth/register.php")
     Call<RegisterResponse> register(@Body RegisterRequest registerRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST("auth/forgot-password.php")
+    Call<ForgetPassResponse> forgetpassword(@Body ForgetPassRequest forgetPassRequest);
 }

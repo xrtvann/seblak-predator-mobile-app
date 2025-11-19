@@ -75,6 +75,53 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         });
+        nameInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nameColumn.setError(null); // hapus error
+            }
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        emailInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailColumn.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        usernameInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                usernameColumn.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        passwordInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordColumn.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
 
         registerButton.setOnClickListener(v -> registerUser());
     }
