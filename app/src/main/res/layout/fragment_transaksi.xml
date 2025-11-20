@@ -75,7 +75,7 @@
                 android:text="Pilih Tipe Pembelian"
                 android:textColor="#000"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,28 +85,29 @@
                 android:paddingVertical="8dp">
 
                 <ImageView
+                    android:id="@+id/imageTypeOrder"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/kurir" />
 
                 <TextView
-                    android:id="@+id/tv_delivery_type"
+                    android:id="@+id/displayTypeOrder"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Delivery"
+                    android:text="Display Order Tipe"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"/>
 
                 <Button
-                    android:id="@+id/btn_ganti_tipe"
+                    android:id="@+id/changeTypeOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:backgroundTint="@color/primary"
                     android:text="Ganti"
-                    android:textColor="#ffff
-"
+                    android:textColor="@color/white"
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -119,7 +120,7 @@
                 android:text="Alamat Pengantaran"
                 android:textColor="#000"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,37 +130,41 @@
                 android:paddingVertical="8dp">
 
                 <TextView
-                    android:id="@+id/tv_alamat"
+                    android:id="@+id/displayAddress"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    style="@style/TextAppearance.Material3.BodyMedium"
                     android:text="Jalan Kalimantan, No. 10"
                     android:textColor="#333"
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/btn_ganti_alamat"
+                    android:id="@+id/addressChangeButton"
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp"
+                    android:layout_height="40dp"
                     android:backgroundTint="@color/primary"
-                    android:text="Ganti Alamat"
-                    android:textColor="#fff
-"
-                    android:textSize="9sp" />
+                    android:text="Ubah Alamat"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_tambah_detail"
+                android:id="@+id/addMoreProduct"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="42dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/primary"
-                android:text="Tambah Detail"
-                android:textColor="#fff"
-                android:textSize="9sp" />
+                android:text="Tambah produk lainnya"
+                android:textColor="#ffffff"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:textSize="13sp" />
 
             <!-- TABEL PRODUK -->
             <LinearLayout
+                android:id="@+id/tableProductList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -170,50 +175,30 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Nama"
-                    android:textStyle="bold" />
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Deskripsi"
-                    android:textStyle="bold" />
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Harga"
-                    android:textStyle="bold" />
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
             </LinearLayout>
 
             <!-- PRODUK 1 -->
             <LinearLayout
-                android:id="@+id/columnDetail"
+                android:id="@+id/InformationOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="4dp">
+                android:orientation="vertical"
 
-                <TextView
-                    android:id="@+id/namaPelanggan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Azizah" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Kuah Normal, Cekrek Aci, Kencur Strong, Gurih Khas..." />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="25.000" />
-            </LinearLayout>
+                android:paddingVertical="4dp"/>
 
             <!-- PRODUK 2 -->
             <LinearLayout
@@ -239,65 +224,75 @@
                 android:paddingVertical="8dp">
 
                 <LinearLayout
+                    android:id="@+id/subtotalDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingVertical="2dp">
 
                     <TextView
+                        android:id="@+id/subtotalProduct"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Subtotal (2)" />
 
                     <TextView
+                        android:id="@+id/priceAllOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="55.000" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/costDeliveryDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingVertical="2dp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/labelCost"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Biaya Pengiriman" />
+                        android:text="Biaya Ongkir" />
 
                     <TextView
+                        android:id="@+id/costDelivery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8.000" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/totalPriceDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingVertical="4dp">
 
                     <TextView
+                        android:id="@+id/labelTotal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Total"
-                        android:textStyle="bold" />
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"/>
 
                     <TextView
+                        android:id="@+id/priceTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="63.000"
-                        android:textStyle="bold" />
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- METODE PEMBAYARAN -->
             <!-- PILIH METODE PEMBAYARAN -->
             <LinearLayout
+                android:id="@+id/selectMethodPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
@@ -308,7 +303,7 @@
                 android:paddingVertical="8dp">
 
                 <TextView
-                    android:id="@+id/tv_metode_pembayaran"
+                    android:id="@+id/displayMethodPayment"
                     android:layout_width="261dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -323,7 +318,8 @@
                     android:backgroundTint="@color/primary"
                     android:text="•••"
                     android:textColor="#fff"
-                    android:textSize="9sp" />
+                    android:textSize="9sp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
 
             </LinearLayout>

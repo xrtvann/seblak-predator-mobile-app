@@ -69,7 +69,7 @@ public class TransaksiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaksi, container, false);
-        addressChangeButton = view.findViewById(R.id.btn_ganti_alamat);
+        addressChangeButton = view.findViewById(R.id.addressChangeButton);
         addressChangeButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ChangeAddressActivity.class);
             startActivity(intent);

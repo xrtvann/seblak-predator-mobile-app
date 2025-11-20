@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +12,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_seblak_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SeblakPredator">
+        android:theme="@style/Theme.SeblakPredator"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".SuccessOrder"
+            android:exported="false" />
         <activity
             android:name=".DisconnectNotification"
             android:exported="false" />
@@ -47,13 +50,13 @@
             android:exported="false" />
         <activity
             android:name=".ChangeAddressActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".auth.CreatePasswordActivity"
             android:exported="false" />
