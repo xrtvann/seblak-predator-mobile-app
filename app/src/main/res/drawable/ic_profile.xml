@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Background lingkaran -->
+    <path
+        android:fillColor="#E9725C"
+        android:pathData="M60,0A60,60 0 1 1 60,120A60,60 0 1 1 60,0" />
+
+    <!-- Kepala (angkat sedikit ke atas) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,24a17,17 0 1 1 -0.01,0z" />
+
+    <!-- Badan (turunkan sedikit, jadi ada jarak) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,85c0,-13 11,-24 24,-24s24,11 24,24v8H36z" />
+</vector>

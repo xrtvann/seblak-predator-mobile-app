@@ -38,10 +38,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/editprofilebutton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/primary"
+            android:text="Edit Profil"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/displayInformation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/displayInformation"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="400dp"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,10 +74,10 @@
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="50dp"
                     android:text="Nama"
-                    android:textSize="15sp"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.047"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-                    android:text="Your Username"
+                    android:text="YourUsername"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:visibility="visible"
@@ -162,15 +176,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-                    android:text="Your Name"
+                    android:text="+6289123456789"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/labelPhone" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Biodata Pribadi"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_profile" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
