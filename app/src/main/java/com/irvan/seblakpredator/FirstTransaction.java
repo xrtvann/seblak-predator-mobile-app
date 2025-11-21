@@ -36,14 +36,13 @@ import androidx.core.view.WindowInsetsCompat;
 public class FirstTransaction extends AppCompatActivity {
 
     EditText edtNama;
-    Spinner spinnerLevel, spinnerKencur, spinnerRasa;
+    Spinner spinnerLevel, spinnerKencur;
     RadioGroup rgKuah, rgTelur;
     Button btnLanjut;
 
     // Data Dropdown
     String[] dataLevel = {"Level 0", "Level 1", "Level 2", "Level 3"};
     String[] dataKencur = {"Sedikit", "Normal", "Banyak"};
-    String[] dataRasa = {"Pedas", "Sedang", "Manis"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +59,16 @@ public class FirstTransaction extends AppCompatActivity {
 
         // ================== INISIALISASI VIEW ==================
 
-        edtNama = findViewById(R.id.edtNama);
-        spinnerLevel = findViewById(R.id.spinnerLevel);
-        spinnerKencur = findViewById(R.id.spinnerKencur);
-        spinnerRasa = findViewById(R.id.spinnerRasa);
-        rgKuah = findViewById(R.id.rgKuah);
-        rgTelur = findViewById(R.id.rgTelur);
+        edtNama = findViewById(R.id.costumerName);
+        spinnerLevel = findViewById(R.id.pilihanLevel);
+        spinnerKencur = findViewById(R.id.pilihanKencur);
+        rgKuah = findViewById(R.id.tipeKuah);
+        rgTelur = findViewById(R.id.tipeTelur);
         btnLanjut = findViewById(R.id.btnLanjut);
 
         // ================== SET DROPDOWN (SPINNER) ==================
         spinnerLevel.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dataLevel));
         spinnerKencur.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dataKencur));
-        spinnerRasa.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dataRasa));
 
         // ================== BUTTON LANJUT ==================
         btnLanjut.setOnClickListener(v -> {
@@ -80,7 +77,6 @@ public class FirstTransaction extends AppCompatActivity {
             String nama = edtNama.getText().toString();
             String level = spinnerLevel.getSelectedItem().toString();
             String kencur = spinnerKencur.getSelectedItem().toString();
-            String rasa = spinnerRasa.getSelectedItem().toString();
 
             int idKuah = rgKuah.getCheckedRadioButtonId();
             int idTelur = rgTelur.getCheckedRadioButtonId();
@@ -103,8 +99,7 @@ public class FirstTransaction extends AppCompatActivity {
                             "\nLevel : " + level +
                             "\nKuah : " + kuah +
                             "\nTelur : " + telur +
-                            "\nKencur : " + kencur +
-                            "\nRasa : " + rasa,
+                            "\nKencur : " + kencur,
                     Toast.LENGTH_LONG).show();
 
             // ================== PINDAH HALAMAN ==================
@@ -116,7 +111,6 @@ public class FirstTransaction extends AppCompatActivity {
             intent.putExtra("kuah", kuah);
             intent.putExtra("telur", telur);
             intent.putExtra("kencur", kencur);
-            intent.putExtra("rasa", rasa);
 
             startActivity(intent);
         });

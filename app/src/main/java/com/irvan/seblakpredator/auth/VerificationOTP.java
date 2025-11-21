@@ -1,9 +1,11 @@
 package com.irvan.seblakpredator.auth;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
 import com.irvan.seblakpredator.apiclient.ForgetPassRequest;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
+import com.irvan.seblakpredator.splash.SplashActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +34,9 @@ public class VerificationOTP extends AppCompatActivity {
 
     private PinView pinView;
     private TextView timerText, btnResendOTP;
-    private Button verifyButton;
+    private Button verifyButton, backButton;
     private String email;
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class VerificationOTP extends AppCompatActivity {
         timerText = findViewById(R.id.timerText);
         btnResendOTP = findViewById(R.id.btnResendOTP);
         verifyButton = findViewById(R.id.btnVerified); // tombol verify
+        backButton = findViewById(R.id.backButton);
 
         // Fokus & keyboard
         pinView.requestFocus();
@@ -68,6 +73,11 @@ public class VerificationOTP extends AppCompatActivity {
         btnResendOTP.setOnClickListener(v -> resendOtp());
 
         verifyButton.setOnClickListener(v -> verifyOtp());
+
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(VerificationOTP.this,ResetPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void startTimer() {
