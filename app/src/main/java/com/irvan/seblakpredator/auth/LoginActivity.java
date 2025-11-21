@@ -2,6 +2,7 @@ package com.irvan.seblakpredator.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -126,43 +127,46 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-
                         LoginResponse res = response.body();
 
+                        // Jika login berhasil
                         if (res.isSuccess()) {
-
                             TokenManager.saveToken(LoginActivity.this, res.getAccessToken());
-
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
-
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         } else {
-                            showErrorIncorrect();
+                            Log.d("LoginResponse", "Login Failed: " + res.getMessage());
+                            showErrorIncorrect();  // Tampilkan notifikasi kesalahan
                         }
-
                     } else {
-                        // Debug tambahan
-                        try {
-                            String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
-                            Toast.makeText(LoginActivity.this,
-                                    "Login gagal (Response Error)\nHTTP Code: " + response.code() + "\nBody: " + errorBody,
-                                    Toast.LENGTH_LONG).show();
-                            String message = "Login gagal!\nHTTP Code: " + response.code() + "\n" + errorBody;
-                            showErrorDialog(message);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        // Tangani error yang terjadi ketika server mengembalikan status error (misalnya, HTTP 401)
+                        if (response.code() == 401) {
+                            // Pesan khusus untuk error login (username/password salah)
+                            Log.d("LoginResponse", "Login failed with 401 - Unauthorized.");
+                            showErrorIncorrect();  // Tampilkan notifikasi "Username atau Password Salah"
+                        } else {
+                            // Tampilkan pesan error umum jika bukan 401
+                            try {
+                                String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
+                                String message = "Login gagal!\nHTTP Code: " + response.code() + "\n" + errorBody;
+                                showErrorDialog(message);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    String message = "Error : "+t.getMessage();
+                    // Tangani error jaringan atau server
+                    String message = "Error: " + t.getMessage();
                     showErrorDialog(message);
-                    Toast.makeText(LoginActivity.this, "Error : " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+
+
             });
         });
 

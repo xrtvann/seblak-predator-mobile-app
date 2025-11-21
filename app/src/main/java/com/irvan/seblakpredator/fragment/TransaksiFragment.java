@@ -30,7 +30,7 @@ public class TransaksiFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button addressChangeButton, checkOutButton, orderTypeButton, addProductButton, methodTypeButton;
+
 
 
     public TransaksiFragment() {
@@ -69,11 +69,7 @@ public class TransaksiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_transaksi, container, false);
-        addressChangeButton = view.findViewById(R.id.addressChangeButton);
-        addressChangeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ChangeAddressActivity.class);
-            startActivity(intent);
-        });
+
         return view;
     }
 }

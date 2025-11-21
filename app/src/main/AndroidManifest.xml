@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SeblakPredator"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TransaksiActivity"
+            android:exported="false" />
+        <activity
             android:name=".SuccessOrder"
             android:exported="false" />
         <activity
