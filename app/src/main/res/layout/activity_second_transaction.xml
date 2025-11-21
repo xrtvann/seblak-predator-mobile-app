@@ -34,14 +34,15 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_product"
+            android:src="@drawable/ic_person"
             app:tint="@color/white" />
 
         <ImageView
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/ic_product"
             app:tint="@color/white" />
+
     </LinearLayout>
 
     <!-- SCROLL UTAMA -->

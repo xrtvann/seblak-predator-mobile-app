@@ -76,7 +76,7 @@ public class ThirdTransaction extends AppCompatActivity {
             ImageView profil = findViewById(R.id.btnProfile);
 
             profil.setOnClickListener(v -> {
-                Intent intent = new Intent(ThirdTransaction.this, ProfileActivity.class);
+                Intent intent = new Intent(ThirdTransaction.this, EditProfileActivity.class);
                 startActivity(intent);
             });
             ImageView keranjang = findViewById(R.id.btnCart);

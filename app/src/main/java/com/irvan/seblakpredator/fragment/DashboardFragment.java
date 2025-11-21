@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.irvan.seblakpredator.ProfileActivity;
+import com.irvan.seblakpredator.EditProfileActivity;
 import com.irvan.seblakpredator.R;
 
 /**
@@ -75,7 +75,7 @@ public class DashboardFragment extends Fragment {
         ConstraintLayout profilePage = view.findViewById(R.id.information);
 
         profilePage.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), ProfileActivity.class);
+            Intent intent = new Intent(requireActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
 

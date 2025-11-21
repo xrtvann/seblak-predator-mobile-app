@@ -15,15 +15,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="90dp"
             android:background="#D94A27"
             android:padding="12dp">
 
             <!-- Back Button -->
             <ImageView
                 android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_arrow_back" />
@@ -39,8 +39,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:src="@drawable/ic_product"
                     app:tint="@color/white" />
 
@@ -58,8 +58,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:id="@+id/profilepage"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:src="@drawable/ic_person" />
 
             </LinearLayout>
@@ -84,15 +85,19 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/labelName"
                         android:layout_width="90dp"
+                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
                         android:text="Nama"
-                        android:textStyle="bold" />
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
 
                     <EditText
-                        android:id="@+id/edtNama"
+                        android:id="@+id/costumerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                         android:hint="Isi nama kamu" />
                 </LinearLayout>
 
@@ -104,13 +109,15 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/labelLevel"
                         android:layout_width="90dp"
+                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
                         android:text="Level"
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spinnerLevel"
+                        android:id="@+id/pilihanLevel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -123,25 +130,30 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/labelKuah"
                         android:layout_width="90dp"
+                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
                         android:text="Kuah"
-                        android:textStyle="bold" />
+                        android:paddingTop="15dp"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"/>
 
                     <RadioGroup
-                        android:id="@+id/rgKuah"
+                        android:id="@+id/tipeKuah"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/kuahNormal"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Normal" />
 
                         <RadioButton
                             android:id="@+id/kuahNyemek"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -157,13 +169,16 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/labelEgg"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:text="Telur"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black"
+                        android:paddingTop="10dp"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
 
                     <RadioGroup
-                        android:id="@+id/rgTelur"
+                        android:id="@+id/tipeTelur"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -172,7 +187,7 @@
                             android:id="@+id/telurUtuh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Utuh" />
+                            android:text="Telur Utuh" />
 
                         <RadioButton
                             android:id="@+id/telurOrak"
@@ -181,12 +196,6 @@
                             android:layout_marginStart="20dp"
                             android:text="Orak Arik" />
 
-                        <RadioButton
-                            android:id="@+id/tanpaTelur"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Tanpa" />
                     </RadioGroup>
                 </LinearLayout>
 
@@ -201,10 +210,11 @@
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:text="Kencur"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized" />
 
                     <Spinner
-                        android:id="@+id/spinnerKencur"
+                        android:id="@+id/pilihanKencur"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -214,19 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:text="Rasa"
-                        android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/spinnerRasa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    android:orientation="horizontal"/>
 
                 <!-- BUTTON LANJUT -->
                 <Button
