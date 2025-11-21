@@ -9,233 +9,125 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.irvan.seblakpredator.apiclient.ApiClient;
+import com.irvan.seblakpredator.apiclient.ApiService;
+import com.irvan.seblakpredator.model.SecondMenuResponse;
+import com.irvan.seblakpredator.model.Topping;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+// ... bagian import dan deklarasi class tetap sama
 
 public class SecondTransaction extends AppCompatActivity {
 
     LinearLayout KotakMenu;
-    Button btnSemua, btnKerupuk, btnSayuran, btnTopping, btnMie, btnAyam;
+    Button btnSemua, btnFrozenFood, btnPelengkap, btnSayuran, btnJamur;
 
+    private List<Topping> toppingList = new ArrayList<>();
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_transaction);
 
         KotakMenu = findViewById(R.id.KotakMenu);
-        btnSemua = findViewById(R.id.btnsemua);
-        btnKerupuk = findViewById(R.id.btnkerupuk);
-        btnSayuran = findViewById(R.id.btnsayuran);
-        btnTopping = findViewById(R.id.btntopping);
-        btnMie = findViewById(R.id.btnmie);
-        btnAyam = findViewById(R.id.btnayam);
+        btnSemua = findViewById(R.id.allButton);
+        btnFrozenFood = findViewById(R.id.frozenfoodButton);
+        btnPelengkap = findViewById(R.id.pelengkapButton);
+        btnSayuran = findViewById(R.id.sayuranButton);
+        btnJamur = findViewById(R.id.jamurButton);
 
-        LayoutInflater inflater = getLayoutInflater();
-        Button lanjut = findViewById(R.id.btnLanjut);
-
+        Button lanjut = findViewById(R.id.nextButton);
+        ImageView kembali = findViewById(R.id.backButton);
+        ImageView profil = findViewById(R.id.profilepage);
 
         lanjut.setOnClickListener(v -> {
             Intent intent = new Intent(SecondTransaction.this, ThirdTransaction.class);
             startActivity(intent);
         });
 
-        ImageView kembali = findViewById(R.id.btnBack);
-
         kembali.setOnClickListener(v -> {
             Intent intent = new Intent(SecondTransaction.this, FirstTransaction.class);
             startActivity(intent);
         });
-
-        // 🔹 Semua produk
-        String[] namaProduk = {
-                "Rafael Putih", "Rafael Oren", "Krupuk Tangga", "Krupuk Bulat Warna", "Kerupuk Bulat Putih",
-                "Krupuk Bulat Oren", "Rafael Warna Kecil", "Rafael Warna Besar", "Pakcoy", "Sawi",
-                "Jeruk Limau", "Enoki", "Enoki Jumbo", "Jamur Salju", "Jamur Kuping",
-                "Sosis Kecil", "Sosis Merah Sapi", "Sosis Oren Ayam", "Beef Burger", "Fish Cake",
-                "Pentol Daging", "Tempura", "Tahu Bakso", "Cocktail", "Pentol Jumbo",
-                "Cireng", "Kornet", "Ekor Udang Sunfish", "Gyoza Ikan", "Money Bag Ikan",
-                "Siomay Ayam", "Siomay Udang", "Udang Gulung", "Odeng Ori", "Odeng Spicy",
-                "Pentol Ikan", "Otak-otak Ikan", "Bola Salmon", "Kue Ikan", "Fish Roll",
-                "Character Ikan", "Tahu Bakso Seafood", "Otak-otak Singapore", "Ekor Udang Cedea", "Duo Twister",
-                "Flower Twister", "Crabstick", "Scallop", "Kembang Cumi", "Cikua Mini",
-                "Cikua Long", "Dumpling Ayam", "Dumpling Keju", "Dumpling Spicy", "Mie Kecil",
-                "Mie Pipih", "Bihun", "Kwetiau", "Tulangan", "Ceker",
-                "Sayap"
-        };
-
-        String[] hargaProduk = {
-                "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000",
-                "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 2.000", "Rp 7.000", "Rp 1.000", "Rp 1.000",
-                "Rp 2.000", "Rp 3.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 5.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000",
-                "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 3.000",
-                "Rp 3.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 2.000",
-                "Rp 1.000", "Rp 2.000", "Rp 5.000"
-        };
-
-        int[] gambarProduk = {
-                R.drawable.img_rafael_putih, R.drawable.img_rafael_oren, R.drawable.img_kerupuk_tangga, R.drawable.img_kerupuk_bulat_warna, R.drawable.img_kerupuk_bulat_putih,
-                R.drawable.img_kerupuk_bulat_oren, R.drawable.img_rafael_warna, R.drawable.img_rafael_warna, R.drawable.img_pakcoy, R.drawable.img_sawi,
-                R.drawable.img_jeruk_limau, R.drawable.img_enoki, R.drawable.img_enoki_jumbo, R.drawable.img_jamur_salju, R.drawable.img_jamur_kuping,
-                R.drawable.img_sosis_kecil, R.drawable.img_sosis_merah_sapi, R.drawable.img_sosis_oren_ayam, R.drawable.img_beef_burger, R.drawable.img_fish_cake, R.drawable.img_pentol_daging, R.drawable.img_tempura,
-                R.drawable.img_tahu_bakso, R.drawable.img_cocktail, R.drawable.img_pentol_jumbo, R.drawable.img_cireng, R.drawable.img_kornet,
-                R.drawable.img_ekor_udang_sunfish, R.drawable.img_gyoza_ikan, R.drawable.img_money_bag_ikan, R.drawable.img_siomay_ayam, R.drawable.img_siomay_udang, R.drawable.img_udang_gulung,
-                R.drawable.img_odeng_ori, R.drawable.img_odeng_spicy, R.drawable.img_pentol_ikan, R.drawable.img_otak_otak_ikan, R.drawable.img_bola_salmon,
-                R.drawable.img_kue_ikan, R.drawable.img_fish_roll, R.drawable.img_cedea_karakter, R.drawable.img_tahu_bakso_seafood, R.drawable.img_otak_otak_singapore,
-                R.drawable.img_ekor_udang_cedea, R.drawable.img_duotwister, R.drawable.img_flower_twister, R.drawable.img_crabstick, R.drawable.img_scallop,
-                R.drawable.img_kembang_cumi, R.drawable.img_cikuwa_mini, R.drawable.img_cikuwa_long, R.drawable.img_dumpling_ayam, R.drawable.img_dumpling_keju,
-                R.drawable.img_dumpling_spicy, R.drawable.img_mie_kecil, R.drawable.img_mie_pipih, R.drawable.img_bihun, R.drawable.img_kwetiau,
-                R.drawable.img_tulangan, R.drawable.img_ceker, R.drawable.img_sayap
-        };
-
-
-        // 🔸 Kategori Kerupuk
-        String[] namaKerupuk = {"Rafael Putih", "Rafael Oren", "Kerupuk Tangga", "Kerupuk Bulat Warna", "Kerupuk Bulat Putih", "Kerupuk Bulat Oren", "Rafael Warna Kecil", "Rafael Warna Besar", "Siomay Kering", "Cuanky Lidah", "Tahu Geprek", "Cikur"};
-        String[] hargaKerupuk = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.500", "Rp 1.500", "Rp 1.000"};
-        int[] gambarKerupuk = {R.drawable.img_rafael_putih, R.drawable.img_rafael_oren, R.drawable.img_kerupuk_tangga, R.drawable.img_kerupuk_bulat_warna, R.drawable.img_kerupuk_bulat_putih, R.drawable.img_kerupuk_bulat_oren, R.drawable.img_rafael_warna, R.drawable.img_rafael_warna};
-
-        // 🔸 Kategori Sayuran
-        String[] namaSayuran = {"Pakcoy", "Sawi", "Jeruk Limau", "Enoki", "Enoki Jumbo", "Jamur Salju", "Jamur Kuping"};
-        String[] hargaSayuran = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 2.000", "Rp 7.000", "Rp 1.000", "Rp 1.000"};
-        int[] gambarSayuran = {R.drawable.img_pakcoy, R.drawable.img_sawi, R.drawable.img_jeruk_limau, R.drawable.img_enoki, R.drawable.img_enoki_jumbo, R.drawable.img_jamur_salju, R.drawable.img_jamur_kuping};
-
-        // 🔸 Kategori Topping
-        String[] namaTopping = {
-                "Sosis Kecil", "Sosis Merah Sapi", "Sosis Oren Ayam", "Beef Burger", "Kue Ikan Bulat",
-                "Pentol Daging", "Tempura", "Tahu Bakso", "Cocktail", "Pentol Jumbo",
-                "Cireng", "Kornet", "Ekor Udang Sunfish", "Gyoza Ikan", "Money Bag Ikan",
-                "Siomay Ayam", "Siomay Udang", "Udang Gulung", "Odeng Ori", "Odeng Spicy",
-                "Pentol Ikan", "Otak-otak Ikan", "Bola Salmon", "Kue Ikan", "Fish Roll",
-                "Character Ikan", "Tahu Bakso Seafood", "Otak-otak Singapore", "Ekor Udang Cedea", "Duo Twister",
-                "Flower Twister", "Crabstick", "Scallop", "Kembang Cumi", "Cikua Mini",
-                "Cikua Long", "Dumpling Ayam", "Dumpling Keju", "Dumpling Spicy", "Pentol Jamur", "Kue Ikan Pedas"
-        };
-
-        String[] hargaTopping = {"Rp 2.000", "Rp 3.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 1.500", "Rp 5.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 2.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.000",
-                "Rp 2.000", "Rp 2.000", "Rp 3.000", "Rp 2.000", "Rp 3.000",
-                "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000",
-                "Rp 4.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 2.000", "Rp 3.500"
-        };
-        int[] gambarTopping = {
-                R.drawable.img_sosis_kecil, R.drawable.img_sosis_merah_sapi, R.drawable.img_sosis_oren_ayam, R.drawable.img_beef_burger, R.drawable.img_fish_cake,
-                R.drawable.img_pentol_daging, R.drawable.img_tempura, R.drawable.img_tahu_bakso, R.drawable.img_cocktail, R.drawable.img_pentol_jumbo,
-                R.drawable.img_cireng, R.drawable.img_kornet, R.drawable.img_ekor_udang_sunfish, R.drawable.img_gyoza_ikan, R.drawable.img_money_bag_ikan,
-                R.drawable.img_siomay_ayam, R.drawable.img_siomay_udang, R.drawable.img_udang_gulung, R.drawable.img_odeng_ori, R.drawable.img_odeng_spicy,
-                R.drawable.img_pentol_ikan, R.drawable.img_otak_otak_ikan, R.drawable.img_bola_salmon, R.drawable.img_kue_ikan, R.drawable.img_fish_roll,
-                R.drawable.img_cedea_karakter, R.drawable.img_tahu_bakso_seafood, R.drawable.img_otak_otak_singapore, R.drawable.img_ekor_udang_cedea, R.drawable.img_duotwister,
-                R.drawable.img_flower_twister, R.drawable.img_crabstick, R.drawable.img_scallop, R.drawable.img_kembang_cumi, R.drawable.img_cikuwa_mini,
-                R.drawable.img_cikuwa_long, R.drawable.img_dumpling_ayam, R.drawable.img_dumpling_keju, R.drawable.img_dumpling_spicy
-        };
-        // 🔸 Kategori Mie
-        String[] namaMie = {"Mie Kecil", "Mie Pipih", "Bihun", "Kuetiau", "Intermie"};
-        String[] hargaMie = {"Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 1.000", "Rp 4.000"};
-        int[] gambarMie = {R.drawable.img_mie_kecil, R.drawable.img_mie_pipih, R.drawable.img_bihun, R.drawable.img_kwetiau};
-
-        // 🔸 Kategori Ayam
-        String[] namaAyam = {"Tulangan", "Ceker", "Sayap", "Telur"};
-        String[] hargaAyam = {"Rp 1.000", "Rp 2.000", "Rp 5.000", "Rp 3.000"};
-        int[] gambarAyam = {R.drawable.img_tulangan, R.drawable.img_ceker, R.drawable.img_sayap};
-
-
-        // =============== SEMUA PRODUK ===============
-        btnSemua.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaProduk.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarProduk[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaProduk[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaProduk[i]);
-
-                setupQtyLogic(itemView);
-
-                KotakMenu.addView(itemView);
-            }
+        profil.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondTransaction.this, ProfileActivity.class);
+            startActivity(intent);
         });
 
-        // =============== KERUPUK ===============
-        btnKerupuk.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaKerupuk.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarKerupuk[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaKerupuk[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaKerupuk[i]);
+        loadToppingsFromApi();
 
-                setupQtyLogic(itemView);
+        // Tampilkan semua data saat tombol semua ditekan
+        btnSemua.setOnClickListener(v -> showToppings(toppingList));
 
-                KotakMenu.addView(itemView);
+        // Tampilkan data berdasarkan category_id saat tombol kategori ditekan
+        btnFrozenFood.setOnClickListener(v -> showByCategory("cat_690b022fee4e9"));
+        btnPelengkap.setOnClickListener(v -> showByCategory("cat_69153987dc69c"));
+        btnSayuran.setOnClickListener(v -> showByCategory("cat_690b0353ec0df"));
+        btnJamur.setOnClickListener(v -> showByCategory("cat_691539dc7b28f"));
+    }
+
+    private void loadToppingsFromApi() {
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getToppings().enqueue(new Callback<SecondMenuResponse>() {
+            @Override
+            public void onResponse(Call<SecondMenuResponse> call, Response<SecondMenuResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    toppingList = response.body().getData();
+                    // Otomatis tampilkan semua data saat halaman dibuka
+                    showToppings(toppingList);
+                } else {
+                    Toast.makeText(SecondTransaction.this, "Response gagal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SecondMenuResponse> call, Throwable t) {
+                Toast.makeText(SecondTransaction.this, "Gagal memuat data", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        // =============== SAYURAN ===============
-        btnSayuran.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaSayuran.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarSayuran[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaSayuran[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaSayuran[i]);
-
-                setupQtyLogic(itemView);
-
-                KotakMenu.addView(itemView);
+    private void showByCategory(String categoryId) {
+        List<Topping> filtered = new ArrayList<>();
+        for (Topping t : toppingList) {
+            if (t.getCategoryId().equals(categoryId)) {
+                filtered.add(t);
             }
-        });
+        }
+        showToppings(filtered);
+    }
 
-        // =============== TOPPING ===============
-        btnTopping.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaTopping.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarTopping[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaTopping[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaTopping[i]);
+    private void showToppings(List<Topping> toppings) {
+        KotakMenu.removeAllViews();
+        LayoutInflater inflater = getLayoutInflater();
+        for (Topping t : toppings) {
+            View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
+            ImageView img = itemView.findViewById(R.id.imgProduk2);
+            TextView nama = itemView.findViewById(R.id.tvNamaProduk2);
+            TextView harga = itemView.findViewById(R.id.tvHargaProduk2);
 
-                setupQtyLogic(itemView);
+            nama.setText(t.getName());
+            harga.setText("Rp " + t.getPrice());
 
-                KotakMenu.addView(itemView);
-            }
-        });
+            Glide.with(this)
+                    .load(t.getImageUrl())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(img);
 
-        // =============== MIE ===============
-        btnMie.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaMie.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarMie[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaMie[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaMie[i]);
-
-                setupQtyLogic(itemView);
-
-                KotakMenu.addView(itemView);
-            }
-        });
-        // =============== AYAM ===============
-        btnAyam.setOnClickListener(v -> {
-            KotakMenu.removeAllViews();
-            for (int i = 0; i < namaAyam.length; i++) {
-                View itemView = inflater.inflate(R.layout.activity_menu, KotakMenu, false);
-                ((ImageView) itemView.findViewById(R.id.imgProduk2)).setImageResource(gambarAyam[i]);
-                ((TextView) itemView.findViewById(R.id.tvNamaProduk2)).setText(namaAyam[i]);
-                ((TextView) itemView.findViewById(R.id.tvHargaProduk2)).setText(hargaAyam[i]);
-
-                setupQtyLogic(itemView);
-
-                KotakMenu.addView(itemView);
-            }
-        });
+            setupQtyLogic(itemView);
+            KotakMenu.addView(itemView);
+        }
     }
 
     private void setupQtyLogic(View itemView) {
@@ -269,3 +161,5 @@ public class SecondTransaction extends AppCompatActivity {
         });
     }
 }
+
+

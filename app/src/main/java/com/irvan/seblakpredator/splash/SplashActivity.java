@@ -15,6 +15,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.SecondTransaction;
 import com.irvan.seblakpredator.auth.LoginActivity;
 
 @SuppressLint("CustomSplashScreen")
@@ -77,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
     // ✔ Fungsi masuk ke LoginActivity jika terkoneksi
     private void goToLogin() {
         handler.postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            Intent intent = new Intent(SplashActivity.this, SecondTransaction.class);
             startActivity(intent);
             finish();
         }, 2000);

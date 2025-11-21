@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btnBack"
+            android:id="@+id/backButton"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:src="@drawable/ic_arrow_back" />
@@ -31,6 +31,7 @@
             android:layout_weight="1" />
 
         <ImageView
+            android:id="@+id/profilepage"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginEnd="16dp"
@@ -38,6 +39,7 @@
             app:tint="@color/white" />
 
         <ImageView
+            android:id="@+id/KeranjangButton"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:src="@drawable/ic_product"
@@ -76,57 +78,53 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnsemua"
-                        android:layout_width="90dp"
+                        android:id="@+id/allButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:backgroundTint="#E64A19"
                         android:text="Semua"
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:id="@+id/btnkerupuk"
-                        android:layout_width="110dp"
+                        android:id="@+id/frozenfoodButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
-                        android:text="Kerupuk"
+                        android:text="Frozen Food"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:id="@+id/btnsayuran"
-                        android:layout_width="108dp"
+                        android:id="@+id/sayuranButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Sayuran"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:id="@+id/btntopping"
-                        android:layout_width="158dp"
+                        android:id="@+id/pelengkapButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
-                        android:text="Topping"
+                        android:text="Pelengkap"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:id="@+id/btnmie"
+                        android:id="@+id/jamurButton"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
-                        android:text="Mie"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/btnayam"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Ayam"
+                        android:text="Jamur"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -164,7 +162,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnLanjut"
+            android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
