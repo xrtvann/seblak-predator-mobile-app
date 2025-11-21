@@ -2,9 +2,11 @@ package com.irvan.seblakpredator.apiclient;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
 import com.irvan.seblakpredator.model.LoginResponse;
 import com.irvan.seblakpredator.model.RegisterResponse;
+import com.irvan.seblakpredator.model.SecondMenuResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -21,4 +23,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("auth/forgot-password.php")
     Call<ForgetPassResponse> forgetpassword(@Body ForgetPassRequest forgetPassRequest);
+
+
+    @GET("menu/toppings.php")
+    Call<SecondMenuResponse> getToppings();
 }
