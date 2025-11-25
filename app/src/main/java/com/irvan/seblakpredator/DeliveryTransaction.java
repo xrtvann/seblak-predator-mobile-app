@@ -2,7 +2,6 @@ package com.irvan.seblakpredator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,24 +16,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-public class FirstTransaction extends AppCompatActivity {
+public class DeliveryTransaction extends AppCompatActivity {
 
     EditText edtNama;
     Spinner spinnerLevel, spinnerKencur;
@@ -46,7 +31,7 @@ public class FirstTransaction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_first_transaction);
+        setContentView(R.layout.activity_delivery_transaction);
 
         // Setup EdgeToEdge (hindari error padding layar)
         RelativeLayout header = findViewById(R.id.header);
@@ -70,6 +55,29 @@ public class FirstTransaction extends AppCompatActivity {
         rgTelur = findViewById(R.id.tipeTelur);
         btnLanjut = findViewById(R.id.btnLanjut);
 
+        EditText inputJamAmbil = findViewById(R.id.inputJamAmbil);
+
+        inputJamAmbil.setOnClickListener(v -> {
+
+            MaterialTimePicker picker = new MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H) // atau CLOCK_24H
+                    .setHour(7)     // default jam
+                    .setMinute(0)   // default menit
+                    .setTitleText("Pilih Waktu Ambil")
+                    .build();
+
+            picker.show(getSupportFragmentManager(), "TIME_PICK");
+
+            picker.addOnPositiveButtonClickListener(view -> {
+                int hour = picker.getHour();
+                int minute = picker.getMinute();
+
+                // Format jam jadi 2 digit
+                String waktu = String.format("%02d:%02d", hour, minute);
+
+                inputJamAmbil.setText(waktu);
+            });
+        });
 
         // ================== BUTTON LANJUT ==================
         btnLanjut.setOnClickListener(v -> {
@@ -104,7 +112,7 @@ public class FirstTransaction extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
 
             // ================== PINDAH HALAMAN ==================
-            Intent intent = new Intent(FirstTransaction.this, SecondTransaction.class);
+            Intent intent = new Intent(DeliveryTransaction.this, SecondTransaction.class);
 
             // (Opsional) Kirim data ke halaman kedua
             intent.putExtra("nama", nama);
