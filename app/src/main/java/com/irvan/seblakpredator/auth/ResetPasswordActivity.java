@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,7 +31,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private TextInputLayout emailColumn;
     private TextInputEditText emailInput;
     private MaterialButton continueButton;
-    private Button backButton;
+    private TextView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +48,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
 
         continueButton.setOnClickListener(v -> sendOtp());
-
-        backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ResetPasswordActivity.this,LoginActivity.class);
+        back = findViewById(R.id.backButton);
+        back.setOnClickListener(v -> {
+            // Membuat intent untuk kembali ke LoginActivity
+            Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish(); // Menutup aktivitas ResetPasswordActivity
         });
     }
+
 
     private void initViews() {
         emailColumn = findViewById(R.id.emailColumn);

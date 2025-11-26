@@ -22,6 +22,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.irvan.seblakpredator.MainActivity;
+import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 
 import com.irvan.seblakpredator.apiclient.ApiClient;
@@ -131,9 +132,12 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Jika login berhasil
                         if (res.isSuccess()) {
-                            TokenManager.saveToken(LoginActivity.this, res.getAccessToken());
+                            // Menyimpan token di SharedPreferences
+                            String token = res.getAccessToken(); // Pastikan kamu mendapatkan token dengan benar
+                            TokenManager.saveToken(LoginActivity.this, token); // Menggunakan TokenManager untuk menyimpan token
+
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                             finish();
                         } else {
                             Log.d("LoginResponse", "Login Failed: " + res.getMessage());

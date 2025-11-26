@@ -27,8 +27,9 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
-            android:exported="true">
+            android:name=".splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SeblakPredator.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,9 +37,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".splash.SplashActivity"
-            android:exported="false"
-            android:theme="@style/Theme.SeblakPredator.Splash"/>
+            android:name=".ProfileActivity"
+            android:exported="false"/>
         <activity
             android:name=".auth.ResetPasswordActivity"
             android:exported="false" />
@@ -48,9 +48,6 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ProfileActivity"-->
-<!--            android:exported="false"/>-->
         <activity
             android:name=".SecondTransaction"
             android:exported="false" />

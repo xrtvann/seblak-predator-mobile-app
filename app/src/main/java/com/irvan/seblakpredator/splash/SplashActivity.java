@@ -78,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
     // ✔ Fungsi masuk ke LoginActivity jika terkoneksi
     private void goToLogin() {
         handler.postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, SecondTransaction.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }, 2000);

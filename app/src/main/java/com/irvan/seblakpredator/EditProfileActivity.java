@@ -37,7 +37,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Button back = findViewById(R.id.backButton);
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
             startActivity(intent);
         });
         // 🧩 Isi data dummy ke form
