@@ -78,7 +78,7 @@ public class SecondTransaction extends AppCompatActivity {
     }
 
     private void loadToppingsFromApi() {
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        ApiService api = ApiClient.getClient(this).create(ApiService.class);
         api.getToppings().enqueue(new Callback<SecondMenuResponse>() {
             @Override
             public void onResponse(Call<SecondMenuResponse> call, Response<SecondMenuResponse> response) {

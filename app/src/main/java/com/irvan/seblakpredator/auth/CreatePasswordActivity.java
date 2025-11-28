@@ -2,7 +2,6 @@ package com.irvan.seblakpredator.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,13 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
-import com.irvan.seblakpredator.apiclient.ForgetPassRequest;
+import com.irvan.seblakpredator.model.ForgetPassRequest;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
 
 import retrofit2.Call;
@@ -122,7 +120,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
         String confirm = passwordConfirmInput.getText().toString().trim();
 
         ForgetPassRequest req = new ForgetPassRequest("reset_password", email, otp, password, confirm);
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        ApiService api = ApiClient.getClient(this).create(ApiService.class);
 
         api.forgetpassword(req).enqueue(new Callback<ForgetPassResponse>() {
             @Override

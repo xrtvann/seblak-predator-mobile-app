@@ -21,14 +21,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
-import com.irvan.seblakpredator.apiclient.LoginRequest;
-import com.irvan.seblakpredator.apiclient.TokenManager;
+import com.irvan.seblakpredator.model.LoginRequest;
+import com.irvan.seblakpredator.model.TokenManager;
 import com.irvan.seblakpredator.model.LoginResponse;
 
 import retrofit2.Call;
@@ -121,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             // MULAI REQUEST API
-            ApiService api = ApiClient.getClient().create(ApiService.class);
+            ApiService api = ApiClient.getClient(this).create(ApiService.class);
             LoginRequest request = new LoginRequest(username, password);
 
             api.login(request).enqueue(new Callback<LoginResponse>() {
@@ -133,8 +132,10 @@ public class LoginActivity extends AppCompatActivity {
                         // Jika login berhasil
                         if (res.isSuccess()) {
                             // Menyimpan token di SharedPreferences
-                            String token = res.getAccessToken(); // Pastikan kamu mendapatkan token dengan benar
-                            TokenManager.saveToken(LoginActivity.this, token); // Menggunakan TokenManager untuk menyimpan token
+                            String accessToken = res.getAccessToken();
+
+                            TokenManager.saveToken(LoginActivity.this, accessToken);
+
 
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, ProfileActivity.class));

@@ -1,4 +1,4 @@
-package com.irvan.seblakpredator.apiclient;
+package com.irvan.seblakpredator.model;
 
 public class ForgetPassRequest {
     private String action;

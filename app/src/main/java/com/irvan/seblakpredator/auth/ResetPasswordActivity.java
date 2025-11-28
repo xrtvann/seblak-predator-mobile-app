@@ -3,7 +3,6 @@ package com.irvan.seblakpredator.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
-import com.irvan.seblakpredator.apiclient.ForgetPassRequest;
+import com.irvan.seblakpredator.model.ForgetPassRequest;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
 
 import retrofit2.Call;
@@ -101,7 +100,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         ForgetPassRequest request = new ForgetPassRequest("send_otp", email);
 
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        ApiService api = ApiClient.getClient(this).create(ApiService.class);
 
         api.forgetpassword(request).enqueue(new Callback<ForgetPassResponse>() {
             @Override

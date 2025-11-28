@@ -1,9 +1,15 @@
 package com.irvan.seblakpredator.apiclient;
+import com.irvan.seblakpredator.model.ForgetPassRequest;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
+import com.irvan.seblakpredator.model.LoginRequest;
 import com.irvan.seblakpredator.model.LoginResponse;
+import com.irvan.seblakpredator.model.ProfileRequest;
 import com.irvan.seblakpredator.model.ProfileResponse;
+import com.irvan.seblakpredator.model.RegisterRequest;
 import com.irvan.seblakpredator.model.RegisterResponse;
 import com.irvan.seblakpredator.model.SecondMenuResponse;
+import com.irvan.seblakpredator.model.UpdateProfileRequest;
+import com.irvan.seblakpredator.model.UpdateProfileResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,12 +32,12 @@ public interface ApiService {
     @POST("auth/forgot-password.php")
     Call<ForgetPassResponse> forgetpassword(@Body ForgetPassRequest forgetPassRequest);
 
-    @POST("auth/profile.php")
-    Call<ProfileResponse> updateProfile(
+    @POST("auth/updateprofilemobile.php")
+    Call<UpdateProfileResponse> updateProfile(
             @Header("Authorization") String token,
-            @Body ProfileRequest request
+            @Body UpdateProfileRequest request
     );
-    @GET("user/profile")
+    @GET("auth/profilemobile.php")
     Call<ProfileResponse> getProfile(
             @Header("Authorization") String token
     );

@@ -1,6 +1,5 @@
 package com.irvan.seblakpredator.auth;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,13 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.chaos.view.PinView;
-import com.google.android.material.button.MaterialButton;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
-import com.irvan.seblakpredator.apiclient.ForgetPassRequest;
+import com.irvan.seblakpredator.model.ForgetPassRequest;
 import com.irvan.seblakpredator.model.ForgetPassResponse;
-import com.irvan.seblakpredator.splash.SplashActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +30,8 @@ import retrofit2.Response;
 public class VerificationOTP extends AppCompatActivity {
 
     private PinView pinView;
-    private TextView timerText, btnResendOTP;
-    private Button verifyButton, backButton;
+    private TextView timerText, btnResendOTP, backButton;
+    private Button verifyButton;
     private String email;
     Handler handler = new Handler();
 
@@ -101,7 +98,7 @@ public class VerificationOTP extends AppCompatActivity {
     private void resendOtp() {
         Toast.makeText(this, "Mengirim ulang kode OTP...", Toast.LENGTH_SHORT).show();
         ForgetPassRequest req = new ForgetPassRequest("send_otp", email);
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        ApiService api = ApiClient.getClient(this).create(ApiService.class);
         api.forgetpassword(req).enqueue(new Callback<ForgetPassResponse>() {
             @Override
             public void onResponse(Call<ForgetPassResponse> call, Response<ForgetPassResponse> response) {
@@ -126,7 +123,7 @@ public class VerificationOTP extends AppCompatActivity {
         }
 
         ForgetPassRequest req = new ForgetPassRequest("verify_otp", email, otp);
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        ApiService api = ApiClient.getClient(this).create(ApiService.class);
         api.forgetpassword(req).enqueue(new Callback<ForgetPassResponse>() {
             @Override
             public void onResponse(Call<ForgetPassResponse> call, Response<ForgetPassResponse> response) {

@@ -1,17 +1,24 @@
 package com.irvan.seblakpredator.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResponse {
 
     private boolean success;
 
     private String message;
 
+
+    @SerializedName("access_token")
     private String accessToken;
 
+    @SerializedName("refresh_token")
     private String refreshToken;
 
+    @SerializedName("token_type")
     private String tokenType;
 
+    @SerializedName("expires_in")
     private int expiresIn;
 
     private User user;

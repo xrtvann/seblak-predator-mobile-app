@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
-import com.irvan.seblakpredator.apiclient.RegisterRequest;
+import com.irvan.seblakpredator.model.RegisterRequest;
 import com.irvan.seblakpredator.model.RegisterResponse;
 
 import retrofit2.Call;
@@ -145,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Log.d("REGISTER_DEBUG", "BODY: " + gson.toJson(request));
 
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         Call<RegisterResponse> call = apiService.register(request);
 
         call.enqueue(new Callback<RegisterResponse>() {

@@ -1,11 +1,11 @@
-package com.irvan.seblakpredator.apiclient;
+package com.irvan.seblakpredator.model;
 
 public class ProfileRequest {
     private String name;
     private String email;
     private String username;
-    private String phone;
-    public ProfileRequest(String name, String email, String username, String phone){
+    private int phone;
+    public ProfileRequest(String name, String email, String username, int phone){
         this.name=name;
         this.email=email;
         this.username=username;
