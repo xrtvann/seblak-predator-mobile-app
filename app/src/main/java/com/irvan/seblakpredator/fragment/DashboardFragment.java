@@ -67,6 +67,13 @@ public class DashboardFragment extends Fragment {
 
 // Klik Dine In -> ke FirstTransaction dengan order_type = "Dine In"
         dineInBtn.setOnClickListener(v -> {
+            // Reset data sebelum masuk FirstTransaction
+            SharedPreferences prefs = requireActivity()
+                    .getSharedPreferences("MyAppPrefs", getContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("restoreData", false); // reset data
+            editor.apply();
+
             Intent intent = new Intent(requireActivity(), FirstTransaction.class);
             intent.putExtra("order_type", "Dine In");
             startActivity(intent);
@@ -74,6 +81,13 @@ public class DashboardFragment extends Fragment {
 
 // Klik Delivery -> ke FirstTransaction dengan order_type = "Delivery"
         deliveryBtn.setOnClickListener(v -> {
+            // Reset data sebelum masuk FirstTransaction
+            SharedPreferences prefs = requireActivity()
+                    .getSharedPreferences("MyAppPrefs", getContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("restoreData", false); // reset data
+            editor.apply();
+
             Intent intent = new Intent(requireActivity(), FirstTransaction.class);
             intent.putExtra("order_type", "Delivery");
             startActivity(intent);

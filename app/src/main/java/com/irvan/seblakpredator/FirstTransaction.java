@@ -2,6 +2,7 @@ package com.irvan.seblakpredator;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
@@ -45,8 +47,9 @@ public class FirstTransaction extends AppCompatActivity {
     EditText edtNama, inputJamAmbil;
     Spinner spinnerLevel, spinnerKencur;
     RadioGroup tipeKuah, tipeTelur, typeOrder;
-    RadioButton dineInOption, deliveryOption, kuahNormal, kuahNyemek, TelurUtuh, TelurOrak;
-    Button btnLanjut , backButton;
+    RadioButton dineInOption, deliveryOption;
+    Button btnLanjut, backButton;
+    TextView labelTime;
 
     private List<CustomizationOption> kuahList = new ArrayList<>();
     private List<CustomizationOption> telurList = new ArrayList<>();
@@ -71,15 +74,23 @@ public class FirstTransaction extends AppCompatActivity {
         inputJamAmbil = findViewById(R.id.inputJamAmbil);
         btnLanjut = findViewById(R.id.btnLanjut);
         backButton = findViewById(R.id.backButton);
-        TextView labelTime = findViewById(R.id.labelTimePick);
+        labelTime = findViewById(R.id.labelTimePick);
+
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
 
         // ======= SET NAMA OTOMATIS DARI LOGIN =======
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         String username = prefs.getString("name", "");
         if (!username.isEmpty()) {
             edtNama.setText(username);
             edtNama.setEnabled(false);
             Log.d(TAG, "Nama otomatis dari login: " + username);
+        }
+
+        // ======= KEMBALI DARI SECOND TRANSACTION =======
+        boolean restoreData = prefs.getBoolean("restoreData", false);
+        if (restoreData) {
+            restorePreviousData(prefs);
+            prefs.edit().putBoolean("restoreData", false).apply(); // reset flag
         }
 
         // ======= WAKTU AMBIL =======
@@ -103,13 +114,17 @@ public class FirstTransaction extends AppCompatActivity {
         backButton.setOnClickListener(v -> startActivity(new Intent(FirstTransaction.this, MainActivity.class)));
 
         // ======= SET DEFAULT TYPE ORDER =======
+        int color = ContextCompat.getColor(this, R.color.primary);
+        dineInOption.setButtonTintList(ColorStateList.valueOf(color));
+        deliveryOption.setButtonTintList(ColorStateList.valueOf(color));
+
         String orderType = getIntent().getStringExtra("order_type");
-        if(orderType != null){
-            if(orderType.equals("Dine In")){
+        if (orderType != null) {
+            if (orderType.equals("Dine In")) {
                 typeOrder.check(dineInOption.getId());
                 inputJamAmbil.setVisibility(View.GONE);
                 labelTime.setVisibility(View.GONE);
-            } else if(orderType.equals("Delivery")){
+            } else if (orderType.equals("Delivery")) {
                 typeOrder.check(deliveryOption.getId());
                 inputJamAmbil.setVisibility(View.VISIBLE);
                 labelTime.setVisibility(View.VISIBLE);
@@ -117,7 +132,7 @@ public class FirstTransaction extends AppCompatActivity {
         }
 
         typeOrder.setOnCheckedChangeListener((group, checkedId) -> {
-            if(checkedId == deliveryOption.getId()){
+            if (checkedId == deliveryOption.getId()) {
                 inputJamAmbil.setVisibility(View.VISIBLE);
                 labelTime.setVisibility(View.VISIBLE);
             } else {
@@ -137,39 +152,72 @@ public class FirstTransaction extends AppCompatActivity {
             int idKuah = tipeKuah.getCheckedRadioButtonId();
             int idTelur = tipeTelur.getCheckedRadioButtonId();
 
-            if(idKuah == -1 || idTelur == -1 || nama.isEmpty() || level.isEmpty()){
+            if (idKuah == -1 || idTelur == -1 || nama.isEmpty() || level.isEmpty()) {
                 Toast.makeText(this, "Harap lengkapi semua data!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Menyimpan data di SharedPreferences
+            RadioButton pilihKuah = findViewById(idKuah);
+            RadioButton pilihTelur = findViewById(idTelur);
+            String order = ((RadioButton)findViewById(typeOrder.getCheckedRadioButtonId())).getText().toString();
+            String waktu = inputJamAmbil.getText().toString();
+
+            // Simpan semua data
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("nama", nama);
             editor.putString("level", level);
             editor.putString("kencur", kencur);
-            RadioButton pilihKuah = findViewById(idKuah);
             editor.putString("kuah", pilihKuah.getText().toString());
-            RadioButton pilihTelur = findViewById(idTelur);
             editor.putString("telur", pilihTelur.getText().toString());
-            editor.putString("orderType", ((RadioButton)findViewById(typeOrder.getCheckedRadioButtonId())).getText().toString());
-            editor.putString("waktuAmbil", inputJamAmbil.getText().toString());
+            editor.putString("orderType", order);
+            editor.putString("waktuAmbil", waktu);
             editor.apply();
 
             // Lanjut ke SecondTransaction
             Intent intent = new Intent(FirstTransaction.this, SecondTransaction.class);
-            intent.putExtra("nama", nama);
-            intent.putExtra("level", level);
-            intent.putExtra("kencur", kencur);
-            intent.putExtra("kuah", pilihKuah.getText().toString());
-            intent.putExtra("telur", pilihTelur.getText().toString());
-            intent.putExtra("orderType", ((RadioButton)findViewById(typeOrder.getCheckedRadioButtonId())).getText().toString());
-            intent.putExtra("waktuAmbil", inputJamAmbil.getText().toString());
             startActivity(intent);
         });
-
     }
 
-    // ================= LOAD CUSTOMIZATION =================
+    // ======= RESTORE DATA DARI SECOND TRANSACTION =======
+    private void restorePreviousData(SharedPreferences prefs) {
+        edtNama.setText(prefs.getString("nama", ""));
+        spinnerLevel.setSelection(getIndexSpinner(spinnerLevel, prefs.getString("level", "")));
+        spinnerKencur.setSelection(getIndexSpinner(spinnerKencur, prefs.getString("kencur", "")));
+
+        String kuah = prefs.getString("kuah", "");
+        for (int i = 0; i < tipeKuah.getChildCount(); i++) {
+            RadioButton rb = (RadioButton) tipeKuah.getChildAt(i);
+            if (rb.getText().toString().equals(kuah)) rb.setChecked(true);
+        }
+
+        String telur = prefs.getString("telur", "");
+        for (int i = 0; i < tipeTelur.getChildCount(); i++) {
+            RadioButton rb = (RadioButton) tipeTelur.getChildAt(i);
+            if (rb.getText().toString().equals(telur)) rb.setChecked(true);
+        }
+
+        String orderType = prefs.getString("orderType", "");
+        if(orderType.equals("Dine In")) {
+            typeOrder.check(dineInOption.getId());
+            inputJamAmbil.setVisibility(View.GONE);
+            labelTime.setVisibility(View.GONE);
+        } else {
+            typeOrder.check(deliveryOption.getId());
+            inputJamAmbil.setVisibility(View.VISIBLE);
+            labelTime.setVisibility(View.VISIBLE);
+            inputJamAmbil.setText(prefs.getString("waktuAmbil", ""));
+        }
+    }
+
+    private int getIndexSpinner(Spinner spinner, String value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equals(value)) return i;
+        }
+        return 0;
+    }
+
+    // ======= LOAD CUSTOMIZATION OPTIONS =======
     private void loadCustomizationOptions() {
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         apiService.getCustomizationOptions().enqueue(new Callback<CustomizationResponse>() {
@@ -184,9 +232,9 @@ public class FirstTransaction extends AppCompatActivity {
 
                     for (CustomizationOption option : allOptions) {
                         switch (option.getCategoryId()) {
-                            case "cat_690b004902b3c": kuahList.add(option); break;       // Kuah
-                            case "cat_690b0054b1092": kencurList.add(option); break;    // Kencur
-                            case "cat_690b003db21f4": telurList.add(option); break;     // Telur
+                            case "cat_690b004902b3c": kuahList.add(option); break;
+                            case "cat_690b0054b1092": kencurList.add(option); break;
+                            case "cat_690b003db21f4": telurList.add(option); break;
                         }
                     }
 
@@ -194,9 +242,7 @@ public class FirstTransaction extends AppCompatActivity {
                     populateTelurRadioGroup();
                     populateKencurSpinner();
 
-                    // Setelah custom options berhasil di-load, load Level Pedas dari API baru
                     loadLevelPedasFromAPI();
-
                 } else {
                     Toast.makeText(FirstTransaction.this, "Gagal memuat data customization", Toast.LENGTH_SHORT).show();
                 }
@@ -216,25 +262,16 @@ public class FirstTransaction extends AppCompatActivity {
             public void onResponse(Call<SpiceLevelResponse> call, Response<SpiceLevelResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     levelPedasList = response.body().getData();
-                    if (levelPedasList.isEmpty()) {
-                        Log.d(TAG, "Level pedas kosong, tidak menampilkan spinner");
-                        return;
-                    }
-
                     List<String> levels = new ArrayList<>();
-                    for (SpiceLevel level : levelPedasList) {
-                        levels.add(level.getName());
-                    }
+                    for (SpiceLevel level : levelPedasList) levels.add(level.getName());
 
-                    // Gunakan ArrayAdapter custom untuk spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(FirstTransaction.this,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(FirstTransaction.this,
                             android.R.layout.simple_spinner_item, levels) {
-
                         @Override
                         public View getView(int position, View convertView, ViewGroup parent) {
                             View view = super.getView(position, convertView, parent);
                             TextView text = view.findViewById(android.R.id.text1);
-                            text.setTextColor(getResources().getColor(android.R.color.black)); // Teks hitam
+                            text.setTextColor(getResources().getColor(android.R.color.black));
                             return view;
                         }
 
@@ -242,14 +279,14 @@ public class FirstTransaction extends AppCompatActivity {
                         public View getDropDownView(int position, View convertView, ViewGroup parent) {
                             View view = super.getDropDownView(position, convertView, parent);
                             TextView text = view.findViewById(android.R.id.text1);
-                            text.setTextColor(getResources().getColor(android.R.color.black)); // Teks hitam
-                            view.setBackgroundResource(R.drawable.spinner_item_selector); // Background selector
+                            text.setTextColor(getResources().getColor(android.R.color.black));
+                            view.setBackgroundResource(R.drawable.spinner_item_selector);
                             return view;
                         }
                     };
-
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerLevel.setAdapter(adapter);
+
                 } else {
                     Toast.makeText(FirstTransaction.this, "Gagal memuat data level pedas", Toast.LENGTH_SHORT).show();
                 }
@@ -262,65 +299,61 @@ public class FirstTransaction extends AppCompatActivity {
         });
     }
 
-    // ================= POPULATE VIEWS =================
     private void populateKuahRadioGroup() {
         tipeKuah.removeAllViews();
+        int color = ContextCompat.getColor(this, R.color.primary);
         for (CustomizationOption kuah : kuahList) {
             RadioButton radioButton = new RadioButton(this);
             radioButton.setId(View.generateViewId());
             radioButton.setText(kuah.getName());
-            radioButton.setTextColor(getResources().getColor(android.R.color.black)); // ⚡ WARNA HITAM
+            radioButton.setButtonTintList(ColorStateList.valueOf(color));
+            radioButton.setTextColor(getResources().getColor(android.R.color.black));
             tipeKuah.addView(radioButton);
         }
     }
 
     private void populateTelurRadioGroup() {
         tipeTelur.removeAllViews();
+        int color = ContextCompat.getColor(this, R.color.primary);
         for (CustomizationOption telur : telurList) {
             RadioButton radioButton = new RadioButton(this);
             radioButton.setId(View.generateViewId());
             radioButton.setText(telur.getName());
-            radioButton.setTextColor(getResources().getColor(android.R.color.black)); // ⚡ WARNA HITAM
+            radioButton.setButtonTintList(ColorStateList.valueOf(color));
+            radioButton.setTextColor(getResources().getColor(android.R.color.black));
             tipeTelur.addView(radioButton);
         }
     }
 
     private void populateKencurSpinner() {
         List<String> names = new ArrayList<>();
-        for (CustomizationOption kencur : kencurList) {
-            names.add(kencur.getName());
-        }
+        for (CustomizationOption kencur : kencurList) names.add(kencur.getName());
 
-        // Membuat ArrayAdapter custom untuk spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names) {
             @Override
-            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+            public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setTextColor(getResources().getColor(android.R.color.black)); // Mengatur warna teks menjadi hitam
+                text.setTextColor(getResources().getColor(android.R.color.black));
                 return view;
             }
 
             @Override
-            public View getDropDownView(int position, View convertView, android.view.ViewGroup parent) {
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView text = view.findViewById(android.R.id.text1);
-                text.setTextColor(getResources().getColor(android.R.color.black)); // Mengatur warna teks menjadi hitam
-                view.setBackgroundResource(R.drawable.spinner_item_selector); // Menggunakan spinner_item_selector.xml untuk background
+                text.setTextColor(getResources().getColor(android.R.color.black));
+                view.setBackgroundResource(R.drawable.spinner_item_selector);
                 return view;
             }
         };
-
-        // Menetapkan adapter ke Spinner
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKencur.setAdapter(adapter);
     }
 
-    // ================= ERROR DIALOG =================
     private void showErrorDialog(String message) {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.notification_errorsystem, null);
-
         TextView errorText = view.findViewById(R.id.errornote);
         errorText.setText(message);
 

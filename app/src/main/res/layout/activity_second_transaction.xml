@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     android:background="#FFFFFF">
 
     <!-- HEADER -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="#E64A19"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:background="#D94A27"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Back Button -->
         <Button
             android:id="@+id/backButton"
             style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
@@ -32,46 +32,73 @@
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_back"
             android:drawableTint="@color/white"
-            android:paddingLeft="0dp"
+            android:paddingLeft="10dp"
             android:text="Back"
             android:textColor="@color/white" />
 
-        <View
-            android:layout_width="0dp"
+        <!-- Keranjang -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnKeranjang"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingRight="10dp">
 
-        <ImageView
-            android:id="@+id/profilepage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_person"
-            app:tint="@color/white" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/KeranjangButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_product"
-            app:tint="@color/white" />
+        <!-- Profil -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/btnKeranjang"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/profilepage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
 
     <!-- SCROLL UTAMA -->
     <ScrollView
         android:id="@+id/scrollContent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/layoutBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -90,52 +117,52 @@
 
                     <Button
                         android:id="@+id/allButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:backgroundTint="#E64A19"
                         android:text="Semua"
                         android:textColor="#FFFFFF" />
 
                     <Button
                         android:id="@+id/frozenfoodButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Frozen Food"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
                         android:id="@+id/sayuranButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Sayuran"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
                         android:id="@+id/pelengkapButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Pelengkap"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                     <Button
                         android:id="@+id/jamurButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/primary"
                         android:text="Jamur"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -156,7 +183,6 @@
                 android:orientation="vertical">
 
 
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -164,7 +190,7 @@
     <!-- TOMBOL LANJUT -->
     <LinearLayout
         android:id="@+id/layoutBottom"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:padding="12dp"
@@ -184,4 +210,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -2,9 +2,11 @@ package com.irvan.seblakpredator;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +21,7 @@ import com.irvan.seblakpredator.apiclient.ApiService;
 import com.irvan.seblakpredator.model.SecondMenuResponse;
 import com.irvan.seblakpredator.model.Topping;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +33,25 @@ public class SecondTransaction extends AppCompatActivity {
 
     LinearLayout KotakMenu;
     Button btnSemua, btnFrozenFood, btnPelengkap, btnSayuran, btnJamur;
-
     private List<Topping> toppingList = new ArrayList<>();
+    private List<SelectedTopping> selectedToppings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_transaction);
 
-        // Ambil data dari intent yang dikirim dari FirstTransaction
+        Window window = getWindow();
+        window.setStatusBarColor(Color.TRANSPARENT);
+        window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+
+
+
+
+        // Ambil data dari intent
         Intent intent = getIntent();
         String nama = intent.getStringExtra("nama");
         String level = intent.getStringExtra("level");
@@ -48,7 +61,7 @@ public class SecondTransaction extends AppCompatActivity {
         String orderType = intent.getStringExtra("orderType");
         String waktuAmbil = intent.getStringExtra("waktuAmbil");
 
-        // Menyimpan data ke SharedPreferences untuk digunakan kembali saat kembali ke FirstTransaction
+        // Simpan data ke SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("nama", nama);
@@ -71,15 +84,20 @@ public class SecondTransaction extends AppCompatActivity {
         Button kembali = findViewById(R.id.backButton);
         ImageView profil = findViewById(R.id.profilepage);
 
+        // Tombol lanjut ke TransaksiActivity
         lanjut.setOnClickListener(v -> {
+            if(selectedToppings.isEmpty()){
+                Toast.makeText(SecondTransaction.this, "Silakan pilih minimal 1 produk!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intentNext = new Intent(SecondTransaction.this, TransaksiActivity.class);
+            intentNext.putExtra("selectedToppings", (Serializable) selectedToppings);
             startActivity(intentNext);
         });
 
+        // Tombol kembali ke FirstTransaction
         kembali.setOnClickListener(v -> {
-            // Kembali ke FirstTransaction dan membawa data yang sudah disimpan
-            Intent intentBack = new Intent(SecondTransaction.this, FirstTransaction.class);
-            startActivity(intentBack);
+            finish(); // tidak reset data di FirstTransaction
         });
 
         profil.setOnClickListener(v -> {
@@ -87,12 +105,10 @@ public class SecondTransaction extends AppCompatActivity {
             startActivity(intentProfile);
         });
 
+        // Load topping dari API
         loadToppingsFromApi();
 
-        // Tampilkan semua data saat tombol semua ditekan
         btnSemua.setOnClickListener(v -> showToppings(toppingList));
-
-        // Tampilkan data berdasarkan category_id saat tombol kategori ditekan
         btnFrozenFood.setOnClickListener(v -> showByCategory("cat_690b022fee4e9"));
         btnPelengkap.setOnClickListener(v -> showByCategory("cat_69153987dc69c"));
         btnSayuran.setOnClickListener(v -> showByCategory("cat_690b0353ec0df"));
@@ -106,7 +122,6 @@ public class SecondTransaction extends AppCompatActivity {
             public void onResponse(Call<SecondMenuResponse> call, Response<SecondMenuResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     toppingList = response.body().getData();
-                    // Otomatis tampilkan semua data saat halaman dibuka
                     showToppings(toppingList);
                 } else {
                     Toast.makeText(SecondTransaction.this, "Response gagal", Toast.LENGTH_SHORT).show();
@@ -123,9 +138,7 @@ public class SecondTransaction extends AppCompatActivity {
     private void showByCategory(String categoryId) {
         List<Topping> filtered = new ArrayList<>();
         for (Topping t : toppingList) {
-            if (t.getCategoryId().equals(categoryId)) {
-                filtered.add(t);
-            }
+            if (t.getCategoryId().equals(categoryId)) filtered.add(t);
         }
         showToppings(filtered);
     }
@@ -147,12 +160,12 @@ public class SecondTransaction extends AppCompatActivity {
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(img);
 
-            setupQtyLogic(itemView);
+            setupQtyLogic(itemView, t);
             KotakMenu.addView(itemView);
         }
     }
 
-    private void setupQtyLogic(View itemView) {
+    private void setupQtyLogic(View itemView, Topping topping) {
         ImageView btnTambahAwal = itemView.findViewById(R.id.btnTambah2);
         LinearLayout layoutQty = itemView.findViewById(R.id.layoutQty);
         ImageView btnTambah = itemView.findViewById(R.id.btnTambah);
@@ -163,12 +176,24 @@ public class SecondTransaction extends AppCompatActivity {
             btnTambahAwal.setVisibility(View.GONE);
             layoutQty.setVisibility(View.VISIBLE);
             txtQty.setText("1");
+            selectedToppings.add(new SelectedTopping(
+                    topping.getId(),
+                    topping.getName(),
+                    1,
+                    topping.getPrice()
+            ));
         });
 
         btnTambah.setOnClickListener(v -> {
             int jumlah = Integer.parseInt(txtQty.getText().toString());
             jumlah++;
             txtQty.setText(String.valueOf(jumlah));
+            for (SelectedTopping s : selectedToppings) {
+                if (s.getId().equals(topping.getId())) {
+                    s.setQuantity(jumlah);
+                    break;
+                }
+            }
         });
 
         btnKurang.setOnClickListener(v -> {
@@ -176,10 +201,38 @@ public class SecondTransaction extends AppCompatActivity {
             if (jumlah > 1) {
                 jumlah--;
                 txtQty.setText(String.valueOf(jumlah));
+                for (SelectedTopping s : selectedToppings) {
+                    if (s.getId().equals(topping.getId())) {
+                        s.setQuantity(jumlah);
+                        break;
+                    }
+                }
             } else {
                 layoutQty.setVisibility(View.GONE);
                 btnTambahAwal.setVisibility(View.VISIBLE);
+                selectedToppings.removeIf(s -> s.getId().equals(topping.getId()));
             }
         });
+    }
+
+    // Model untuk dikirim ke TransaksiActivity
+    public static class SelectedTopping implements Serializable {
+        private String id;
+        private String name;
+        private int quantity;
+        private int price;
+
+        public SelectedTopping(String id, String name, int quantity, int price) {
+            this.id = id;
+            this.name = name;
+            this.quantity = quantity;
+            this.price = price;
+        }
+
+        public String getId() { return id; }
+        public String getName() { return name; }
+        public int getQuantity() { return quantity; }
+        public int getPrice() { return price; }
+        public void setQuantity(int quantity) { this.quantity = quantity; }
     }
 }

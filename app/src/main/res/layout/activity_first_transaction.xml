@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:text="Dine In"
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
+                        android:buttonTint="@color/primary"
                         android:textColor="@color/black" />
 
                     <RadioButton
@@ -167,7 +167,7 @@
                         android:layout_marginStart="20dp"
                         android:text="Delivery"
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
+                        android:buttonTint="@color/primary"
                         android:textColor="@color/black" />
                 </RadioGroup>
 
@@ -254,9 +254,9 @@
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Normal"
+                        android:text="Kuah Normal"
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
+                        android:buttonTint="@color/primary"
                         android:textColor="@color/black" />
 
                     <RadioButton
@@ -265,9 +265,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:text="Nyemek"
+                        android:text="Kuah Nyemek"
+                        android:buttonTint="@color/primary"
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
                         android:textColor="@color/black" />
                 </RadioGroup>
 
@@ -302,8 +302,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Telur Utuh"
+                        android:buttonTint="@color/primary"
+
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
                         android:textColor="@color/black" />
 
                     <RadioButton
@@ -312,11 +313,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:text="Orak Arik"
+                        android:text="Telur Orak-Arik"
+                        android:buttonTint="@color/primary"
                         android:paddingLeft="10dp"
-                        android:button="@drawable/radio_button_selector"
                         android:textColor="@color/black" />
-
                 </RadioGroup>
 
             </LinearLayout>

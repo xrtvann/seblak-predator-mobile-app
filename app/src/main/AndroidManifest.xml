@@ -53,7 +53,8 @@
             android:exported="false" />
         <activity
             android:name=".SecondTransaction"
-            android:exported="false" />
+            android:exported="false"/>
+
         <activity
             android:name=".auth.VerificationOTP"
             android:exported="false" />
