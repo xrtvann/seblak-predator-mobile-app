@@ -10,8 +10,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,11 +24,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
+import com.irvan.seblakpredator.fragment.DashboardFragment;
 import com.irvan.seblakpredator.model.LoginRequest;
 import com.irvan.seblakpredator.model.TokenManager;
 import com.irvan.seblakpredator.model.LoginResponse;
@@ -51,12 +56,32 @@ public class LoginActivity extends AppCompatActivity {
         initViews();
         setupListener();
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                    new OnBackInvokedCallback() {
+                        @Override
+                        public void onBackInvoked() {
+                            Log.d("BackPressed", "onBackInvoked called");
+                            showExitConfirmationDialog();
+                        }
+                    }
+            );
+        } else {
+            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    Log.d("BackPressed", "handleOnBackPressed called");
+                    showExitConfirmationDialog();
+                }
+            });
+        }
+
     }
 
     private void initViews() {
@@ -136,9 +161,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             TokenManager.saveToken(LoginActivity.this, accessToken);
 
+                            // Simpan nama user ke SharedPreferences
+                            getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                                    .edit()
+                                    .putString("name", res.getUser().getName())
+                                    .apply();
 
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         } else {
                             Log.d("LoginResponse", "Login Failed: " + res.getMessage());
@@ -217,6 +247,31 @@ public class LoginActivity extends AppCompatActivity {
         // Tombol OK
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    public void showExitConfirmationDialog() {
+        Log.d("BackPressed", "showExitConfirmationDialog called");
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_closeapp, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit confirmed, finishing app");
+            dialog.dismiss();
+            finishAffinity();
+        });
+
+        Button btnBatal = view.findViewById(R.id.batalbutton);
+        btnBatal.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit cancelled");
+            dialog.dismiss();
+        });
     }
 
 

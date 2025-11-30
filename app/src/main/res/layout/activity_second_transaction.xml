@@ -9,8 +9,8 @@
     <!-- HEADER -->
     <LinearLayout
         android:id="@+id/headerLayout"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
         android:background="#E64A19"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -19,11 +19,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <Button
             android:id="@+id/backButton"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:src="@drawable/ic_arrow_back" />
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="0dp"
+            android:text="Back"
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="0dp"
@@ -32,16 +43,16 @@
 
         <ImageView
             android:id="@+id/profilepage"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_person"
             app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/KeranjangButton"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_product"
             app:tint="@color/white" />
 

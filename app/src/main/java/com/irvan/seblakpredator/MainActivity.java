@@ -90,4 +90,16 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null) // supaya bisa tombol back
                 .commit();
     }
+    public void riwayatOfDashboard() {
+        // ganti fragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_container, new RiwayatFragment())
+                .addToBackStack(null)
+                .commit();
+
+        // set menu bottom navigation aktif
+        bottomNavigation.setSelectedItemId(R.id.nav_history);
+    }
+
 }

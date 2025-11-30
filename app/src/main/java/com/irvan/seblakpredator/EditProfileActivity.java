@@ -1,6 +1,7 @@
 package com.irvan.seblakpredator;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -126,6 +127,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 // Kirim flag ke ProfileActivity
+
+                SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                prefs.edit().putString("name", name).apply();
+
                 Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
                 intent.putExtra("profile_update_success", true); // flag untuk notifikasi
                 startActivity(intent);

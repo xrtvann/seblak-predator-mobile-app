@@ -24,17 +24,24 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-10dp">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="28dp"
-            android:src="@drawable/ic_arrow_back"
+        <Button
+            android:id="@+id/backButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="0dp"
+            android:text="Back"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView8"
@@ -43,8 +50,9 @@
             android:layout_weight="1"
             android:text="Checkout"
             android:textColor="@android:color/white"
-            android:textSize="23dp"
-            android:textStyle="bold"
+            android:textSize="19dp"
+            android:gravity="center"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -73,7 +81,7 @@
                 style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Pilih Tipe Pembelian"
+                android:text="Tipe Order"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -97,18 +105,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:text="Display Order Tipe"
                     android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/changeTypeOrder"
-                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:backgroundTint="@color/primary"
-                    android:text="Ganti"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -163,29 +162,53 @@
                 android:textSize="13sp" />
 
             <!-- TABEL PRODUK -->
+            <TableLayout
+                android:id="@+id/tableInformation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pesanan yang dibeli" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
+
             <LinearLayout
                 android:id="@+id/tableProductList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingVertical="4dp">
+                android:paddingVertical="4dp"
+                android:visibility="visible">
 
                 <TextView
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Nama" />
-
-                <TextView
-                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Deskripsi" />
 
                 <TextView
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:paddingRight="50dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Harga" />
@@ -198,30 +221,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
 
-                android:paddingVertical="4dp" />
+                android:paddingVertical="4dp" >
+
+                <LinearLayout
+                    android:id="@+id/item_productorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="4dp" />
+            </LinearLayout>
 
             <!-- PRODUK 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="4dp" />
 
             <!-- RINGKASAN PEMBAYARAN -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:text="Ringkasan Pembayaran"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:text="Ringkasan Pembayaran"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/subtotalDetail"

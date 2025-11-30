@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.irvan.seblakpredator.MainActivity;
+import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.auth.ChangePasswordActivity;
 import com.irvan.seblakpredator.auth.LoginActivity;
 
 /**
@@ -68,6 +72,17 @@ public class PengaturanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pengaturan, container, false);
+        ConstraintLayout profile, changePassword;
+        profile = view.findViewById(R.id.akunButton);
+        changePassword = view.findViewById(R.id.changePassword);
+        profile.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
+        changePassword.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), ChangePasswordActivity.class);
+            startActivity(intent);
+        });
         View logout = view.findViewById(R.id.logoutButton);
         logout.setOnClickListener(v ->
             showLogoutDialog());
@@ -91,10 +106,11 @@ public class PengaturanFragment extends Fragment {
         // Tombol OK
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> {dialog.dismiss();
-        requireContext().getSharedPreferences("user_prefs", 0)
-                .edit()
-                .clear()
-                .apply();
+            // Hapus semua data login
+            requireContext().getSharedPreferences("MyAppPrefs", 0)
+                    .edit()
+                    .clear()
+                    .apply();
 
         // Pindah ke halaman login
         Intent intent = new Intent(requireContext(), LoginActivity.class);

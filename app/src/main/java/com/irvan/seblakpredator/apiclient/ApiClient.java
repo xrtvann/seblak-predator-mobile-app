@@ -46,7 +46,7 @@ public class ApiClient {
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.10.4.94/seblak-predator-web-app/api/")
+                    .baseUrl("http://192.168.0.9/seblak-predator-web-app/api/")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

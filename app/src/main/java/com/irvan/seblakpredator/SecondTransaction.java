@@ -1,7 +1,7 @@
 package com.irvan.seblakpredator;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +26,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-// ... bagian import dan deklarasi class tetap sama
-
 public class SecondTransaction extends AppCompatActivity {
 
     LinearLayout KotakMenu;
@@ -40,6 +38,28 @@ public class SecondTransaction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_transaction);
 
+        // Ambil data dari intent yang dikirim dari FirstTransaction
+        Intent intent = getIntent();
+        String nama = intent.getStringExtra("nama");
+        String level = intent.getStringExtra("level");
+        String kencur = intent.getStringExtra("kencur");
+        String kuah = intent.getStringExtra("kuah");
+        String telur = intent.getStringExtra("telur");
+        String orderType = intent.getStringExtra("orderType");
+        String waktuAmbil = intent.getStringExtra("waktuAmbil");
+
+        // Menyimpan data ke SharedPreferences untuk digunakan kembali saat kembali ke FirstTransaction
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nama", nama);
+        editor.putString("level", level);
+        editor.putString("kencur", kencur);
+        editor.putString("kuah", kuah);
+        editor.putString("telur", telur);
+        editor.putString("orderType", orderType);
+        editor.putString("waktuAmbil", waktuAmbil);
+        editor.apply();
+
         KotakMenu = findViewById(R.id.KotakMenu);
         btnSemua = findViewById(R.id.allButton);
         btnFrozenFood = findViewById(R.id.frozenfoodButton);
@@ -48,21 +68,23 @@ public class SecondTransaction extends AppCompatActivity {
         btnJamur = findViewById(R.id.jamurButton);
 
         Button lanjut = findViewById(R.id.nextButton);
-        ImageView kembali = findViewById(R.id.backButton);
+        Button kembali = findViewById(R.id.backButton);
         ImageView profil = findViewById(R.id.profilepage);
 
         lanjut.setOnClickListener(v -> {
-            Intent intent = new Intent(SecondTransaction.this, ThirdTransaction.class);
-            startActivity(intent);
+            Intent intentNext = new Intent(SecondTransaction.this, TransaksiActivity.class);
+            startActivity(intentNext);
         });
 
         kembali.setOnClickListener(v -> {
-            Intent intent = new Intent(SecondTransaction.this, FirstTransaction.class);
-            startActivity(intent);
+            // Kembali ke FirstTransaction dan membawa data yang sudah disimpan
+            Intent intentBack = new Intent(SecondTransaction.this, FirstTransaction.class);
+            startActivity(intentBack);
         });
+
         profil.setOnClickListener(v -> {
-            Intent intent = new Intent(SecondTransaction.this, ProfileActivity.class);
-            startActivity(intent);
+            Intent intentProfile = new Intent(SecondTransaction.this, ProfileActivity.class);
+            startActivity(intentProfile);
         });
 
         loadToppingsFromApi();
@@ -161,5 +183,3 @@ public class SecondTransaction extends AppCompatActivity {
         });
     }
 }
-
-

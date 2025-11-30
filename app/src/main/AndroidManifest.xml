@@ -24,6 +24,9 @@
             android:name=".DisconnectNotification"
             android:exported="false" />
         <activity
+            android:name=".FirstTransaction"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity

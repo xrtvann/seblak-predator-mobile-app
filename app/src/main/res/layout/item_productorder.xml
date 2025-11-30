@@ -6,21 +6,19 @@
     android:orientation="horizontal"
     android:paddingVertical="4dp">
 
-    <TextView
-        android:id="@+id/costumerName"
-        style="@style/TextAppearance.Material3.BodySmall.Emphasized"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Azizah" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/descriptionOrder"
-        style="@style/TextAppearance.Material3.BodySmall.Emphasized"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Kuah Normal, Cekrek Aci, Kencur Strong, Gurih Khas..." />
+        <TextView
+            android:id="@+id/descriptionOrder"
+            style="@style/TextAppearance.Material3.BodySmall.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Kuah Normal, Cekrek Aci, Kencur Strong, Gurih Khas..." />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/priceOrder"
