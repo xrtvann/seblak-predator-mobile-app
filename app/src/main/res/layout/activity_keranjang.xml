@@ -11,48 +11,76 @@
     tools:context=".KeranjangActivity">
 
     <!-- Header -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="90sp"
-        android:background="#E84E1B"
-        android:padding="16dp"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal">
-
-        <!-- Tombol back -->
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="@android:color/white" />
-
-        <!-- Judul -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Keranjang Saya"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_weight="1" />
-
-        <!-- Profil -->
-        <ImageView
-            android:id="@+id/btnProfile"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_person"
-            app:tint="@android:color/white" />
-    </LinearLayout>
 
     <!-- RecyclerView (bisa discroll) -->
+    <RelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#E84E1B"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/backButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="2dp"
+            android:text="Back"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+
+        <!-- Judul -->
+
+        <!-- Profil -->
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="115dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toStartOf="@+id/btnProfile"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Keranjang Saya"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/btnProfile"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_person"
+            app:tint="@android:color/white" />
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerKeranjang"
         android:layout_width="0dp"

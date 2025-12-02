@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -30,6 +29,7 @@ import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
 import com.irvan.seblakpredator.model.CustomizationOption;
 import com.irvan.seblakpredator.model.CustomizationResponse;
+import com.irvan.seblakpredator.model.SelectedMenu;
 import com.irvan.seblakpredator.model.SpiceLevel;
 import com.irvan.seblakpredator.model.SpiceLevelResponse;
 
@@ -44,12 +44,12 @@ public class FirstTransaction extends AppCompatActivity {
 
     private static final String TAG = "FirstTransaction";
 
-    EditText edtNama, inputJamAmbil;
+    EditText edtNama, inputJamAmbil, numberTable;
     Spinner spinnerLevel, spinnerKencur;
     RadioGroup tipeKuah, tipeTelur, typeOrder;
     RadioButton dineInOption, deliveryOption;
     Button btnLanjut, backButton;
-    TextView labelTime;
+    TextView labelTime, labelNumberTable;
 
     private List<CustomizationOption> kuahList = new ArrayList<>();
     private List<CustomizationOption> telurList = new ArrayList<>();
@@ -59,7 +59,6 @@ public class FirstTransaction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_first_transaction);
 
         // ======= INISIALISASI VIEW =======
@@ -75,8 +74,17 @@ public class FirstTransaction extends AppCompatActivity {
         btnLanjut = findViewById(R.id.btnLanjut);
         backButton = findViewById(R.id.backButton);
         labelTime = findViewById(R.id.labelTimePick);
+        labelNumberTable = findViewById(R.id.labelTableNumber);
+        numberTable = findViewById(R.id.tableNumberInput);
 
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+
+
+        // ======= DAFTAR MENU SEBELUMNYA =======
+        ArrayList<SelectedMenu> existingMenus = getIntent().getSerializableExtra("existingMenus") != null ?
+                (ArrayList<SelectedMenu>) getIntent().getSerializableExtra("existingMenus") :
+                new ArrayList<>();
+
 
         // ======= SET NAMA OTOMATIS DARI LOGIN =======
         String username = prefs.getString("name", "");
@@ -111,7 +119,7 @@ public class FirstTransaction extends AppCompatActivity {
             });
         });
 
-        backButton.setOnClickListener(v -> startActivity(new Intent(FirstTransaction.this, MainActivity.class)));
+        backButton.setOnClickListener(v -> finish());
 
         // ======= SET DEFAULT TYPE ORDER =======
         int color = ContextCompat.getColor(this, R.color.primary);
@@ -124,10 +132,14 @@ public class FirstTransaction extends AppCompatActivity {
                 typeOrder.check(dineInOption.getId());
                 inputJamAmbil.setVisibility(View.GONE);
                 labelTime.setVisibility(View.GONE);
+                numberTable.setVisibility(View.VISIBLE);
+                labelNumberTable.setVisibility(View.VISIBLE);
             } else if (orderType.equals("Delivery")) {
                 typeOrder.check(deliveryOption.getId());
                 inputJamAmbil.setVisibility(View.VISIBLE);
                 labelTime.setVisibility(View.VISIBLE);
+                numberTable.setVisibility(View.GONE);
+                labelNumberTable.setVisibility(View.GONE);
             }
         }
 
@@ -135,9 +147,13 @@ public class FirstTransaction extends AppCompatActivity {
             if (checkedId == deliveryOption.getId()) {
                 inputJamAmbil.setVisibility(View.VISIBLE);
                 labelTime.setVisibility(View.VISIBLE);
+                numberTable.setVisibility(View.GONE);
+                labelNumberTable.setVisibility(View.GONE);
             } else {
                 inputJamAmbil.setVisibility(View.GONE);
                 labelTime.setVisibility(View.GONE);
+                numberTable.setVisibility(View.VISIBLE);
+                labelNumberTable.setVisibility(View.VISIBLE);
             }
         });
 
@@ -147,6 +163,7 @@ public class FirstTransaction extends AppCompatActivity {
         // ======= BUTTON LANJUT =======
         btnLanjut.setOnClickListener(v -> {
             String nama = edtNama.getText().toString();
+            String tablenumber = numberTable.getText().toString();
             String level = spinnerLevel.getSelectedItem() != null ? spinnerLevel.getSelectedItem().toString() : "";
             String kencur = spinnerKencur.getSelectedItem() != null ? spinnerKencur.getSelectedItem().toString() : "";
             int idKuah = tipeKuah.getCheckedRadioButtonId();
@@ -159,24 +176,44 @@ public class FirstTransaction extends AppCompatActivity {
 
             RadioButton pilihKuah = findViewById(idKuah);
             RadioButton pilihTelur = findViewById(idTelur);
-            String order = ((RadioButton)findViewById(typeOrder.getCheckedRadioButtonId())).getText().toString();
-            String waktu = inputJamAmbil.getText().toString();
 
-            // Simpan semua data
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("nama", nama);
-            editor.putString("level", level);
-            editor.putString("kencur", kencur);
-            editor.putString("kuah", pilihKuah.getText().toString());
-            editor.putString("telur", pilihTelur.getText().toString());
-            editor.putString("orderType", order);
-            editor.putString("waktuAmbil", waktu);
-            editor.apply();
+            // Ambil harga dari API
+            int hargaLevel = 0;
+            for (SpiceLevel sl : levelPedasList) {
+                if (sl.getName().equals(level)) { hargaLevel = (int) sl.getPrice(); break; }
+            }
 
-            // Lanjut ke SecondTransaction
+            int hargaKuah = 0;
+            for (CustomizationOption kuah : kuahList) {
+                if (kuah.getName().equals(pilihKuah.getText().toString())) { hargaKuah = (int) kuah.getPrice(); break; }
+            }
+
+            int hargaTelur = 0;
+            for (CustomizationOption t : telurList) {
+                if (t.getName().equals(pilihTelur.getText().toString())) { hargaTelur = (int) t.getPrice(); break; }
+            }
+
+            int hargaKencur = 0;
+            for (CustomizationOption k : kencurList) {
+                if (k.getName().equals(kencur)) { hargaKencur = (int) k.getPrice(); break; }
+            }
+
+
+            // Kirim ke SecondTransaction (atau TransaksiActivity)
             Intent intent = new Intent(FirstTransaction.this, SecondTransaction.class);
+            // Kirim harga dan pilihan menu terbaru
+            intent.putExtra("nama", nama);
+            intent.putExtra("level", level);
+            intent.putExtra("kuah", pilihKuah.getText().toString());
+            intent.putExtra("telur", pilihTelur.getText().toString());
+            intent.putExtra("kencur", kencur);
+            intent.putExtra("hargaLevel", hargaLevel);
+            intent.putExtra("hargaKuah", hargaKuah);
+            intent.putExtra("hargaTelur", hargaTelur);
+            intent.putExtra("hargaKencur", hargaKencur);
             startActivity(intent);
         });
+
     }
 
     // ======= RESTORE DATA DARI SECOND TRANSACTION =======

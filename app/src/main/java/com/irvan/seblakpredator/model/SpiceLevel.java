@@ -15,8 +15,6 @@ public class SpiceLevel {
     private String updated_at;    // opsional, bisa ditambahkan jika ingin
 
     // ======== Constructor ========
-    public SpiceLevel() {
-    }
 
     public SpiceLevel(String id, String name, double price, String image, String category_id,
                       boolean is_active, int sort_order, String category_name, String category_type,
