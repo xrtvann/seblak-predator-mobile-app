@@ -69,6 +69,7 @@
         android:layout_weight="1"
         android:overScrollMode="never"
         android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/checkoutlayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <LinearLayout
@@ -97,7 +98,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/kurir" />
+                    android:src="@drawable/kurir"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/displayTypeOrder"
@@ -105,8 +107,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
                     android:text="Display Order Tipe"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -134,7 +136,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Jalan Kalimantan, No. 10"
+                    android:text="Silahkan tambahkan alamat anda"
                     android:textColor="#333"
                     android:textSize="14sp" />
 
@@ -176,13 +178,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="Deskripsi" />
 
                 <TextView
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:paddingRight="50dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="Harga" />
             </LinearLayout>
 
@@ -193,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
 
-                android:paddingVertical="4dp" >
+                android:paddingVertical="4dp">
 
                 <LinearLayout
                     android:id="@+id/item_productorder"
@@ -220,7 +224,7 @@
                     android:text="Ringkasan Pembayaran"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"/>
 
                 <LinearLayout
                     android:id="@+id/subtotalDetail"
@@ -234,12 +238,17 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Subtotal (2)" />
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:text="Subtotal" />
 
                     <TextView
                         android:id="@+id/priceAllOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                         android:text="55.000" />
                 </LinearLayout>
 
@@ -274,14 +283,16 @@
 
                     <TextView
                         android:id="@+id/labelTotal"
-                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                        style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/black"
                         android:text="Total" />
 
                     <TextView
                         android:id="@+id/priceTotal"
+                        android:textColor="@color/black"
                         style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -334,6 +345,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="500dp"
         android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button

@@ -55,6 +55,9 @@
             android:name=".SecondTransaction"
             android:exported="false"/>
         <activity
+            android:name=".SelectCustomization"
+            android:exported="false"/>
+        <activity
             android:name=".KeranjangActivity"
             android:exported="false"/>
 

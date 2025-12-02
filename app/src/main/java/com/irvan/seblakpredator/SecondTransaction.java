@@ -113,16 +113,23 @@ public class SecondTransaction extends AppCompatActivity {
 
             // Tambahkan menu baru ke existingMenus
             existingMenus.add(currentMenu);
+            String orderType = getIntent().getStringExtra("orderType");
 
             // Kirim existingMenus ke TransaksiActivity
             Intent intentNext = new Intent(SecondTransaction.this, TransaksiActivity.class);
             intentNext.putExtra("existingMenus", existingMenus);
-
+            intentNext.putExtra("orderType", orderType);  // <- tambahan
             startActivity(intentNext);
         });
 
         // Tombol kembali ke FirstTransaction
-        kembali.setOnClickListener(v -> finish());
+        kembali.setOnClickListener(v -> {
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("existingMenus", existingMenus);
+            setResult(RESULT_OK, resultIntent);
+            finish();
+
+        });
 
         profil.setOnClickListener(v -> {
             // Buka profil (jika ada)

@@ -102,135 +102,149 @@
 
             <!-- NAMA -->
             <LinearLayout
-                android:id="@+id/linearNameCostumer"
+                android:id="@+id/linearLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/labelName"
-                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:id="@+id/labelLevel"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:text="Nama"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/costumerName"
-                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Your Name"
+                    android:text="Level"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/pilihanLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
+            <!-- KUAH -->
             <LinearLayout
-                android:id="@+id/linearTableNumber"
+                android:id="@+id/linearOptionsKuah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/labelTableNumber"
-                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:text="Nomor meja"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/tableNumberInput"
-                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Contoh : 9"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <!-- METODE ORDER -->
-            <LinearLayout
-                android:id="@+id/linearOptionsOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/labelOrderType"
+                    android:id="@+id/labelKuah"
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:paddingTop="15dp"
-                    android:text="Metode Order"
+                    android:text="Kuah"
                     android:textColor="@color/black" />
 
                 <RadioGroup
-                    android:id="@+id/typeOrder"
+                    android:id="@+id/tipeKuah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/dineInOption"
+                        android:id="@+id/kuahNormal"
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dine In"
+                        android:text="Kuah Normal"
                         android:paddingLeft="10dp"
                         android:buttonTint="@color/primary"
                         android:textColor="@color/black" />
 
                     <RadioButton
-                        android:id="@+id/deliveryOption"
+                        android:id="@+id/kuahNyemek"
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:text="Delivery"
-                        android:paddingLeft="10dp"
+                        android:text="Kuah Nyemek"
                         android:buttonTint="@color/primary"
+                        android:paddingLeft="10dp"
                         android:textColor="@color/black" />
                 </RadioGroup>
 
             </LinearLayout>
 
-            <!-- WAKTU AMBIL -->
+            <!-- TELUR -->
             <LinearLayout
-                android:id="@+id/linearTImePick"
+                android:id="@+id/linearOptionsEgg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/labelTimePick"
+                    android:id="@+id/labelEgg"
                     style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:text="Waktu Ambil"
+                    android:text="Telur"
                     android:textColor="@color/black" />
 
-                <EditText
-                    android:id="@+id/inputJamAmbil"
-                    style="@style/TextAppearance.Material3.BodyLarge"
+                <RadioGroup
+                    android:id="@+id/tipeTelur"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:drawable/edit_text"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:hint="Select Time"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/telurUtuh"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telur Utuh"
+                        android:buttonTint="@color/primary"
+
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/telurOrak"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="Telur Orak-Arik"
+                        android:buttonTint="@color/primary"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- KENCUR -->
+            <LinearLayout
+                android:id="@+id/linearKencur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Kencur"
+                    android:textColor="@color/black" />
+
+                <Spinner
+                    android:id="@+id/pilihanKencur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!-- LEVEL -->
 
+            <!-- KUAH -->
+
+            <!-- TELUR -->
+
+            <!-- KENCUR -->
 
             <!-- BUTTON LANJUT -->
 
