@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- Header Bar -->
+
+    <!-- BUTTON CHECKOUT -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="#E74A2E"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-10dp">
+
+        <Button
+            android:id="@+id/backButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="0dp"
+            android:text="Back"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="106dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="Checkout"
+            android:textColor="@android:color/white"
+            android:textSize="19dp"
+            android:gravity="center"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.688" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/checkoutlayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- PILIH TIPE PEMBELIAN -->
+            <TextView
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Tipe Order"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <ImageView
+                    android:id="@+id/imageTypeOrder"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/kurir"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/displayTypeOrder"
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Display Order Tipe"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- ALAMAT -->
+            <TextView
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:text="Alamat Pengantaran"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/displayAddress"
+                    style="@style/TextAppearance.Material3.BodyMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Silahkan tambahkan alamat anda"
+                    android:textColor="#333"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/addressChangeButton"
+                    style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="Ubah Alamat"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addMoreProduct"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/primary"
+                android:text="Tambah produk lainnya"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+            <!-- TABEL PRODUK -->
+
+            <LinearLayout
+                android:id="@+id/tableProductList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="Deskripsi" />
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Harga" />
+            </LinearLayout>
+
+            <!-- PRODUK 1 -->
+            <LinearLayout
+                android:id="@+id/InformationOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:paddingVertical="4dp">
+
+                <LinearLayout
+                    android:id="@+id/item_productorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="4dp" />
+            </LinearLayout>
+
+            <!-- PRODUK 2 -->
+
+            <!-- RINGKASAN PEMBAYARAN -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:text="Ringkasan Pembayaran"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"/>
+
+                <LinearLayout
+                    android:id="@+id/subtotalDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="2dp">
+
+                    <TextView
+                        android:id="@+id/subtotalProduct"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:text="Subtotal" />
+
+                    <TextView
+                        android:id="@+id/priceAllOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                        android:text="55.000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/costDeliveryDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="2dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/labelCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Biaya Ongkir" />
+
+                    <TextView
+                        android:id="@+id/costDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8.000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/totalPriceDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="4dp">
+
+                    <TextView
+                        android:id="@+id/labelTotal"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="Total" />
+
+                    <TextView
+                        android:id="@+id/priceTotal"
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="63.000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- METODE PEMBAYARAN -->
+            <!-- PILIH METODE PEMBAYARAN -->
+            <LinearLayout
+                android:id="@+id/selectMethodPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/displayMethodPayment"
+                    android:layout_width="261dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pilih Metode Pembayaran"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="43dp"
+                    android:layout_height="29dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="•••"
+                    android:textColor="#fff"
+                    android:textSize="9sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/checkoutlayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="500dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/primary"
+            android:text="Checkout"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

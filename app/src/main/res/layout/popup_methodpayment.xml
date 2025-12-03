@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/backbutton"
+        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_back"
+        android:drawableTint="@color/black"
+        android:textColor="@color/black"
+        android:text="Back" />
+
+    <TextView
+        android:text="Metode Pembayaran"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Card COD -->
+    <LinearLayout
+        android:id="@+id/itemCOD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/peach"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_cash" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pembayaran tunai"
+                android:textColor="#FF6847"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rbCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- Transfer Bank -->
+    <LinearLayout
+        android:id="@+id/itemTransfer"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/peach"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:src="@drawable/ic_noncash"
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Transfer Bank"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Pembayaran non-tunai"
+                android:textSize="13sp"
+                android:textColor="#FF6847"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rbNoncash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <!-- Sub-menu pilihan transfer bank -->
+    <LinearLayout
+        android:id="@+id/layoutBankList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="30dp"
+        android:paddingTop="8dp"
+        android:visibility="visible">
+
+        <!-- DANA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- Nama metode (DANA) -->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/dana_text"
+                style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="30dp"
+                android:text="DANA"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <!-- Radio button -->
+            <RadioButton
+                android:id="@+id/danaPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <!-- ShopeePay -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/shopeepay_text"
+                style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="30dp"
+                android:text="ShopeePay"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/shopeePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <!-- BRI -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/bri_text"
+                style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="30dp"
+                android:text="BRI"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/briPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <!-- Tambahkan bank lain sama formatnya -->
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:text="Konfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+        android:backgroundTint="#FF5722"/>
+
+</LinearLayout>

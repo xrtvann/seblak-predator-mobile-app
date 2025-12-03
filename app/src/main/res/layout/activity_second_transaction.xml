@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:background="#FFFFFF">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="#D94A27"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="10dp"
+            android:text="Back"
+            android:textColor="@color/white" />
+
+        <!-- Keranjang -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnKeranjang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Profil -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/btnKeranjang"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/profilepage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+    <!-- SCROLL UTAMA -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- KATEGORI -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/allButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#E64A19"
+                        android:text="Semua"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/frozenfoodButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Frozen Food"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/sayuranButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Sayuran"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/pelengkapButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Pelengkap"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/jamurButton"
+                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="Jamur"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- GARIS PEMBATAS -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="4dp"
+                android:background="#DDD" />
+
+            <!-- DAFTAR ITEM MENU -->
+            <LinearLayout
+                android:id="@+id/KotakMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- TOMBOL LANJUT -->
+    <LinearLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            android:backgroundTint="@color/primary"
+            android:text="Lanjut"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

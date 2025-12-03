@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Saat fokus -->
+    <item android:color="@color/white" android:state_focused="true" />
+    <!-- Saat aktif (ada teks di dalam) -->
+    <item android:color="@color/white" android:state_activated="true" />
+    <!-- Saat default -->
+    <item android:color="@color/white" />
+</selector>

@@ -92,21 +92,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- No Telepon -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneColumn"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="No Telepon"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phoneInput"
-                    style="@style/customEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Username -->
             <com.google.android.material.textfield.TextInputLayout

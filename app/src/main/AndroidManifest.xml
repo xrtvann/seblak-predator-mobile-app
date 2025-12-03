@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -9,12 +12,60 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_seblak_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SeblakPredator">
+        android:theme="@style/Theme.SeblakPredator"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".TransaksiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuccessOrder"
+            android:exported="false" />
+        <activity
+            android:name=".DisconnectNotification"
+            android:exported="false" />
+        <activity
+            android:name=".FirstTransaction"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SeblakPredator.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"/>
         <activity
             android:name=".auth.ResetPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".auth.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondTransaction"
+            android:exported="false"/>
+        <activity
+            android:name=".SelectCustomization"
+            android:exported="false"/>
+        <activity
+            android:name=".KeranjangActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".auth.VerificationOTP"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeAddressActivity"
             android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
@@ -23,15 +74,11 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".splash.SplashActivity"
-            android:theme="@style/Theme.SeblakPredator.Splash"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".auth.CreatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.ChangePasswordActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

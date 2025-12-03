@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ===================== HEADER ===================== -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="#D94A27"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_back"
+            android:drawableTint="@color/white"
+            android:paddingLeft="10dp"
+            android:text="Back"
+            android:textColor="@color/white" />
+
+        <!-- Keranjang -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnKeranjang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Profil -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/btnKeranjang"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/profilepage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- NAMA -->
+            <LinearLayout
+                android:id="@+id/linearLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labelLevel"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Level"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/pilihanLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- KUAH -->
+            <LinearLayout
+                android:id="@+id/linearOptionsKuah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labelKuah"
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:text="Kuah"
+                    android:textColor="@color/black" />
+
+                <RadioGroup
+                    android:id="@+id/tipeKuah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/kuahNormal"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kuah Normal"
+                        android:paddingLeft="10dp"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/kuahNyemek"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="Kuah Nyemek"
+                        android:buttonTint="@color/primary"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- TELUR -->
+            <LinearLayout
+                android:id="@+id/linearOptionsEgg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labelEgg"
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="Telur"
+                    android:textColor="@color/black" />
+
+                <RadioGroup
+                    android:id="@+id/tipeTelur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/telurUtuh"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telur Utuh"
+                        android:buttonTint="@color/primary"
+
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/telurOrak"
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="Telur Orak-Arik"
+                        android:buttonTint="@color/primary"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- KENCUR -->
+            <LinearLayout
+                android:id="@+id/linearKencur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Kencur"
+                    android:textColor="@color/black" />
+
+                <Spinner
+                    android:id="@+id/pilihanKencur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- LEVEL -->
+
+            <!-- KUAH -->
+
+            <!-- TELUR -->
+
+            <!-- KENCUR -->
+
+            <!-- BUTTON LANJUT -->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <Button
+            android:id="@+id/btnLanjut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:padding="12dp"
+            android:text="LANJUT"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

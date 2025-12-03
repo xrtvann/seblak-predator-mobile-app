@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="5dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+        <!-- Checkbox pilih -->
+        <CheckBox
+            android:id="@+id/checkBoxItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp" />
+
+        <!-- Detail item -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <!-- Nama pemesan -->
+            <TextView
+                android:id="@+id/tvCustomerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajeng Elsa"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <!-- Harga total -->
+            <TextView
+                android:id="@+id/tvItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 18.000"
+                android:textColor="#E84E1B"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Deskripsi isi seblak -->
+            <TextView
+                android:id="@+id/tvItemNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mie, sosis, ceker, kembang tahu - level 2"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+        <!-- Tombol hapus individual -->
+        <ImageView
+            android:id="@+id/btnDeleteItem"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_delete"
+            android:tint="#E84E1B"
+            android:contentDescription="Hapus item" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
