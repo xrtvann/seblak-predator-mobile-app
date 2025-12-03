@@ -73,6 +73,14 @@ public class SelectCustomization extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         String nama = getIntent().getStringExtra("nama");
         String orderType = getIntent().getStringExtra("orderType");
+        String address = getIntent().getStringExtra("address");
+        String userId = getIntent().getStringExtra("user_id");
+        if (userId == null) {
+            Toast.makeText(this, "User ID tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
 
         ArrayList<SelectedMenu> existingMenus = getIntent().getSerializableExtra("existingMenus") != null ?
                 (ArrayList<SelectedMenu>) getIntent().getSerializableExtra("existingMenus") :
@@ -138,8 +146,10 @@ public class SelectCustomization extends AppCompatActivity {
 
             // Kirim ke SecondTransaction
             Intent intent = new Intent(SelectCustomization.this, SecondTransaction.class);
+            intent.putExtra("user_id", userId);
             intent.putExtra("nama", nama);
             intent.putExtra("orderType", orderType);
+            intent.putExtra("address", address);
             intent.putExtra("level", level);
             intent.putExtra("kuah", pilihKuah.getText().toString());
             intent.putExtra("telur", pilihTelur.getText().toString());

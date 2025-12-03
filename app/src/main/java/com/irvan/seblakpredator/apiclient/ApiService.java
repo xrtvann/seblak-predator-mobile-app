@@ -9,6 +9,8 @@ import com.irvan.seblakpredator.model.ForgetPassResponse;
 import com.irvan.seblakpredator.model.GetOrderResponse;
 import com.irvan.seblakpredator.model.LoginRequest;
 import com.irvan.seblakpredator.model.LoginResponse;
+import com.irvan.seblakpredator.model.OrderRequest;
+import com.irvan.seblakpredator.model.OrderResponse;
 import com.irvan.seblakpredator.model.ProfileRequest;
 import com.irvan.seblakpredator.model.ProfileResponse;
 import com.irvan.seblakpredator.model.RegisterRequest;
@@ -86,4 +88,6 @@ public interface ApiService {
     Call<CustomizationResponse> getCustomizationOptions();
     @GET("spice-levels.php")
     Call<SpiceLevelResponse> getAllSpiceLevels();
+    @POST("mobile/create-order.php")
+    Call<OrderResponse> createOrder(@Body OrderRequest body);
 }
