@@ -303,7 +303,7 @@
             <!-- METODE PEMBAYARAN -->
             <!-- PILIH METODE PEMBAYARAN -->
             <LinearLayout
-                android:id="@+id/selectMethodPayment"
+                android:id="@+id/methodPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
@@ -323,7 +323,7 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/selectMethodPayment"
                     android:layout_width="43dp"
                     android:layout_height="29dp"
                     android:backgroundTint="@color/primary"

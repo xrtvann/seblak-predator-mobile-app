@@ -28,6 +28,7 @@ import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 
+import com.irvan.seblakpredator.TransaksiActivity;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
 import com.irvan.seblakpredator.fragment.DashboardFragment;
@@ -61,29 +62,61 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
-                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
-                    new OnBackInvokedCallback() {
-                        @Override
-                        public void onBackInvoked() {
-                            Log.d("BackPressed", "onBackInvoked called");
-                            showExitConfirmationDialog();
-                        }
-                    }
-            );
-        } else {
-            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-                @Override
-                public void handleOnBackPressed() {
-                    Log.d("BackPressed", "handleOnBackPressed called");
-                    showExitConfirmationDialog();
-                }
-            });
-        }
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+//            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+//                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+//                    new OnBackInvokedCallback() {
+//                        @Override
+//                        public void onBackInvoked() {
+//                            Log.d("BackPressed", "onBackInvoked called");
+//                            showExitConfirmationDialog();
+//                        }
+//                    }
+//            );
+//        } else {
+//            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+//                @Override
+//                public void handleOnBackPressed() {
+//                    Log.d("BackPressed", "handleOnBackPressed called");
+//                    showExitConfirmationDialog();
+//                }
+//            });
+//        }
+
+        // Back gesture
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showCanceled();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
     }
+    private void showCanceled(){
+        Log.d("BackPressed", "showExitConfirmationDialog called");
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_closeapp, null);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit confirmed, finishing app");
+            dialog.dismiss();
+            finishAffinity();
+        });
+
+        Button btnBatal = view.findViewById(R.id.batalbutton);
+        btnBatal.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit cancelled");
+            dialog.dismiss();
+        });
+    }
     private void initViews() {
         usernameColumn = findViewById(R.id.usernameColumn);
         passwordColumn = findViewById(R.id.passwordColumn);
@@ -165,6 +198,10 @@ public class LoginActivity extends AppCompatActivity {
                             getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
                                     .edit()
                                     .putString("name", res.getUser().getName())
+                                    .apply();
+                            getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                                    .edit()
+                                    .putString("user_id", res.getUser().getId())
                                     .apply();
 
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();

@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,15 +19,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.irvan.seblakpredator.model.SelectedMenu;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class TransaksiActivity extends AppCompatActivity {
 
-    private Button addressChangeButton, addProductButton, checkOutButton, backButton;
+    private Button addressChangeButton, addProductButton, checkOutButton, backButton, selectMethodPayment;
     private LinearLayout informationOrder;
-    private TextView priceTotal, ongkirPrice, priceTotalProduct, displayOrderType;
+    private TextView priceTotal, ongkirPrice, priceTotalProduct, displayOrderType, displayAddress, displayMethodPayment;
     private int ongkir = 0;
     private ArrayList<SelectedMenu> existingMenus = new ArrayList<>();
+    private String address = "";
+    private String orderType = "";
+    private String userId = "";
+
+    private String tax = "0";
+    private String discount = "0";
 
     private final ActivityResultLauncher<Intent> addMenuLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -41,42 +51,103 @@ public class TransaksiActivity extends AppCompatActivity {
             }
     );
 
+    private final ActivityResultLauncher<Intent> changeAddressLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String newAddress = result.getData().getStringExtra("address");
+                    if (newAddress != null && !newAddress.isEmpty()) {
+                        address = newAddress;
+                        updateDisplayOrderType();
+                    }
+                }
+            }
+    );
+    private JSONArray buildItemsJson() {
+        JSONArray itemsArray = new JSONArray();
+
+        try {
+            for (SelectedMenu menu : existingMenus) {
+                JSONObject menuJson = new JSONObject();
+                menuJson.put("name", menu.getNama());
+                menuJson.put("level", menu.getLevel());
+                menuJson.put("kuah", menu.getKuah());
+                menuJson.put("telur", menu.getTelur());
+                menuJson.put("kencur", menu.getKencur());
+                menuJson.put("harga_level", menu.getHargaLevel());
+                menuJson.put("harga_kuah", menu.getHargaKuah());
+                menuJson.put("harga_telur", menu.getHargaTelur());
+                menuJson.put("harga_kencur", menu.getHargaKencur());
+
+                // Topping
+                JSONArray toppingsArray = new JSONArray();
+                for (SecondTransaction.SelectedTopping t : menu.getSelectedToppings()) {
+                    JSONObject toppingJson = new JSONObject();
+                    toppingJson.put("id", t.getId());
+                    toppingJson.put("name", t.getName());
+                    toppingJson.put("quantity", t.getQuantity());
+                    toppingJson.put("price", t.getPrice());
+                    toppingsArray.put(toppingJson);
+                }
+
+                menuJson.put("toppings", toppingsArray);
+                itemsArray.put(menuJson);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return itemsArray;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaksi);
 
+        // Status bar transparan
         Window window = getWindow();
         window.setStatusBarColor(Color.TRANSPARENT);
         window.getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
+        // Inisialisasi view
         informationOrder = findViewById(R.id.InformationOrder);
         priceTotal = findViewById(R.id.priceTotal);
         ongkirPrice = findViewById(R.id.costDelivery);
         priceTotalProduct = findViewById(R.id.priceAllOrder);
         displayOrderType = findViewById(R.id.displayTypeOrder);
+        displayAddress = findViewById(R.id.displayAddress);
+        selectMethodPayment = findViewById(R.id.selectMethodPayment);
+        displayMethodPayment = findViewById(R.id.displayMethodPayment);
         addressChangeButton = findViewById(R.id.addressChangeButton);
         addProductButton = findViewById(R.id.addMoreProduct);
         checkOutButton = findViewById(R.id.btn_checkout);
         backButton = findViewById(R.id.backButton);
 
-        // Ambil list menu awal jika ada
+
+        // Ambil data awal dari intent
         existingMenus = getIntent().getSerializableExtra("existingMenus") != null ?
                 (ArrayList<SelectedMenu>) getIntent().getSerializableExtra("existingMenus") :
                 new ArrayList<>();
+        orderType = getIntent().getStringExtra("orderType");
+        address = getIntent().getStringExtra("address");
 
-        // Ambil tipe order dari FirstTransaction
-        String orderType = getIntent().getStringExtra("orderType");
-        if(orderType != null){
-            displayOrderType.setText(orderType);
-        } else {
-            displayOrderType.setText("Tipe Order Tidak Diketahui");
+        userId = getIntent().getStringExtra("user_id");
+        if (userId == null || userId.isEmpty()) {
+            // user_id wajib, jika tidak ada bisa hentikan activity
+            Toast.makeText(this, "User tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
 
-        // Tampilkan semua menu
+
+        // Tampilkan tipe order dan alamat
+        updateDisplayOrderType();
+
+        // Tampilkan menu awal
         displayAllMenus();
 
         // Back gesture
@@ -92,6 +163,8 @@ public class TransaksiActivity extends AppCompatActivity {
         addProductButton.setOnClickListener(v -> {
             Intent intent = new Intent(TransaksiActivity.this, SelectCustomization.class);
             intent.putExtra("existingMenus", existingMenus);
+            intent.putExtra("orderType", orderType);
+            intent.putExtra("address", address);
             addMenuLauncher.launch(intent);
         });
 
@@ -113,11 +186,34 @@ public class TransaksiActivity extends AppCompatActivity {
 
         // Ganti alamat
         addressChangeButton.setOnClickListener(v -> {
-            startActivity(new Intent(TransaksiActivity.this, ChangeAddressActivity.class));
+            Intent intent = new Intent(TransaksiActivity.this, ChangeAddressActivity.class);
+            changeAddressLauncher.launch(intent);
         });
 
         // Tombol back
         backButton.setOnClickListener(v -> showCanceled());
+
+        // Pilih metode pembayaran
+        selectMethodPayment.setOnClickListener(v -> {
+            // Menampilkan popup metode pembayaran
+            showPaymentMethodPopup();
+        });
+    }
+
+    private void updateDisplayOrderType() {
+        // Hanya menampilkan tipe order
+        if (orderType != null && !orderType.isEmpty()) {
+            displayOrderType.setText(orderType);
+        } else {
+            displayOrderType.setText("Tipe Order Tidak Diketahui");
+        }
+
+        // Alamat ditampilkan di displayAddress
+        if (address != null && !address.isEmpty()) {
+            displayAddress.setText(address);
+        } else {
+            displayAddress.setText("Alamat belum diisi");
+        }
     }
 
     private void displayAllMenus() {
@@ -170,7 +266,7 @@ public class TransaksiActivity extends AppCompatActivity {
         ongkirPrice.setText("Rp " + ongkir);
     }
 
-    private void showCanceled(){
+    private void showCanceled() {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.notification_cancelorder, null);
 
@@ -191,4 +287,28 @@ public class TransaksiActivity extends AppCompatActivity {
         Button btnBatal = view.findViewById(R.id.batalbutton);
         btnBatal.setOnClickListener(v -> dialog.dismiss());
     }
+
+    private void showPaymentMethodPopup() {
+        // Tampilkan popup metode pembayaran yang sudah didefinisikan dalam popup_methodpayment.xml
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.popup_methodpayment, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Mengatur tombol back untuk menutup popup
+        TextView backButton = view.findViewById(R.id.backbutton);
+        backButton.setOnClickListener(v -> dialog.dismiss());
+
+        // Tombol konfirmasi pembayaran
+        Button btnConfirm = view.findViewById(R.id.btnConfirm);
+        btnConfirm.setOnClickListener(v -> {
+            // Lakukan konfirmasi metode pembayaran yang dipilih
+            dialog.dismiss();
+        });
+    }
+
 }

@@ -67,6 +67,13 @@ public class SecondTransaction extends AppCompatActivity {
         if (oldToppings != null && !oldToppings.isEmpty()) {
             selectedToppings.addAll(oldToppings);
         }
+        String userId = getIntent().getStringExtra("user_id");
+        if (userId == null) {
+            Toast.makeText(this, "User ID tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
 
         KotakMenu = findViewById(R.id.KotakMenu);
         btnSemua = findViewById(R.id.allButton);
@@ -111,6 +118,8 @@ public class SecondTransaction extends AppCompatActivity {
                     new ArrayList<>(selectedToppings) // salin topping saat ini
             );
 
+            String address = getIntent().getStringExtra("address");
+
             // Tambahkan menu baru ke existingMenus
             existingMenus.add(currentMenu);
             String orderType = getIntent().getStringExtra("orderType");
@@ -119,6 +128,8 @@ public class SecondTransaction extends AppCompatActivity {
             Intent intentNext = new Intent(SecondTransaction.this, TransaksiActivity.class);
             intentNext.putExtra("existingMenus", existingMenus);
             intentNext.putExtra("orderType", orderType);  // <- tambahan
+            intentNext.putExtra("user_id", userId);
+            intentNext.putExtra("address", address);
             startActivity(intentNext);
         });
 
