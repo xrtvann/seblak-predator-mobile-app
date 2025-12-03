@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -162,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.e("REGISTER_DEBUG", "ERROR PARSING", e);
                     }
 
-                    showErrorDialog("Error Server " + response.code());
+                    showErrorDialog("Email atau username sudah ada (" + response.code()+")");
                     return;
                 }
 

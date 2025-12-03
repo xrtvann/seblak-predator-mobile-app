@@ -162,6 +162,7 @@ public class TransaksiActivity extends AppCompatActivity {
         // Tambah menu
         addProductButton.setOnClickListener(v -> {
             Intent intent = new Intent(TransaksiActivity.this, SelectCustomization.class);
+            intent.putExtra("user_id", userId);
             intent.putExtra("existingMenus", existingMenus);
             intent.putExtra("orderType", orderType);
             intent.putExtra("address", address);
