@@ -18,6 +18,8 @@ import com.irvan.seblakpredator.model.ProfileResponse;
 import com.irvan.seblakpredator.model.RegisterRequest;
 import com.irvan.seblakpredator.model.RegisterResponse;
 import com.irvan.seblakpredator.model.SecondMenuResponse;
+import com.irvan.seblakpredator.model.SnapRequest;
+import com.irvan.seblakpredator.model.SnapResponse;
 import com.irvan.seblakpredator.model.SpiceLevelResponse;
 import com.irvan.seblakpredator.model.UpdateProfileRequest;
 import com.irvan.seblakpredator.model.UpdateProfileResponse;
@@ -96,4 +98,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("auth/change-password.php")  // Pastikan ini adalah endpoint yang benar
     Call<ChangePasswordResponse> changePassword (@Body ChangePasswordRequest request);
+
+    @POST("midtrans/get_snap_token.php")
+    Call<SnapResponse> getSnapToken(@Body SnapRequest request);
+
 }
