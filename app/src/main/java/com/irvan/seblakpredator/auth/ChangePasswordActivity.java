@@ -47,9 +47,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 changePassword();
             }
         });
-        if (getIntent().getBooleanExtra("profile_update_success", false)) {
-            showCustomNotification("Data berhasil disimpan", 7000);
-        }
     }
 
     private void changePassword() {
@@ -92,7 +89,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("profile_update_success", true);
                         setResult(RESULT_OK, resultIntent);
-
                         finish(); // ✅ Langsung tutup activity
 
                     } else {
