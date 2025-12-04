@@ -1,5 +1,4 @@
 package com.irvan.seblakpredator;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -59,6 +58,7 @@ public class KeranjangActivity extends AppCompatActivity {
         // Ambil data selectedToppings dari intent
         selectedToppings = (ArrayList<SecondTransaction.SelectedTopping>) getIntent()
                 .getSerializableExtra("selectedToppings");
+
         String userId = getIntent().getStringExtra("user_id");
         if (userId == null) {
             Toast.makeText(this, "User ID tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show();
@@ -70,8 +70,9 @@ public class KeranjangActivity extends AppCompatActivity {
         ArrayList<SecondTransaction.SelectedTopping> oldToppings = (ArrayList<SecondTransaction.SelectedTopping>) getIntent()
                 .getSerializableExtra("existingToppings");
         if (oldToppings != null && !oldToppings.isEmpty()) {
-            selectedToppings.addAll(oldToppings);
+            selectedToppings.addAll(oldToppings); // Menambahkan topping lama ke topping yang baru dipilih
         }
+
         // Ambil data menu utama dari FirstTransaction
         String nama = getIntent().getStringExtra("nama");
         String level = getIntent().getStringExtra("level");
@@ -120,7 +121,7 @@ public class KeranjangActivity extends AppCompatActivity {
             resultIntent.putExtra("address", address);
             setResult(RESULT_OK, resultIntent);
             finish();
-                });
+        });
 
         // Listener check all
         checkAll.setOnCheckedChangeListener((buttonView, isChecked) -> adapter.selectAll(isChecked));
@@ -179,14 +180,12 @@ public class KeranjangActivity extends AppCompatActivity {
 
             // Kirim existingMenus ke TransaksiActivity
             Intent intentNext = new Intent(KeranjangActivity.this, TransaksiActivity.class);
-            intentNext.putExtra("selectedToppings", (ArrayList<SecondTransaction.SelectedTopping>) selectedToppings);
             intentNext.putExtra("existingMenus", existingMenus);
             intentNext.putExtra("orderType", orderType);  // <- tambahan
             intentNext.putExtra("user_id", userId);
             intentNext.putExtra("address", address);
             startActivity(intentNext);
         });
-
     }
 
     @Override
@@ -197,4 +196,5 @@ public class KeranjangActivity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         super.finish();
     }
+
 }

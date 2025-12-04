@@ -65,6 +65,7 @@ public class DashboardFragment extends Fragment {
         ConstraintLayout dineInBtn = view.findViewById(R.id.dineinOptionButton);
         ConstraintLayout deliveryBtn = view.findViewById(R.id.deliveryOptionButton);
 
+
 // Klik Dine In -> ke FirstTransaction dengan order_type = "Dine In"
         dineInBtn.setOnClickListener(v -> {
             // Reset data sebelum masuk FirstTransaction
@@ -121,7 +122,6 @@ public class DashboardFragment extends Fragment {
             // 🔄 Refresh greeting pengguna
             SharedPreferences sharedPreferences = requireActivity()
                     .getSharedPreferences("MyAppPrefs", getContext().MODE_PRIVATE);
-
             String name = sharedPreferences.getString("name", "User");
 
             String displayName = name;

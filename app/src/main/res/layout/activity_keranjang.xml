@@ -60,7 +60,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="70dp"
             android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/btnProfile"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Keranjang Saya"
