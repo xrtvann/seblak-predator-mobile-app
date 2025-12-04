@@ -3,10 +3,16 @@ package com.irvan.seblakpredator.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -107,7 +113,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onResponse(Call<ForgetPassResponse> call, Response<ForgetPassResponse> response) {
 
                 if (!response.isSuccessful()) {
-                    Toast.makeText(ResetPasswordActivity.this, "Error " + response.code(), Toast.LENGTH_SHORT).show();
+                    String message = "Email tidak ditemukan";
+                    showErrorDialog(message);
                     return;
                 }
 
@@ -135,5 +142,28 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 Toast.makeText(ResetPasswordActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void showErrorDialog(String message) {
+        // Inflate custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_errorsystem, null);
+
+        // Set message di TextView (pastikan layout punya TextView dengan id misal errorMessage)
+        TextView errorText = view.findViewById(R.id.errornote);
+        errorText.setText(message);
+
+        // Buat dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.dialog_enter);
+        view.startAnimation(anim);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Tombol OK
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> dialog.dismiss());
     }
 }

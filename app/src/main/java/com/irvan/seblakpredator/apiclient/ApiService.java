@@ -1,5 +1,7 @@
 package com.irvan.seblakpredator.apiclient;
 import com.irvan.seblakpredator.model.BasicResponse;
+import com.irvan.seblakpredator.model.ChangePasswordRequest;
+import com.irvan.seblakpredator.model.ChangePasswordResponse;
 import com.irvan.seblakpredator.model.CreateOrderRequest;
 import com.irvan.seblakpredator.model.CreateOrderResponse;
 import com.irvan.seblakpredator.model.CustomizationOption;
@@ -57,6 +59,7 @@ public interface ApiService {
             @Header("Authorization") String token
     );
 
+
     @GET("menu/toppings.php")
     Call<SecondMenuResponse> getToppings();
     // ===============================================
@@ -90,4 +93,7 @@ public interface ApiService {
     Call<SpiceLevelResponse> getAllSpiceLevels();
     @POST("mobile/create-order.php")
     Call<OrderResponse> createOrder(@Body OrderRequest body);
+    @Headers("Content-Type: application/json")
+    @POST("auth/change-password.php")  // Pastikan ini adalah endpoint yang benar
+    Call<ChangePasswordResponse> changePassword (@Body ChangePasswordRequest request);
 }

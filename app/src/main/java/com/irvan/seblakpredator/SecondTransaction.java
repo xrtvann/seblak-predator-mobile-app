@@ -84,7 +84,6 @@ public class SecondTransaction extends AppCompatActivity {
 
         Button lanjut = findViewById(R.id.nextButton);
         Button kembali = findViewById(R.id.backButton);
-        ImageView profil = findViewById(R.id.profilepage);
 
         // Ambil data menu utama dari FirstTransaction
         String nama = getIntent().getStringExtra("nama");
@@ -135,15 +134,16 @@ public class SecondTransaction extends AppCompatActivity {
 
         // Tombol kembali ke FirstTransaction
         kembali.setOnClickListener(v -> {
+            String address = getIntent().getStringExtra("address");
+            String orderType = getIntent().getStringExtra("orderType");
             Intent resultIntent = new Intent();
             resultIntent.putExtra("existingMenus", existingMenus);
+            resultIntent.putExtra("orderType", orderType);  // <- tambahan
+            resultIntent.putExtra("user_id", userId);
+            resultIntent.putExtra("address", address);
             setResult(RESULT_OK, resultIntent);
             finish();
 
-        });
-
-        profil.setOnClickListener(v -> {
-            // Buka profil (jika ada)
         });
 
         ConstraintLayout btnKeranjang = findViewById(R.id.btnKeranjang);
@@ -153,7 +153,13 @@ public class SecondTransaction extends AppCompatActivity {
                 return;
             }
             Intent intentKeranjang = new Intent(SecondTransaction.this, KeranjangActivity.class);
+            String address = getIntent().getStringExtra("address");
+            String orderType = getIntent().getStringExtra("orderType");
             intentKeranjang.putExtra("selectedToppings", (ArrayList<SelectedTopping>) selectedToppings);
+            intentKeranjang.putExtra("existingMenus", existingMenus);
+            intentKeranjang.putExtra("orderType", orderType);  // <- tambahan
+            intentKeranjang.putExtra("user_id", userId);
+            intentKeranjang.putExtra("address", address);
             startActivityForResult(intentKeranjang, REQUEST_CART);
         });
 

@@ -2,14 +2,18 @@ package com.irvan.seblakpredator.adapter;
 
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.model.CartItem;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -75,6 +79,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             }
         }
         notifyDataSetChanged();
+    }
+
+    // Menambahkan method untuk mengambil item yang terpilih
+    public List<CartItem> getSelectedItems() {
+        List<CartItem> selectedItems = new ArrayList<>();
+        for (CartItem item : itemList) {
+            if (item.isSelected()) {  // Cek apakah item dipilih
+                selectedItems.add(item);
+            }
+        }
+        return selectedItems;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

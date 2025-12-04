@@ -112,6 +112,72 @@ public class EditProfileActivity extends AppCompatActivity {
         String email = emailInput.getText().toString().trim();
         String phone = phoneInput.getText().toString().trim();
 
+        nameInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nameInput.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        usernameInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                usernameInput.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        emailInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailInput.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+        phoneInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                phoneInput.setError(null); // hapus error
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+
+        if (name.isEmpty()) {
+            nameInput.setError("Nama harus di isi");
+            return;
+        }
+        if (username.isEmpty()) {
+            usernameInput.setError("Username harus di isi");
+            return;
+        }
+        if (email.isEmpty()) {
+            emailInput.setError("Email harus di isi");
+            return;
+        }
+        if (phone.isEmpty()) {
+            phoneInput.setError("Nomor Telepon harus di isi");
+            return;
+        }
+
         UpdateProfileRequest request = new UpdateProfileRequest(name, username, email, phone);
 
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
