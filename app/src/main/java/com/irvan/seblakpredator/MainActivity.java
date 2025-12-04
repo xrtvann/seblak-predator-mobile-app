@@ -1,6 +1,13 @@
 package com.irvan.seblakpredator;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
@@ -33,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmationDialog();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
@@ -100,6 +114,30 @@ public class MainActivity extends AppCompatActivity {
 
         // set menu bottom navigation aktif
         bottomNavigation.setSelectedItemId(R.id.nav_history);
+    }
+    public void showExitConfirmationDialog() {
+        Log.d("BackPressed", "showExitConfirmationDialog called");
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_closeapp, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit confirmed, finishing app");
+            dialog.dismiss();
+            finishAffinity();
+        });
+
+        Button btnBatal = view.findViewById(R.id.batalbutton);
+        btnBatal.setOnClickListener(v -> {
+            Log.d("BackPressed", "Exit cancelled");
+            dialog.dismiss();
+        });
     }
 
 }
