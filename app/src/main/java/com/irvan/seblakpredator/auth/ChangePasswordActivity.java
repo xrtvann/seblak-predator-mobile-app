@@ -1,11 +1,21 @@
 package com.irvan.seblakpredator.auth;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.irvan.seblakpredator.R;
@@ -27,7 +37,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        // Mengambil referensi dari EditText dan Button
         oldPasswordInput = findViewById(R.id.oldPasswordInput);
         newPasswordInput = findViewById(R.id.passwordInput);
         confirmPasswordInput = findViewById(R.id.passwordConfirmInput);
@@ -38,6 +47,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 changePassword();
             }
         });
+        if (getIntent().getBooleanExtra("profile_update_success", false)) {
+            showCustomNotification("Data berhasil disimpan", 7000);
+        }
     }
 
     private void changePassword() {
@@ -45,31 +57,26 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String newPassword = newPasswordInput.getText().toString().trim();
         String confirmPassword = confirmPasswordInput.getText().toString().trim();
 
-        // Validasi input
         if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+            showCustomNotification("Kolom wajib diisi", 6000);
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
-            Toast.makeText(this, "New password and confirmation do not match", Toast.LENGTH_SHORT).show();
+            showCustomNotification("Password tidak sama", 6000);
             return;
         }
 
-        // Ambil user_id dan token dari SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        String userId = sharedPreferences.getString("user_id", null);  // Ambil user_id dari SharedPreferences
+        String userId = sharedPreferences.getString("user_id", null);
 
-        // Pastikan user_id tidak null
         if (userId == null) {
             Toast.makeText(this, "User ID is not available", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Membuat request body untuk API
         ChangePasswordRequest request = new ChangePasswordRequest(userId, oldPassword, newPassword, confirmPassword);
 
-        // Panggil API ganti password menggunakan Retrofit
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         Call<ChangePasswordResponse> call = apiService.changePassword(request);
 
@@ -78,25 +85,84 @@ public class ChangePasswordActivity extends AppCompatActivity {
             public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
                 if (response.isSuccessful()) {
                     ChangePasswordResponse changePasswordResponse = response.body();
+
                     if (changePasswordResponse != null && changePasswordResponse.isSuccess()) {
-                        // Tampilkan pesan sukses
-                        Toast.makeText(ChangePasswordActivity.this, "Password successfully changed!", Toast.LENGTH_SHORT).show();
-                        finish();  // Tutup activity ini dan kembali ke halaman sebelumnya
+
+                        // ✅ KIRIM HASIL SUKSES KE ACTIVITY SEBELUMNYA
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("profile_update_success", true);
+                        setResult(RESULT_OK, resultIntent);
+
+                        finish(); // ✅ Langsung tutup activity
+
                     } else {
-                        // Tampilkan pesan error yang dikembalikan oleh API
-                        Toast.makeText(ChangePasswordActivity.this, changePasswordResponse != null ? changePasswordResponse.getMessage() : "Failed to change password", Toast.LENGTH_SHORT).show();
+                        String apiMessage = changePasswordResponse != null
+                                ? changePasswordResponse.getMessage()
+                                : "Gagal mengubah password";
+
+                        showErrorIncorrect(apiMessage);
                     }
+
                 } else {
-                    // Tangani error ketika response gagal (misalnya error jaringan atau server error)
-                    Toast.makeText(ChangePasswordActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                    if (response.code() == 400 || response.code() == 401) {
+                        showErrorIncorrect("Password lama anda salah");
+                    } else {
+                        showErrorIncorrect("Terjadi kesalahan pada server");
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
-                // Tangani failure jika terjadi kesalahan pada koneksi (misalnya, jaringan tidak tersedia)
                 Toast.makeText(ChangePasswordActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showCustomNotification(String message, int durationMillis) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.notification_custom, null);
+
+        TextView messageText = layout.findViewById(R.id.note);
+        messageText.setText(message);
+
+        ViewGroup root = findViewById(android.R.id.content);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.gravity = Gravity.CENTER;
+        layout.setLayoutParams(params);
+
+        root.addView(layout);
+
+        layout.setAlpha(0f);
+        layout.animate().alpha(1f).setDuration(300).start();
+
+        layout.postDelayed(() -> {
+            layout.animate().alpha(0f).setDuration(300).withEndAction(() -> {
+                root.removeView(layout);
+            }).start();
+        }, durationMillis);
+    }
+
+    private void showErrorIncorrect(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.notification_incorrectdata, null);
+        TextView messageView = view.findViewById(R.id.note1);
+        messageView.setText(message);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.dialog_enter);
+        view.startAnimation(anim);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        Button btnOk = view.findViewById(R.id.okbutton);
+        btnOk.setOnClickListener(v -> dialog.dismiss());
     }
 }
