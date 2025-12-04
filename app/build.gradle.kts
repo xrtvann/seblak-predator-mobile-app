@@ -62,6 +62,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("com.midtrans:uikit:2.5.0-SANDBOX")
+    implementation("com.google.code.gson:gson:2.10")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
