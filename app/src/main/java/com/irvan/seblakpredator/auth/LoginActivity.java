@@ -53,6 +53,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        String token = TokenManager.getToken(this);
+        if (token != null && !token.isEmpty()) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_login);
         initViews();
         setupListener();
@@ -62,25 +68,14 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-//            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
-//                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
-//                    new OnBackInvokedCallback() {
-//                        @Override
-//                        public void onBackInvoked() {
-//                            Log.d("BackPressed", "onBackInvoked called");
-//                            showExitConfirmationDialog();
-//                        }
-//                    }
-//            );
-//        } else {
-//            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-//                @Override
-//                public void handleOnBackPressed() {
-//                    Log.d("BackPressed", "handleOnBackPressed called");
-//                    showExitConfirmationDialog();
-//                }
-//            });
+//
+            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    Log.d("BackPressed", "handleOnBackPressed called");
+                    showExitConfirmationDialog();
+                }
+            });
 //        }
 
         // Back gesture

@@ -20,6 +20,7 @@ import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.auth.ChangePasswordActivity;
 import com.irvan.seblakpredator.auth.LoginActivity;
+import com.irvan.seblakpredator.model.TokenManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +89,7 @@ public class PengaturanFragment extends Fragment {
         logout.setOnClickListener(v ->
             showLogoutDialog());
         return view;
+
     }
     private void showLogoutDialog() {
         // Inflate custom layout
@@ -107,6 +109,8 @@ public class PengaturanFragment extends Fragment {
         // Tombol OK
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> {dialog.dismiss();
+            // 🔥 Hapus token login
+            TokenManager.removeToken(requireContext());
             // Hapus semua data login
             requireContext().getSharedPreferences("MyAppPrefs", 0)
                     .edit()
