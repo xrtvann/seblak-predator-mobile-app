@@ -47,6 +47,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
