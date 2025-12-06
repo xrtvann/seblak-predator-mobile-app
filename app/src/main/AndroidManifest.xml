@@ -51,6 +51,7 @@
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".SecondTransaction"

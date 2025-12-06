@@ -13,6 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.irvan.seblakpredator.apiclient.ApiClient;
@@ -30,6 +33,7 @@ import com.irvan.seblakpredator.model.CustomizationResponse;
 import com.irvan.seblakpredator.model.SelectedMenu;
 import com.irvan.seblakpredator.model.SpiceLevel;
 import com.irvan.seblakpredator.model.SpiceLevelResponse;
+import com.irvan.seblakpredator.SecondTransaction.SelectedTopping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,22 +44,27 @@ import retrofit2.Response;
 
 public class SelectCustomization extends AppCompatActivity {
 
-    private static final String TAG = "SelectCustomization";
     private static final int REQUEST_SECOND_TRANSACTION = 200;
 
     Spinner spinnerLevel, spinnerKencur;
     RadioGroup tipeKuah, tipeTelur;
-    Button btnLanjut, backButton;
+    Button btnLanjut, backButton, addToppingButton;
+    ConstraintLayout bartopping;
+    LinearLayout kotakMenu;
 
     private List<CustomizationOption> kuahList = new ArrayList<>();
     private List<CustomizationOption> telurList = new ArrayList<>();
     private List<CustomizationOption> kencurList = new ArrayList<>();
     private List<SpiceLevel> levelPedasList = new ArrayList<>();
 
+    private ArrayList<SelectedTopping> selectedToppings = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selectcustomization);
+
+        // Setelan status bar transparan
         Window window = getWindow();
         window.setStatusBarColor(Color.TRANSPARENT);
         window.getDecorView().setSystemUiVisibility(
@@ -63,42 +72,47 @@ public class SelectCustomization extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
+        // Inisialisasi UI
         spinnerLevel = findViewById(R.id.pilihanLevel);
         spinnerKencur = findViewById(R.id.pilihanKencur);
         tipeKuah = findViewById(R.id.tipeKuah);
         tipeTelur = findViewById(R.id.tipeTelur);
         btnLanjut = findViewById(R.id.btnLanjut);
         backButton = findViewById(R.id.backButton);
+        addToppingButton = findViewById(R.id.btnAddTopping);
+        kotakMenu = findViewById(R.id.KotakMenu);
+        bartopping = findViewById(R.id.statusTopping);
 
+        // Ambil data dari intent
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        String nama = getIntent().getStringExtra("nama");
-        String orderType = getIntent().getStringExtra("orderType");
+        String nama = getIntent().getStringExtra("name");
+        String orderType = getIntent().getStringExtra("order_type");
         String address = getIntent().getStringExtra("address");
         String userId = getIntent().getStringExtra("user_id");
+
         if (userId == null) {
             Toast.makeText(this, "User ID tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-
         ArrayList<SelectedMenu> existingMenus = getIntent().getSerializableExtra("existingMenus") != null ?
                 (ArrayList<SelectedMenu>) getIntent().getSerializableExtra("existingMenus") :
                 new ArrayList<>();
 
-        boolean restoreData = prefs.getBoolean("restoreData", false);
-        if (restoreData) {
-            restorePreviousData(prefs);
-            prefs.edit().putBoolean("restoreData", false).apply();
-        }
-
         backButton.setOnClickListener(v -> finish());
 
+        // Memuat pilihan kustomisasi
         loadCustomizationOptions();
 
+        // Tombol tambah topping
+        addToppingButton.setOnClickListener(v -> openSecondTransaction(nama, orderType, address, userId, existingMenus));
+
+        // Tombol lanjut
         btnLanjut.setOnClickListener(v -> {
             String level = spinnerLevel.getSelectedItem() != null ? spinnerLevel.getSelectedItem().toString() : "";
             String kencur = spinnerKencur.getSelectedItem() != null ? spinnerKencur.getSelectedItem().toString() : "";
+
             int idKuah = tipeKuah.getCheckedRadioButtonId();
             int idTelur = tipeTelur.getCheckedRadioButtonId();
 
@@ -110,6 +124,7 @@ public class SelectCustomization extends AppCompatActivity {
             RadioButton pilihKuah = findViewById(idKuah);
             RadioButton pilihTelur = findViewById(idTelur);
 
+            // Mendapatkan harga dari pilihan
             int hargaLevel = 0;
             for (SpiceLevel sl : levelPedasList) {
                 if (sl.getName().equals(level)) { hargaLevel = (int) sl.getPrice(); break; }
@@ -130,8 +145,8 @@ public class SelectCustomization extends AppCompatActivity {
                 if (k.getName().equals(kencur)) { hargaKencur = (int) k.getPrice(); break; }
             }
 
-            // Buat menu baru
-            SelectedMenu newMenu = new SelectedMenu(
+            // Membuat objek SelectedMenu
+            SelectedMenu currentMenu = new SelectedMenu(
                     nama,
                     level,
                     pilihKuah.getText().toString(),
@@ -141,64 +156,181 @@ public class SelectCustomization extends AppCompatActivity {
                     hargaKuah,
                     hargaTelur,
                     hargaKencur,
-                    new ArrayList<>()
+                    new ArrayList<>(selectedToppings)
             );
 
-            // Kirim ke SecondTransaction
-            Intent intent = new Intent(SelectCustomization.this, SecondTransaction.class);
+            // Menambahkan menu yang sudah dipilih ke dalam existingMenus
+            existingMenus.add(currentMenu);
+
+            // Membuat Intent untuk mengarahkan ke TransaksiActivity
+            Intent intent = new Intent(this, TransaksiActivity.class);
             intent.putExtra("user_id", userId);
-            intent.putExtra("nama", nama);
+            intent.putExtra("existingMenus", existingMenus);
             intent.putExtra("orderType", orderType);
             intent.putExtra("address", address);
-            intent.putExtra("level", level);
-            intent.putExtra("kuah", pilihKuah.getText().toString());
-            intent.putExtra("telur", pilihTelur.getText().toString());
-            intent.putExtra("kencur", kencur);
-            intent.putExtra("hargaLevel", hargaLevel);
-            intent.putExtra("hargaKuah", hargaKuah);
-            intent.putExtra("hargaTelur", hargaTelur);
-            intent.putExtra("hargaKencur", hargaKencur);
-            intent.putExtra("existingMenus", existingMenus);
 
-            startActivityForResult(intent, REQUEST_SECOND_TRANSACTION);
+            startActivity(intent);
         });
     }
 
-    // TERUSKAN HASIL DARI SECOND TRANSACTION
+    private void openSecondTransaction(String nama, String orderType, String address, String userId, ArrayList<SelectedMenu> existingMenus) {
+        String level = spinnerLevel.getSelectedItem() != null ? spinnerLevel.getSelectedItem().toString() : "";
+        String kencur = spinnerKencur.getSelectedItem() != null ? spinnerKencur.getSelectedItem().toString() : "";
+
+        int idKuah = tipeKuah.getCheckedRadioButtonId();
+        int idTelur = tipeTelur.getCheckedRadioButtonId();
+
+        if (idKuah == -1 || idTelur == -1 || level.isEmpty()) {
+            Toast.makeText(this, "Harap lengkapi semua data!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        RadioButton pilihKuah = findViewById(idKuah);
+        RadioButton pilihTelur = findViewById(idTelur);
+
+        int hargaLevel = 0;
+        for (SpiceLevel sl : levelPedasList) {
+            if (sl.getName().equals(level)) { hargaLevel = (int) sl.getPrice(); break; }
+        }
+
+        int hargaKuah = 0;
+        for (CustomizationOption kuah : kuahList) {
+            if (kuah.getName().equals(pilihKuah.getText().toString())) { hargaKuah = (int) kuah.getPrice(); break; }
+        }
+
+        int hargaTelur = 0;
+        for (CustomizationOption t : telurList) {
+            if (t.getName().equals(pilihTelur.getText().toString())) { hargaTelur = (int) t.getPrice(); break; }
+        }
+
+        int hargaKencur = 0;
+        for (CustomizationOption k : kencurList) {
+            if (k.getName().equals(kencur)) { hargaKencur = (int) k.getPrice(); break; }
+        }
+
+        SelectedMenu currentMenu = new SelectedMenu(
+                nama,
+                level,
+                pilihKuah.getText().toString(),
+                pilihTelur.getText().toString(),
+                kencur,
+                hargaLevel,
+                hargaKuah,
+                hargaTelur,
+                hargaKencur,
+                new ArrayList<>(selectedToppings)
+        );
+
+        Intent intent = new Intent(this, SecondTransaction.class);
+        intent.putExtra("user_id", userId);
+        intent.putExtra("nama", nama);
+        intent.putExtra("orderType", orderType);
+        intent.putExtra("address", address);
+        intent.putExtra("level", level);
+        intent.putExtra("kuah", pilihKuah.getText().toString());
+        intent.putExtra("telur", pilihTelur.getText().toString());
+        intent.putExtra("kencur", kencur);
+        intent.putExtra("hargaLevel", hargaLevel);
+        intent.putExtra("hargaKuah", hargaKuah);
+        intent.putExtra("hargaTelur", hargaTelur);
+        intent.putExtra("hargaKencur", hargaKencur);
+        intent.putExtra("existingMenus", existingMenus);
+        intent.putExtra("existingToppings", selectedToppings);
+
+        startActivityForResult(intent, REQUEST_SECOND_TRANSACTION);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SECOND_TRANSACTION && resultCode == RESULT_OK && data != null) {
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("existingMenus", data.getSerializableExtra("existingMenus"));
-            setResult(RESULT_OK, resultIntent);
-            finish(); // kembali ke FirstTransaction
+            ArrayList<SelectedTopping> updatedToppings =
+                    (ArrayList<SelectedTopping>) data.getSerializableExtra("selectedToppings");
+            if (updatedToppings != null) {
+                selectedToppings.clear();
+                selectedToppings.addAll(updatedToppings);
+            }
+
+            displaySelectedToppings(selectedToppings);
+
+            // Update existingMenus
+            ArrayList<SelectedMenu> updatedMenus = (ArrayList<SelectedMenu>) data.getSerializableExtra("existingMenus");
+            if (updatedMenus != null) {
+                // bisa diteruskan ke TransaksiActivity nanti
+            }
+        }
+    }
+    private void displaySelectedToppings(List<SelectedTopping> toppings) {
+        kotakMenu.removeAllViews(); // Hapus tampilan sebelumnya
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        // Jika tidak ada topping yang dipilih, tampilkan bar topping
+        if (toppings.isEmpty()) {
+            bartopping.setVisibility(View.VISIBLE); // Tampilkan bar topping
+        } else {
+            bartopping.setVisibility(View.GONE); // Sembunyikan bar topping
+        }
+
+        for (SelectedTopping t : toppings) {
+            View itemView = inflater.inflate(R.layout.activity_menu, kotakMenu, false);
+            ImageView img = itemView.findViewById(R.id.imgProduk2);
+            TextView nama = itemView.findViewById(R.id.tvNamaProduk2);
+            TextView txtQty = itemView.findViewById(R.id.txtQty);
+            LinearLayout layoutQty = itemView.findViewById(R.id.layoutQty);
+            ImageView btnTambahAwal = itemView.findViewById(R.id.btnTambah2);
+            ImageView btnTambah = itemView.findViewById(R.id.btnTambah);
+            ImageView btnKurang = itemView.findViewById(R.id.btnKurang);
+
+            nama.setText(t.getName());
+
+            // Menampilkan quantity jika ada
+            if (t.getQuantity() > 0) {
+                btnTambahAwal.setVisibility(View.GONE);
+                layoutQty.setVisibility(View.VISIBLE);
+                txtQty.setText(String.valueOf(t.getQuantity()));
+            } else {
+                btnTambahAwal.setVisibility(View.VISIBLE);
+                layoutQty.setVisibility(View.GONE);
+            }
+
+            // Ketika tombol tambah diklik
+            btnTambahAwal.setOnClickListener(v -> {
+                btnTambahAwal.setVisibility(View.GONE);
+                layoutQty.setVisibility(View.VISIBLE);
+                txtQty.setTextColor(Color.BLACK);
+                txtQty.setText("1");
+                t.setQuantity(1);
+                if (!selectedToppings.contains(t)) selectedToppings.add(t);
+                updateNoteTopping(); // Memperbarui status bartopping
+            });
+
+            // Ketika tombol tambah lagi diklik
+            btnTambah.setOnClickListener(v -> {
+                int qty = Integer.parseInt(txtQty.getText().toString());
+                qty++;
+                txtQty.setText(String.valueOf(qty));
+                t.setQuantity(qty);
+                updateNoteTopping(); // Memperbarui status bartopping
+            });
+
+            // Ketika tombol kurang diklik
+            btnKurang.setOnClickListener(v -> {
+                int qty = Integer.parseInt(txtQty.getText().toString());
+                if (qty > 1) {
+                    qty--;
+                    txtQty.setText(String.valueOf(qty));
+                    t.setQuantity(qty);
+                } else {
+                    selectedToppings.removeIf(s -> s.getId().equals(t.getId())); // Menghapus topping
+                    displaySelectedToppings(selectedToppings); // Memperbarui tampilan topping
+                    updateNoteTopping(); // Memperbarui status bartopping
+                }
+            });
+
+            kotakMenu.addView(itemView); // Menambahkan item topping ke layout
         }
     }
 
-    private void restorePreviousData(SharedPreferences prefs) {
-        spinnerLevel.setSelection(getIndexSpinner(spinnerLevel, prefs.getString("level", "")));
-        spinnerKencur.setSelection(getIndexSpinner(spinnerKencur, prefs.getString("kencur", "")));
-
-        String kuah = prefs.getString("kuah", "");
-        for (int i = 0; i < tipeKuah.getChildCount(); i++) {
-            RadioButton rb = (RadioButton) tipeKuah.getChildAt(i);
-            if (rb.getText().toString().equals(kuah)) rb.setChecked(true);
-        }
-
-        String telur = prefs.getString("telur", "");
-        for (int i = 0; i < tipeTelur.getChildCount(); i++) {
-            RadioButton rb = (RadioButton) tipeTelur.getChildAt(i);
-            if (rb.getText().toString().equals(telur)) rb.setChecked(true);
-        }
-    }
-
-    private int getIndexSpinner(Spinner spinner, String value) {
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equals(value)) return i;
-        }
-        return 0;
-    }
 
     private void loadCustomizationOptions() {
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
@@ -223,7 +355,6 @@ public class SelectCustomization extends AppCompatActivity {
                     populateKuahRadioGroup();
                     populateTelurRadioGroup();
                     populateKencurSpinner();
-
                     loadLevelPedasFromAPI();
                 } else {
                     Toast.makeText(SelectCustomization.this, "Gagal memuat data customization", Toast.LENGTH_SHORT).show();
@@ -268,7 +399,6 @@ public class SelectCustomization extends AppCompatActivity {
                     };
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerLevel.setAdapter(adapter);
-
                 } else {
                     Toast.makeText(SelectCustomization.this, "Gagal memuat data level pedas", Toast.LENGTH_SHORT).show();
                 }
@@ -310,7 +440,6 @@ public class SelectCustomization extends AppCompatActivity {
     private void populateKencurSpinner() {
         List<String> names = new ArrayList<>();
         for (CustomizationOption kencur : kencurList) names.add(kencur.getName());
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -350,5 +479,13 @@ public class SelectCustomization extends AppCompatActivity {
 
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void updateNoteTopping() {
+        if (selectedToppings.isEmpty()) {
+            bartopping.setVisibility(View.VISIBLE);
+        } else {
+            bartopping.setVisibility(View.GONE);
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.irvan.seblakpredator.FirstTransaction;
 import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.SelectCustomization;
 
 public class DashboardFragment extends Fragment {
 
@@ -86,10 +87,14 @@ public class DashboardFragment extends Fragment {
             SharedPreferences prefs = requireActivity()
                     .getSharedPreferences("MyAppPrefs", getContext().MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
+            String name = prefs.getString("name", "User");
+            String userId = prefs.getString("user_id", null);
             editor.putBoolean("restoreData", false); // reset data
             editor.apply();
 
-            Intent intent = new Intent(requireActivity(), FirstTransaction.class);
+            Intent intent = new Intent(requireActivity(), SelectCustomization.class);
+            intent.putExtra("name", name);
+            intent.putExtra("user_id", userId);
             intent.putExtra("order_type", "Delivery");
             startActivity(intent);
         });
