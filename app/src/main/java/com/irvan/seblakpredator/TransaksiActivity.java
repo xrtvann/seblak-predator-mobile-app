@@ -132,7 +132,7 @@ public class TransaksiActivity extends AppCompatActivity {
         existingMenus = getIntent().getSerializableExtra("existingMenus") != null ?
                 (ArrayList<SelectedMenu>) getIntent().getSerializableExtra("existingMenus") :
                 new ArrayList<>();
-        orderType = getIntent().getStringExtra("orderType");
+        orderType = getIntent().getStringExtra("order_type");
         address = getIntent().getStringExtra("address");
 
         userId = getIntent().getStringExtra("user_id");
@@ -164,7 +164,7 @@ public class TransaksiActivity extends AppCompatActivity {
             Intent intent = new Intent(TransaksiActivity.this, SelectCustomization.class);
             intent.putExtra("user_id", userId);
             intent.putExtra("existingMenus", existingMenus);
-            intent.putExtra("orderType", orderType);
+            intent.putExtra("order_type", orderType);
             intent.putExtra("address", address);
             addMenuLauncher.launch(intent);
         });

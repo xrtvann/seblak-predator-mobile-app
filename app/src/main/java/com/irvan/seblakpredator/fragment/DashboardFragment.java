@@ -60,7 +60,7 @@ public class DashboardFragment extends Fragment {
         // SwipeRefreshLayout
         SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipeRefreshLayout);
 
-        LinearLayout productContainer = view.findViewById(R.id.productContainer);
+        LinearLayout productContainer = view.findViewById(R.id.toppingContainer);
         LinearLayout riwayatButton = view.findViewById(R.id.btnRiwayat);
         ConstraintLayout profilePage = view.findViewById(R.id.information);
         ConstraintLayout dineInBtn = view.findViewById(R.id.dineinOptionButton);
@@ -144,10 +144,10 @@ public class DashboardFragment extends Fragment {
             for (int i = 0; i < namaProduk.length; i++) {
                 View itemView = inflater.inflate(R.layout.item_product, productContainer, false);
 
-                ImageView img = itemView.findViewById(R.id.imageProduct);
-                TextView nama = itemView.findViewById(R.id.nameProduct);
+                ImageView img = itemView.findViewById(R.id.imageTopping);
+                TextView nama = itemView.findViewById(R.id.NameTopping);
                 TextView desc = itemView.findViewById(R.id.descriptionProduct);
-                TextView harga = itemView.findViewById(R.id.price_product);
+                TextView harga = itemView.findViewById(R.id.priceTopping);
 
                 img.setImageResource(gambarProduk[i]);
                 nama.setText(namaProduk[i]);

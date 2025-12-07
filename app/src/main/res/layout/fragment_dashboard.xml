@@ -341,7 +341,7 @@
                     android:layout_height="match_parent">
 
                     <LinearLayout
-                        android:id="@+id/productContainer"
+                        android:id="@+id/toppingContainer"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"/>
