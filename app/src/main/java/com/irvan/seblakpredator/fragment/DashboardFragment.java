@@ -19,6 +19,7 @@ import com.irvan.seblakpredator.FirstTransaction;
 import com.irvan.seblakpredator.MainActivity;
 import com.irvan.seblakpredator.ProfileActivity;
 import com.irvan.seblakpredator.R;
+import com.irvan.seblakpredator.SelectCustomization;
 
 public class DashboardFragment extends Fragment {
 
@@ -59,7 +60,7 @@ public class DashboardFragment extends Fragment {
         // SwipeRefreshLayout
         SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipeRefreshLayout);
 
-        LinearLayout productContainer = view.findViewById(R.id.productContainer);
+        LinearLayout productContainer = view.findViewById(R.id.toppingContainer);
         LinearLayout riwayatButton = view.findViewById(R.id.btnRiwayat);
         ConstraintLayout profilePage = view.findViewById(R.id.information);
         ConstraintLayout dineInBtn = view.findViewById(R.id.dineinOptionButton);
@@ -86,10 +87,14 @@ public class DashboardFragment extends Fragment {
             SharedPreferences prefs = requireActivity()
                     .getSharedPreferences("MyAppPrefs", getContext().MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
+            String name = prefs.getString("name", "User");
+            String userId = prefs.getString("user_id", null);
             editor.putBoolean("restoreData", false); // reset data
             editor.apply();
 
-            Intent intent = new Intent(requireActivity(), FirstTransaction.class);
+            Intent intent = new Intent(requireActivity(), SelectCustomization.class);
+            intent.putExtra("name", name);
+            intent.putExtra("user_id", userId);
             intent.putExtra("order_type", "Delivery");
             startActivity(intent);
         });
@@ -139,10 +144,10 @@ public class DashboardFragment extends Fragment {
             for (int i = 0; i < namaProduk.length; i++) {
                 View itemView = inflater.inflate(R.layout.item_product, productContainer, false);
 
-                ImageView img = itemView.findViewById(R.id.imageProduct);
-                TextView nama = itemView.findViewById(R.id.nameProduct);
+                ImageView img = itemView.findViewById(R.id.imageTopping);
+                TextView nama = itemView.findViewById(R.id.NameTopping);
                 TextView desc = itemView.findViewById(R.id.descriptionProduct);
-                TextView harga = itemView.findViewById(R.id.price_product);
+                TextView harga = itemView.findViewById(R.id.priceTopping);
 
                 img.setImageResource(gambarProduk[i]);
                 nama.setText(namaProduk[i]);

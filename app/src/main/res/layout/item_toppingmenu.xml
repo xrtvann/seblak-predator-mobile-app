@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:scrollbars="none"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <!-- LinearLayout harus horizontal -->
+    <LinearLayout
+        android:id="@+id/toppingItemSelectContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!-- Contoh satu CardView -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/detailTopping"
+            android:layout_width="186dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_cardview_border"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageTopping"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/seblak_suki"
+                        tools:ignore="ContentDescription,MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/NameTopping"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Nama Produk"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageTopping" />
+
+                    <TextView
+                        android:id="@+id/priceTopping"
+                        style="@style/TextAppearance.Material3.SearchView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp10.000"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/NameTopping" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutQty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btnKurang"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_remove_circle"
+                        app:tint="#E53935" />
+
+                    <TextView
+                        android:id="@+id/txtQty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="6dp"
+                        android:text="1"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/btnTambah"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_circle"
+                        app:tint="#3CB371" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btnTambah2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="right"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/ic_add_circle"
+                    app:tint="#3CB371" />
+
+                <ImageView
+                    android:id="@+id/deleteButtonItemSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingRight="10dp"
+                    app:srcCompat="@drawable/outline_delete_24" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</HorizontalScrollView>
