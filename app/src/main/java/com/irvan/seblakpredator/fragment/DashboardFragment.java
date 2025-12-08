@@ -89,12 +89,14 @@ public class DashboardFragment extends Fragment {
             SharedPreferences.Editor editor = prefs.edit();
             String name = prefs.getString("name", "User");
             String userId = prefs.getString("user_id", null);
+            String phone = prefs.getString("phone", null);
             editor.putBoolean("restoreData", false); // reset data
             editor.apply();
 
             Intent intent = new Intent(requireActivity(), SelectCustomization.class);
             intent.putExtra("name", name);
             intent.putExtra("user_id", userId);
+            intent.putExtra("phone", phone);
             intent.putExtra("order_type", "Delivery");
             startActivity(intent);
         });

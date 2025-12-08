@@ -27,6 +27,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
 import com.irvan.seblakpredator.model.CustomizationOption;
@@ -87,7 +88,8 @@ public class SelectCustomization extends AppCompatActivity {
         spiceContainer = findViewById(R.id.toppingContainer);
 
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        String nama = getIntent().getStringExtra("name");
+        String name = getIntent().getStringExtra("name");
+        String phone = getIntent().getStringExtra("phone");
         String orderType = getIntent().getStringExtra("order_type");
         String address = getIntent().getStringExtra("address");
         String userId = getIntent().getStringExtra("user_id");
@@ -106,7 +108,7 @@ public class SelectCustomization extends AppCompatActivity {
         loadCustomizationOptions();
 
         addToppingButton.setOnClickListener(v ->
-                openSecondTransaction(nama, orderType, address, userId, existingMenus)
+                openSecondTransaction(name, phone, orderType, address, userId, existingMenus)
         );
 
         btnLanjut.setOnClickListener(v -> {
@@ -149,7 +151,8 @@ public class SelectCustomization extends AppCompatActivity {
                 if (k.getName().equals(kencur)) hargaKencur = (int) k.getPrice();
 
             SelectedMenu currentMenu = new SelectedMenu(
-                    nama,
+                    name,
+                    phone,
                     selectedLevelPedas,
                     pilihKuah.getText().toString(),
                     pilihTelur.getText().toString(),
@@ -165,6 +168,8 @@ public class SelectCustomization extends AppCompatActivity {
 
             Intent intent = new Intent(this, TransaksiActivity.class);
             intent.putExtra("user_id", userId);
+            intent.putExtra("nama", name);
+            intent.putExtra("phone", phone);
             intent.putExtra("existingMenus", existingMenus);
             intent.putExtra("order_type", orderType);
             intent.putExtra("address", address);
@@ -194,6 +199,11 @@ public class SelectCustomization extends AppCompatActivity {
                         CardView detailSpice = card.findViewById(R.id.detailTopping);
                         TextView levelSpice = card.findViewById(R.id.NameTopping);
                         TextView priceSpice = card.findViewById(R.id.priceTopping);
+                        ImageView image = card.findViewById(R.id.imageTopping);
+                        String imageUrl = spice.getImage();
+                        Glide.with(SelectCustomization.this)
+                                .load(imageUrl)  // URL gambar untuk level pedas
+                                .into(image); // Memasukkan gambar ke ImageView
 
                         levelSpice.setText(spice.getName());
                         priceSpice.setText("Rp" + spice.getPrice());
@@ -365,7 +375,7 @@ public class SelectCustomization extends AppCompatActivity {
 
     // ----------------- OTHER FUNCTIONS ------------------
 
-    private void openSecondTransaction(String nama, String orderType, String address,
+    private void openSecondTransaction(String name, String phone, String orderType, String address,
                                        String userId, ArrayList<SelectedMenu> existingMenus) {
 
         if (selectedLevelPedas.isEmpty()) {
@@ -406,7 +416,8 @@ public class SelectCustomization extends AppCompatActivity {
             if (k.getName().equals(kencur)) hargaKencur = (int) k.getPrice();
 
         SelectedMenu currentMenu = new SelectedMenu(
-                nama,
+                name,
+                phone,
                 selectedLevelPedas,
                 pilihKuah.getText().toString(),
                 pilihTelur.getText().toString(),
@@ -420,7 +431,8 @@ public class SelectCustomization extends AppCompatActivity {
 
         Intent intent = new Intent(this, SecondTransaction.class);
         intent.putExtra("user_id", userId);
-        intent.putExtra("nama", nama);
+        intent.putExtra("nama", name);
+        intent.putExtra("phone", phone);
         intent.putExtra("order_type", orderType);
         intent.putExtra("address", address);
         intent.putExtra("level", selectedLevelPedas);
@@ -481,15 +493,18 @@ public class SelectCustomization extends AppCompatActivity {
         for (SelectedTopping t : toppings) {
             // Inflate CardView layout
             View cardView = inflater.inflate(R.layout.item_toppingmenu, toppingContainer, false);
-
             TextView name = cardView.findViewById(R.id.NameTopping);
             TextView price = cardView.findViewById(R.id.priceTopping);
+            ImageView img = cardView.findViewById(R.id.imageTopping);
             LinearLayout layoutQty = cardView.findViewById(R.id.layoutQty);
             ImageView btnTambahAwal = cardView.findViewById(R.id.btnTambah2);
             ImageView btnTambah = cardView.findViewById(R.id.btnTambah);
             ImageView btnKurang = cardView.findViewById(R.id.btnKurang);
             ImageView deleteButton = cardView.findViewById(R.id.deleteButtonItemSelected);
-
+            String imageUrl = t.getImage();
+            Glide.with(SelectCustomization.this)
+                    .load(imageUrl)  // URL gambar untuk level pedas
+                    .into(img); // Memasukkan gambar ke ImageView
             // Set data
             name.setText(t.getName());
             price.setText("Rp" + t.getPrice());

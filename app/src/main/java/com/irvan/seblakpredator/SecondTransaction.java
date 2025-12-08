@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -100,7 +100,8 @@ public class SecondTransaction extends AppCompatActivity {
         Button lanjut = findViewById(R.id.nextButton);
         Button kembali = findViewById(R.id.backButton);
 
-        String nama = getIntent().getStringExtra("nama");
+        String name = getIntent().getStringExtra("name");
+        String phone = getIntent().getStringExtra("phone");
         String level = getIntent().getStringExtra("level");
         String kuah = getIntent().getStringExtra("kuah");
         String telur = getIntent().getStringExtra("telur");
@@ -116,7 +117,8 @@ public class SecondTransaction extends AppCompatActivity {
             lanjut.setEnabled(false);
 
             SelectedMenu currentMenu = new SelectedMenu(
-                    nama != null ? nama : "",
+                    name != null ? name : "",
+                    phone != null ? phone : "",
                     level != null ? level : "",
                     kuah != null ? kuah : "",
                     telur != null ? telur : "",
@@ -138,6 +140,8 @@ public class SecondTransaction extends AppCompatActivity {
             allToppings.addAll(selectedToppings);
 
             Intent intentNext = new Intent();
+            intentNext.putExtra("name",name);
+            intentNext.putExtra("phone",phone);
             intentNext.putExtra("existingMenus", existingMenus);
             intentNext.putExtra("selectedToppings", allToppings);
             intentNext.putExtra("order_type", orderType);
@@ -153,6 +157,8 @@ public class SecondTransaction extends AppCompatActivity {
             String address = getIntent().getStringExtra("address");
 
             Intent result = new Intent();
+            result.putExtra("name",name);
+            result.putExtra("phone",phone);
             result.putExtra("existingMenus", existingMenus);
             result.putExtra("existingToppings", previousToppings);
             result.putExtra("orderType", orderType);
@@ -330,10 +336,10 @@ public class SecondTransaction extends AppCompatActivity {
             nama.setText(t.getName());
             harga.setText("Rp " + t.getPrice());
 
-            Glide.with(this)
-                    .load(t.getImageUrl())
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(img);
+            String imageUrl = t.getImage();
+            Glide.with(SecondTransaction.this)
+                    .load(imageUrl)  // URL gambar untuk level pedas
+                    .into(img); // Memasukkan gambar ke ImageView
 
             setupQtyLogic(itemView, t);
 
@@ -344,86 +350,70 @@ public class SecondTransaction extends AppCompatActivity {
     // =========================
     // LOGIC QTY → handle topping lama & baru
     // =========================
+
     private void setupQtyLogic(View itemView, Topping topping) {
         ImageView btnTambahAwal = itemView.findViewById(R.id.btnTambah2);
         LinearLayout layoutQty = itemView.findViewById(R.id.layoutQty);
         ImageView btnTambah = itemView.findViewById(R.id.btnTambah);
         ImageView btnKurang = itemView.findViewById(R.id.btnKurang);
         TextView txtQty = itemView.findViewById(R.id.txtQty);
+        LinearLayout kotakMenu = itemView.findViewById(R.id.KotakMenu);
 
-        // Cek qty dari topping lama atau baru
+        // Cek apakah topping sudah dipilih sebelumnya (quantity > 0)
         int initialQty = 0;
-        boolean isPrevious = false;
+        AtomicBoolean isSelected = new AtomicBoolean(false); // Gunakan AtomicBoolean untuk bisa mengubah status
 
+        // Periksa jika topping sudah ada di selectedToppings
         for (SelectedTopping s : selectedToppings) {
             if (s.getId().equals(topping.getId())) {
                 initialQty = s.getQuantity();
+                isSelected.set(true);  // Set to true when selected
+                txtQty.setText(String.valueOf(initialQty));
                 break;
             }
         }
+
+        // Jika topping tidak ditemukan di selectedToppings, periksa di previousToppings
         if (initialQty == 0) {
             for (SelectedTopping s : previousToppings) {
                 if (s.getId().equals(topping.getId())) {
                     initialQty = s.getQuantity();
-                    isPrevious = true;
+                    isSelected.set(true); // Set to true when selected
+                    txtQty.setText(String.valueOf(initialQty));
                     break;
                 }
             }
         }
 
-        if (initialQty > 0) {
-            btnTambahAwal.setVisibility(View.GONE);
-            layoutQty.setVisibility(View.VISIBLE);
-            txtQty.setText(String.valueOf(initialQty));
+        // Menampilkan qty yang sesuai (jika sudah dipilih sebelumnya)
+        if (isSelected.get()) {
+            btnTambahAwal.setVisibility(View.GONE); // Sembunyikan tombol pilih pertama kali
+            layoutQty.setVisibility(View.VISIBLE); // Tampilkan layout qty
+            itemView.setBackgroundColor(Color.parseColor("#FFE082")); // Warna highlight jika dipilih
+            itemView.setElevation(12f); // Tambah shadow
+        } else {
+            itemView.setBackgroundColor(Color.WHITE);  // Warna normal
+            itemView.setElevation(2f);  // Shadow normal
+            layoutQty.setVisibility(View.GONE);  // Menyembunyikan layout qty
+            btnTambahAwal.setVisibility(View.VISIBLE); // Menampilkan tombol pilih pertama kali
         }
 
-        btnTambahAwal.setOnClickListener(v -> {
-            btnTambahAwal.setVisibility(View.GONE);
-            layoutQty.setVisibility(View.VISIBLE);
-            txtQty.setText("1");
-            txtQty.setTextColor(Color.BLACK);
-
-            boolean foundInPrevious = false;
-            for (SelectedTopping s : previousToppings) {
-                if (s.getId().equals(topping.getId())) {
-                    s.setQuantity(1);
-                    foundInPrevious = true;
-                    break;
-                }
-            }
-            if (!foundInPrevious) {
-                selectedToppings.add(new SelectedTopping(
-                        topping.getId(),
-                        topping.getName(),
-                        1,
-                        topping.getPrice()
-                ));
-            }
-        });
-
+        // Tombol tambah qty
         btnTambah.setOnClickListener(v -> {
             int jumlah = Integer.parseInt(txtQty.getText().toString());
             jumlah++;
             txtQty.setText(String.valueOf(jumlah));
 
-            boolean updated = false;
+            // Update qty di selectedToppings
             for (SelectedTopping s : selectedToppings) {
                 if (s.getId().equals(topping.getId())) {
                     s.setQuantity(jumlah);
-                    updated = true;
                     break;
-                }
-            }
-            if (!updated) {
-                for (SelectedTopping s : previousToppings) {
-                    if (s.getId().equals(topping.getId())) {
-                        s.setQuantity(jumlah);
-                        break;
-                    }
                 }
             }
         });
 
+        // Tombol kurang qty
         btnKurang.setOnClickListener(v -> {
             int jumlah = Integer.parseInt(txtQty.getText().toString());
 
@@ -431,31 +421,68 @@ public class SecondTransaction extends AppCompatActivity {
                 jumlah--;
                 txtQty.setText(String.valueOf(jumlah));
 
-                boolean updated = false;
+                // Update qty di selectedToppings
                 for (SelectedTopping s : selectedToppings) {
                     if (s.getId().equals(topping.getId())) {
                         s.setQuantity(jumlah);
-                        updated = true;
                         break;
                     }
                 }
-                if (!updated) {
-                    for (SelectedTopping s : previousToppings) {
-                        if (s.getId().equals(topping.getId())) {
-                            s.setQuantity(jumlah);
-                            break;
-                        }
-                    }
-                }
             } else {
-                layoutQty.setVisibility(View.GONE);
-                btnTambahAwal.setVisibility(View.VISIBLE);
+                // Jika qty = 1, hapus topping dan kembalikan ke keadaan semula
+                layoutQty.setVisibility(View.GONE); // Sembunyikan layout qty
+                btnTambahAwal.setVisibility(View.VISIBLE); // Tampilkan tombol pilih pertama kali
 
+                // Reset topping yang dipilih
                 selectedToppings.removeIf(s -> s.getId().equals(topping.getId()));
                 previousToppings.removeIf(s -> s.getId().equals(topping.getId()));
+
+                itemView.setBackgroundColor(Color.WHITE); // Kembalikan warna ke normal
+                itemView.setElevation(2f); // Kembalikan shadow ke normal
             }
         });
+
+        // Mengatur klik pada KotakMenu (untuk memilih topping)
+        kotakMenu.setOnClickListener(v -> {
+            if (!isSelected.get()) {
+                // Topping belum dipilih, ubah ke kondisi dipilih
+                itemView.setBackgroundColor(Color.parseColor("#FFE082")); // Highlight color
+                itemView.setElevation(12f); // Tambah shadow
+                txtQty.setText("1"); // Set quantity ke 1
+
+                // Menambahkan topping ke selectedToppings
+                selectedToppings.add(new SelectedTopping(
+                        topping.getId(),
+                        topping.getName(),
+                        1,  // Quantity 1
+                        topping.getPrice(),
+                        topping.getImage()
+                ));
+
+                // Menampilkan layout qty dan tombol tambah/kurang
+                layoutQty.setVisibility(View.VISIBLE);
+                btnTambahAwal.setVisibility(View.GONE); // Sembunyikan tombol pilih pertama kali
+            } else {
+                // Topping sudah dipilih, kembalikan ke kondisi semula
+                itemView.setBackgroundColor(Color.WHITE); // Kembalikan warna ke normal
+                itemView.setElevation(2f); // Kembalikan shadow ke normal
+                txtQty.setText("0"); // Set quantity ke 0
+
+                // Hapus topping dari selectedToppings
+                selectedToppings.removeIf(s -> s.getId().equals(topping.getId()));
+                previousToppings.removeIf(s -> s.getId().equals(topping.getId()));
+
+                // Menyembunyikan layout qty dan tombol pilih pertama kali
+                layoutQty.setVisibility(View.GONE);
+                btnTambahAwal.setVisibility(View.VISIBLE); // Tampilkan tombol pilih pertama kali
+            }
+
+            // Toggle status isSelected
+            isSelected.set(!isSelected.get());  // Toggle status (selected or not)
+        });
     }
+
+
 
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
         String query = charSequence.toString().toLowerCase();
@@ -540,18 +567,21 @@ public class SecondTransaction extends AppCompatActivity {
         private String name;
         private int quantity;
         private int price;
+        private String image;
 
-        public SelectedTopping(String id, String name, int quantity, int price) {
+        public SelectedTopping(String id, String name, int quantity, int price, String image) {
             this.id = id;
             this.name = name;
             this.quantity = quantity;
             this.price = price;
+            this.image = image;
         }
 
         public String getId() { return id; }
         public String getName() { return name; }
         public int getQuantity() { return quantity; }
         public int getPrice() { return price; }
+        public String getImage() {return image;}
 
         public void setQuantity(int quantity) { this.quantity = quantity; }
     }

@@ -47,10 +47,10 @@
     <!-- Layout untuk tombol qty -->
     <LinearLayout
         android:id="@+id/layoutQty"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:visibility="gone">
 
         <ImageView
@@ -58,22 +58,24 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_remove_circle"
-            app:tint="#E53935"/>
+            app:tint="#E53935" />
 
         <TextView
             android:id="@+id/txtQty"
+            style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
             android:text="1"
-            android:textSize="16sp"
-            android:paddingHorizontal="6dp"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/btnTambah"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_add_circle"
-            app:tint="#3CB371"/>
+            app:tint="#3CB371" />
     </LinearLayout>
 
     <!-- Tombol Tambah -->

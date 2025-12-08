@@ -75,6 +75,7 @@ public class KeranjangActivity extends AppCompatActivity {
 
         // Ambil data menu utama dari FirstTransaction
         String nama = getIntent().getStringExtra("nama");
+        String phone = getIntent().getStringExtra("phone");
         String level = getIntent().getStringExtra("level");
         String kuah = getIntent().getStringExtra("kuah");
         String telur = getIntent().getStringExtra("telur");
@@ -115,6 +116,7 @@ public class KeranjangActivity extends AppCompatActivity {
             String address = getIntent().getStringExtra("address");
             String orderType = getIntent().getStringExtra("orderType");
             Intent resultIntent = new Intent();
+            resultIntent.putExtra("name", nama);
             resultIntent.putExtra("existingMenus", existingMenus);
             resultIntent.putExtra("orderType", orderType);  // <- tambahan
             resultIntent.putExtra("user_id", userId);
@@ -161,6 +163,7 @@ public class KeranjangActivity extends AppCompatActivity {
             // Buat SelectedMenu baru untuk menu yang dipilih sekarang
             SelectedMenu currentMenu = new SelectedMenu(
                     nama != null ? nama : "",
+                    phone != null ? phone : "",
                     level != null ? level : "",
                     kuah != null ? kuah : "",
                     telur != null ? telur : "",

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.chaos.view.PinView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.irvan.seblakpredator.R;
 import com.irvan.seblakpredator.apiclient.ApiClient;
 import com.irvan.seblakpredator.apiclient.ApiService;
@@ -153,5 +156,32 @@ public class VerificationOTP extends AppCompatActivity {
                 Toast.makeText(VerificationOTP.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof TextInputEditText) {
+                int[] scrcoords = new int[2];
+                v.getLocationOnScreen(scrcoords);
+
+                float x = ev.getRawX() + v.getLeft() - scrcoords[0];
+                float y = ev.getRawY() + v.getTop() - scrcoords[1];
+
+                // Jika klik di luar area EditText → tutup keyboard
+                if (x < v.getLeft() || x > v.getRight() || y < v.getTop() || y > v.getBottom()) {
+                    hideKeyboard();
+                    v.clearFocus();
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

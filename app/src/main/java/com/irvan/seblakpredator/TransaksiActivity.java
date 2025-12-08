@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +28,15 @@ import java.util.ArrayList;
 public class TransaksiActivity extends AppCompatActivity {
 
     private Button addressChangeButton, addProductButton, checkOutButton, backButton, selectMethodPayment;
-    private LinearLayout informationOrder;
+    private LinearLayout informationOrder, viaPembayaran;
+    private AlertDialog paymentPopup;
     private TextView priceTotal, ongkirPrice, priceTotalProduct, displayOrderType, displayAddress, displayMethodPayment;
     private int ongkir = 0;
     private ArrayList<SelectedMenu> existingMenus = new ArrayList<>();
     private String address = "";
     private String orderType = "";
+    private String name = "";
+    private String phone = "";
     private String userId = "";
 
     private String tax = "0";
@@ -69,7 +73,8 @@ public class TransaksiActivity extends AppCompatActivity {
         try {
             for (SelectedMenu menu : existingMenus) {
                 JSONObject menuJson = new JSONObject();
-                menuJson.put("name", menu.getNama());
+                menuJson.put("name", menu.getName());
+                menuJson.put("phone", menu.getPhone());
                 menuJson.put("level", menu.getLevel());
                 menuJson.put("kuah", menu.getKuah());
                 menuJson.put("telur", menu.getTelur());
@@ -126,6 +131,7 @@ public class TransaksiActivity extends AppCompatActivity {
         addProductButton = findViewById(R.id.addMoreProduct);
         checkOutButton = findViewById(R.id.btn_checkout);
         backButton = findViewById(R.id.backButton);
+        viaPembayaran = findViewById(R.id.viaPembayaran);
 
 
         // Ambil data awal dari intent
@@ -134,7 +140,8 @@ public class TransaksiActivity extends AppCompatActivity {
                 new ArrayList<>();
         orderType = getIntent().getStringExtra("order_type");
         address = getIntent().getStringExtra("address");
-
+        name = getIntent().getStringExtra("name");
+        phone = getIntent().getStringExtra("phone");
         userId = getIntent().getStringExtra("user_id");
         if (userId == null || userId.isEmpty()) {
             // user_id wajib, jika tidak ada bisa hentikan activity
@@ -162,6 +169,8 @@ public class TransaksiActivity extends AppCompatActivity {
         // Tambah menu
         addProductButton.setOnClickListener(v -> {
             Intent intent = new Intent(TransaksiActivity.this, SelectCustomization.class);
+            intent.putExtra("name", name);
+            intent.putExtra("phone", phone);
             intent.putExtra("user_id", userId);
             intent.putExtra("existingMenus", existingMenus);
             intent.putExtra("order_type", orderType);
@@ -196,9 +205,42 @@ public class TransaksiActivity extends AppCompatActivity {
 
         // Pilih metode pembayaran
         selectMethodPayment.setOnClickListener(v -> {
-            // Menampilkan popup metode pembayaran
-            showPaymentMethodPopup();
+            if (viaPembayaran.getVisibility() == View.GONE) {
+                viaPembayaran.setVisibility(View.VISIBLE);
+                displayPaymentMethods(); // Fungsi untuk menampilkan metode pembayaran
+            } else {
+                viaPembayaran.setVisibility(View.GONE);
+            }
         });
+
+    }
+    private void displayPaymentMethods() {
+        viaPembayaran.removeAllViews(); // Kosongkan dulu layout
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        // Contoh list metode pembayaran
+        String[] paymentMethods = {"Transfer Bank", "OVO", "Dana", "GoPay"};
+
+        for (String method : paymentMethods) {
+            View methodView = inflater.inflate(R.layout.via_pembayaran, viaPembayaran, false);
+
+            TextView namaMethod = methodView.findViewById(R.id.namaMethod);
+            RadioButton paymentButton = methodView.findViewById(R.id.paymentButton);
+
+            namaMethod.setText(method);
+
+            paymentButton.setOnClickListener(v -> {
+                // Set metode yang dipilih di TextView displayMethodPayment
+                displayMethodPayment.setText(method);
+                // Sembunyikan viaPembayaran setelah memilih
+                viaPembayaran.setVisibility(View.GONE);
+
+                // Bisa juga simpan metode ini di variable untuk checkout nanti
+            });
+
+            viaPembayaran.addView(methodView);
+        }
     }
 
     private void updateDisplayOrderType() {

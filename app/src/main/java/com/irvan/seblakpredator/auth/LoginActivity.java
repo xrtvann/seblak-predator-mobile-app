@@ -199,6 +199,10 @@ public class LoginActivity extends AppCompatActivity {
                                     .edit()
                                     .putString("user_id", res.getUser().getId())
                                     .apply();
+                            getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                                    .edit()
+                                    .putString("phone", res.getUser().getId())
+                                    .apply();
 
                             Toast.makeText(LoginActivity.this, "Login Berhasil!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
