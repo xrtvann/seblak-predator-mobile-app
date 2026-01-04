@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -66,11 +67,105 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchTextColumn"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Nama"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/allButton"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#E64A19"
+                android:text="Semua"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/frozenfoodButton"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/primary"
+                android:text="Frozen Food"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/sayuranButton"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/primary"
+                android:text="Sayuran"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/pelengkapButton"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/primary"
+                android:text="Pelengkap"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/jamurButton"
+                style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/primary"
+                android:text="Jamur"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <!-- SCROLL UTAMA -->
+
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="420dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/layoutBottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,70 +179,6 @@
             android:padding="8dp">
 
             <!-- KATEGORI -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="8dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/allButton"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="#E64A19"
-                        android:text="Semua"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/frozenfoodButton"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Frozen Food"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/sayuranButton"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Sayuran"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/pelengkapButton"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Pelengkap"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/jamurButton"
-                        style="@style/TextAppearance.Material3.BodyLarge.Emphasized"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Jamur"
-                        android:textColor="#FFFFFF" />
-
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <!-- GARIS PEMBATAS -->
             <View
@@ -165,6 +196,28 @@
 
 
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/noResultsMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/noResults"
+                    style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Tidak ada topping yang ditemukan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -186,9 +239,10 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="4dp"
             android:backgroundTint="@color/primary"
-            android:text="Lanjut"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            style="@style/TextAppearance.Material3.BodyMedium.Emphasized"
+            android:text="Tambahkan"
+            android:textSize="17dp"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

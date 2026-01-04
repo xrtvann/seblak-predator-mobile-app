@@ -43,7 +43,7 @@ public class Topping {
     public String getId() { return id; }
     public String getName() { return name; }
     public int getPrice() { return price; }
-    public String getImage() { return image; }
+    public String getImage() { return "http://192.168.0.168/seblak-predator-web-app/uploads/menu-images/" + image; }
     public String getCategoryId() { return categoryId; }
     public String getCategoryName() { return categoryName; }
     public boolean isAvailable() { return isAvailable; }

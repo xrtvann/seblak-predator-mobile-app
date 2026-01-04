@@ -1,6 +1,8 @@
 package com.irvan.seblakpredator;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SuccessOrder extends AppCompatActivity {
 
+    Button home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,12 @@ public class SuccessOrder extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        home = findViewById(R.id.homeButton);
+        home.setOnClickListener(v -> {
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 }

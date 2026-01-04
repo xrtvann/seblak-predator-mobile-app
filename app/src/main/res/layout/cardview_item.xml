@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:scrollbars="none"
     android:paddingStart="8dp"
     android:paddingEnd="8dp">
@@ -12,14 +12,14 @@
     <LinearLayout
         android:id="@+id/toppingContainer"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <!-- Contoh satu CardView -->
         <androidx.cardview.widget.CardView
             android:id="@+id/detailTopping"
-            android:layout_width="186dp"
-            android:layout_height="match_parent"
+            android:layout_width="160dp"
+            android:layout_height="180dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_cardview_border"
             app:cardBackgroundColor="@color/white"
@@ -28,7 +28,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/imageTopping"
@@ -44,35 +44,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Nama Produk"
+                    android:text="Level pedas"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/imageTopping"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <TextView
-                    android:id="@+id/descriptionProduct"
-                    style="@style/TextAppearance.Material3.LabelSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Deskripsi Produk"
-                    android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/NameTopping"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/imageTopping" />
 
                 <TextView
                     android:id="@+id/priceTopping"
                     style="@style/TextAppearance.Material3.SearchView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:text="Rp10.000"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/descriptionProduct"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/NameTopping" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

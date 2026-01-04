@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SelectedMenu implements Serializable {
-    private String nama;
+    private String name;
+    private String phone;
     private String level;
     private String kuah;
     private String telur;
@@ -17,10 +18,11 @@ public class SelectedMenu implements Serializable {
     private int hargaKencur;
     private ArrayList<SecondTransaction.SelectedTopping> selectedToppings;
 
-    public SelectedMenu(String nama, String level, String kuah, String telur, String kencur,
+    public SelectedMenu(String name, String phone,String level, String kuah, String telur, String kencur,
                         int hargaLevel, int hargaKuah, int hargaTelur, int hargaKencur,
                         ArrayList<SecondTransaction.SelectedTopping> selectedToppings) {
-        this.nama = nama;
+        this.name = name;
+        this.phone = phone;
         this.level = level;
         this.kuah = kuah;
         this.telur = telur;
@@ -31,7 +33,8 @@ public class SelectedMenu implements Serializable {
         this.hargaKencur = hargaKencur;
         this.selectedToppings = selectedToppings != null ? selectedToppings : new ArrayList<>();
     }
-    public void setNama(String nama) { this.nama = nama; }
+    public void setName(String name) { this.name = name; }
+    public void setPhone(String phone){this.phone = phone;}
     public void setLevel(String level) { this.level = level; }
     public void setKuah(String kuah) { this.kuah = kuah; }
     public void setTelur(String telur) { this.telur = telur; }
@@ -44,7 +47,8 @@ public class SelectedMenu implements Serializable {
         this.selectedToppings = selectedToppings != null ? selectedToppings : new ArrayList<>();
     }
 
-    public String getNama() { return nama; }
+    public String getName() { return name; }
+    public String getPhone(){return phone;}
     public String getLevel() { return level; }
     public String getKuah() { return kuah; }
     public String getTelur() { return telur; }

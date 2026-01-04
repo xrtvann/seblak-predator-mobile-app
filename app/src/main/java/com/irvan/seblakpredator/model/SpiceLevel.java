@@ -1,10 +1,13 @@
 package com.irvan.seblakpredator.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SpiceLevel {
 
     private String id;
     private String name;
     private double price;
+    @SerializedName("image")
     private String image;
     private String category_id;
     private boolean is_active;
@@ -58,7 +61,7 @@ public class SpiceLevel {
     }
 
     public String getImage() {
-        return image;
+        return "http://192.168.0.168/seblak-predator-web-app/uploads/menu-images/" + image;  // Membuat URL gambar;
     }
 
     public void setImage(String image) {

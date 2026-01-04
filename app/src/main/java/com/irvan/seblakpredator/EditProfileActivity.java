@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -50,10 +52,12 @@ public class EditProfileActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(0,0, systemBars.right, systemBars.bottom);
+            v.setPadding(0, 0, systemBars.right, systemBars.bottom);
             return insets;
         });
 
@@ -72,6 +76,7 @@ public class EditProfileActivity extends AppCompatActivity {
         loadProfile(token);
 
         saveButton.setOnClickListener(v -> saveProfile(token));
+
         // Cek flag dari EditProfileActivity
         if (getIntent().getBooleanExtra("profile_update_success", false)) {
             showCustomNotification("Data berhasil disimpan", 7000);
@@ -100,7 +105,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                String message = "Error"+t.getMessage();
+                String message = "Error" + t.getMessage();
                 showErrorIncorrect(message);
             }
         });
@@ -112,55 +117,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String email = emailInput.getText().toString().trim();
         String phone = phoneInput.getText().toString().trim();
 
-        nameInput.addTextChangedListener(new android.text.TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                nameInput.setError(null); // hapus error
-            }
-
-            @Override
-            public void afterTextChanged(android.text.Editable s) {}
-        });
-        usernameInput.addTextChangedListener(new android.text.TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                usernameInput.setError(null); // hapus error
-            }
-
-            @Override
-            public void afterTextChanged(android.text.Editable s) {}
-        });
-        emailInput.addTextChangedListener(new android.text.TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                emailInput.setError(null); // hapus error
-            }
-
-            @Override
-            public void afterTextChanged(android.text.Editable s) {}
-        });
-        phoneInput.addTextChangedListener(new android.text.TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                phoneInput.setError(null); // hapus error
-            }
-
-            @Override
-            public void afterTextChanged(android.text.Editable s) {}
-        });
-
+        // Validasi input dan error handling
         if (name.isEmpty()) {
             nameInput.setError("Nama harus di isi");
             return;
@@ -193,7 +150,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 // Kirim flag ke ProfileActivity
-
                 SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                 prefs.edit().putString("name", name).apply();
 
@@ -228,6 +184,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Button btnOk = view.findViewById(R.id.okbutton);
         btnOk.setOnClickListener(v -> dialog.dismiss());
     }
+
     private void showCustomNotification(String message, int durationMillis) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.notification_custom, null);
@@ -255,5 +212,34 @@ public class EditProfileActivity extends AppCompatActivity {
                 root.removeView(layout);
             }).start();
         }, durationMillis);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof TextInputEditText) {
+                int[] scrcoords = new int[2];
+                v.getLocationOnScreen(scrcoords);
+
+                float x = ev.getRawX() + v.getLeft() - scrcoords[0];
+                float y = ev.getRawY() + v.getTop() - scrcoords[1];
+
+                // Jika klik di luar area EditText → tutup keyboard
+                if (x < v.getLeft() || x > v.getRight() || y < v.getTop() || y > v.getBottom()) {
+                    hideKeyboard();
+                    v.clearFocus();
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
